@@ -1,0 +1,16 @@
+21.11.2017
+
+-	schreiben der fitnessproportionalen stochastischen sampling-methode
+-	die Selektion und der Fitnesswert müssen irgendwie aneinander angepasst werden, damit die bestenselektion auch wirklich immer die besten raussucht und nicht den kleinsten wert o.ä.
+-	sort-funktion umschreiben: high ist immer arraylänge low ist immer 0, bool variable hinzufügen, die bestimmt ob von klein nach groß, oder von groß nach klein sortiert werden soll	--done
+-	best-funktion muss auch angepasst werden	--done nimmt jetzt immer den max wert
+
+23.11.2017
+	
+Klasse Evo
+-	Neue Function PopInfo : gibt ein array zurück in dem aktuelle Generationenzahl, individuenzahl und aktuell bester Fitnesswert zurückgegeben wird
+
+Klasse Form1:
+-	TestGUI: hinzufügen der Eingabefelder für die Evolution: Grenzwert Fitness, max Individuenzahl, max generationenzahl
+	die Methode führt also Cycle() so oft aus, bis eine der Abbruchbedingungen getroffen ist.
+	Alles ist nocht nicht rebust gegen false Eingaben wie z.B. texte o.ä. !!

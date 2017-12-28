@@ -1,0 +1,5 @@
+Global:
+
+19.12.2017
+
+-	 optional: Objekte überatbeiten: alle eigenschaften als properties erklären und die Get-Set-funktion nutzen
