@@ -7,20 +7,34 @@ Public Class Evo
     Private Curpath As String
     Private name As String
     Private cloner As New Clone
-    Private mute As New Mutation
-    Private reco As New Recombination
-    Private fit As New Fitness
-    Private sel As New Selection
+    Private mute As New Mutation(ans)
+    Private reco As New Recombination(ans)
+    Private fit As New Fitness(ans)
+    Private sel As New Selection(ans)
 
-    ' TODO OPTIONAL recreate whole project in a way, that all objects are saved and managed in a xml format
+    Private ans As AnsysControl.Ansys
+
+    ' TODO OPTIONAL recreate whole project in a way, that all objects are saved and managed in xml format
 
     'constructor
     Public Sub New()
-
+        ' Start of needed programms
+        '-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        ans = New AnsysControl.Ansys
+        '-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     End Sub
 
     'location for the evolution with a name to take place, an individuum to get a starting population from and how many induviduals shall be created
     Public Sub New(ByVal p As String, ByVal n As String, ByVal start As Individuum, ByVal size As Integer)
+
+        ' Start of needed programms
+        '-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        ans = New AnsysControl.Ansys
+
+        '-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        ' population Stuff
+        '-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         name = n
         livingSpace = p & "\" & name
         If Directory.Exists(livingSpace) Then
@@ -38,6 +52,8 @@ Public Class Evo
         Next
 
         UpdatePop()
+
+        '-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     End Sub
 
@@ -253,26 +269,25 @@ Public Class Evo
         Directory.CreateDirectory(Pop.gYoungstersHome)
         Pop.sNextGenHome(p)
         Directory.CreateDirectory(Pop.gNextGenHome)
-
-
+        ans.slogfile(livingSpace)
 
         Dim fs As FileStream = File.Create(p & "\PopInfo.txt")
         fs.Close()
-
+        fs.Dispose()
     End Sub
 
     ' https:// dotnet-snippets.de/snippet/pruefen-ob-datei-gerade-benutzt-wird/71
-    Public Function FileInUse(ByVal sFile As String) As Boolean
-        If System.IO.File.Exists(sFile) Then
-            Try
-                Dim F As Short = FreeFile()
-                FileOpen(F, sFile, OpenMode.Binary, OpenAccess.ReadWrite, OpenShare.LockReadWrite)
-                FileClose(F)
-            Catch
-                Return True
-            End Try
-        End If
-    End Function
+    'Public Function FileInUse(ByVal sFile As String) As Boolean
+    '    If System.IO.File.Exists(sFile) Then
+    '        Try
+    '            Dim F As Short = FreeFile()
+    '            FileOpen(F, sFile, OpenMode.Binary, OpenAccess.ReadWrite, OpenShare.LockReadWrite)
+    '            FileClose(F)
+    '        Catch
+    '            Return True
+    '        End Try
+    '    End If
+    'End Function
 
     'creates a startpopulation with a given start individuum
     Private Function CreateStartPop(ByVal startI As Individuum, ByVal size As Integer)

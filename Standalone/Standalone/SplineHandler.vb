@@ -211,7 +211,7 @@ Public Class SplineHandler
         Next
         s.sPoints(p)
         'default
-        ' TODO build algorithm that checks wether spline should be closed or not
+        ' TODO build algorithm that checks whether spline should be closed or not
         s.sClose(False)
         Return s
     End Function

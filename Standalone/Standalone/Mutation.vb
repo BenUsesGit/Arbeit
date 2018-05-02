@@ -1,7 +1,13 @@
 ﻿Imports System.Math
 
 Public Class Mutation
-    Dim fit As New Fitness
+    Dim ans As AnsysControl.Ansys
+
+    Dim fit As New Fitness(ans)
+
+    Public Sub New(a As AnsysControl.Ansys)
+        ans = a
+    End Sub
 
     'applies a very simple random generator on all control points of splines of given individual
     Public Function SimpleMut(ByVal indi As Individuum)
@@ -60,7 +66,7 @@ Public Class Mutation
 
         Loop Until q <> 0 And q < 1
 
-        p = Sqrt(-2 * Log(q) / q)
+        p = Sqrt(-2 * Math.Log(q) / q)
 
         ' quotient of 5 is deliberately chosen to slim the bell function
         If x = 0 Then

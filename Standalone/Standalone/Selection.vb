@@ -2,6 +2,12 @@
 Public Class Selection
     Private cloner As New Clone
     Private sort As New Sort
+    Dim ans As AnsysControl.Ansys
+
+    Public Sub New(a As AnsysControl.Ansys)
+        ans = a
+    End Sub
+
     ' Selection of the best individuals, input is a population and a number of individuals to be chosen, the choice for a individual is made alternating from the best individuals of
     ' the older and the younger generation
     Public Sub BestSelect(ByVal Pop As Population, ByVal n As Integer)

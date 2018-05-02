@@ -1,4 +1,16 @@
-﻿Public Class Fitness
+﻿Imports AnsysControl
+Public Class Fitness
+
+    Dim ac As Ansys
+    Dim iArr As Integer()
+
+    Public Sub New(a As Ansys)
+        ac = a
+    End Sub
+
+    Public Sub SetNewBatch(Arr As Integer())
+
+    End Sub
 
     ' Evaluates the fitness on an individual
     Public Function EvalFitness(ByVal indi As Individuum)
@@ -24,7 +36,7 @@
 
         'f = indi.gGenome.Length / f
 
-        ' ganz einfach: jeh näher der erste punktdes ersten splines des individuums an 5 ist, desto besser der fitnesswert, ist der wert negativ wird die fitness null
+        ' ganz einfach: je näher der erste punkt des ersten splines des individuums an 5 ist, desto besser der fitnesswert, ist der wert negativ wird die fitness null
         If indi.gGenome(0).gPoint(0).gX < 0 Then
             f = 0
         Else
@@ -33,4 +45,16 @@
 
         Return f
     End Function
+
+
+    ' Sends Commands to the Ansysmodule to retrieve results of a simulation
+    Public Function EvalAns(ByVal indi As Individuum)
+        Dim f As Double = 0
+
+
+        Return f
+    End Function
+
+
+
 End Class

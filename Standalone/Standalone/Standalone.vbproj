@@ -130,5 +130,14 @@
     </None>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\AnsysControl\AnsysControl\AnsysControl.vbproj">
+      <Project>{8e0beea8-1aa6-40ad-b8f5-7a01894deb30}</Project>
+      <Name>AnsysControl</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

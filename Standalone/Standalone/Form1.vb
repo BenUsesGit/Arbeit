@@ -8,7 +8,6 @@
 
         ' Fügen Sie Initialisierungen nach dem InitializeComponent()-Aufruf hinzu.
         NeuAusNix("D:\Skripte\VBA\Splines\Test")
-
         'i = 0
         'While i < 3
         '    testEvo.Cycle()

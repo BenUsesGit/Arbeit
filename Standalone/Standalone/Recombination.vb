@@ -2,7 +2,13 @@
 
 Public Class Recombination
     Dim cloner As New Clone
-    Dim fit As New Fitness
+    Dim fit As New Fitness(ans)
+
+    Dim ans As AnsysControl.Ansys
+
+    Public Sub New(a As AnsysControl.Ansys)
+        ans = a
+    End Sub
 
     ' Simulates a simple mating process by choosing mating partners randomly by choosing the max values of each control point, input is the parent group, output is the childrengroup
     Public Sub SimpleMate(ByVal parents As Individuum(), ByVal Pop As Population)

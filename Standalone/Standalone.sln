@@ -5,6 +5,10 @@ VisualStudioVersion = 15.0.26430.13
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Standalone", "Standalone\Standalone.vbproj", "{F84190A0-700C-462B-AC84-F326544FB593}"
 EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "TimerTestProcessOutput", "..\..\TimerTestprocessOutput\TimerTestProcessOutput\TimerTestProcessOutput\TimerTestProcessOutput.vbproj", "{6CE8C915-2F78-4827-B53E-AC26197D814C}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "AnsysControl", "..\..\AnsysControl\AnsysControl\AnsysControl.vbproj", "{8E0BEEA8-1AA6-40AD-B8F5-7A01894DEB30}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{F84190A0-700C-462B-AC84-F326544FB593}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F84190A0-700C-462B-AC84-F326544FB593}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F84190A0-700C-462B-AC84-F326544FB593}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CE8C915-2F78-4827-B53E-AC26197D814C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CE8C915-2F78-4827-B53E-AC26197D814C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CE8C915-2F78-4827-B53E-AC26197D814C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CE8C915-2F78-4827-B53E-AC26197D814C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E0BEEA8-1AA6-40AD-B8F5-7A01894DEB30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E0BEEA8-1AA6-40AD-B8F5-7A01894DEB30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E0BEEA8-1AA6-40AD-B8F5-7A01894DEB30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E0BEEA8-1AA6-40AD-B8F5-7A01894DEB30}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
