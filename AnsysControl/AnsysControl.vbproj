@@ -73,16 +73,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Ansys.vb" />
-    <Compile Include="DelayClass.vb" />
     <Compile Include="eString.vb" />
-    <Compile Include="Form1.vb">
+    <Compile Include="AnsForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.vb">
-      <DependentUpon>Form1.vb</DependentUpon>
+    <Compile Include="AnsForm.Designer.vb">
+      <DependentUpon>AnsForm.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="IndieJoblist.vb" />
     <Compile Include="JobManager.vb" />
     <Compile Include="Log.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -100,14 +98,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="ObjectDelay.vb" />
     <Compile Include="Pair.vb" />
     <Compile Include="ProControl.vb" />
-    <Compile Include="TextHandlerForAnsys.vb" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.vb</DependentUpon>
+    <EmbeddedResource Include="AnsForm.resx">
+      <DependentUpon>AnsForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -117,6 +113,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>

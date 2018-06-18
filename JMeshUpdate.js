@@ -7,7 +7,7 @@ function Update() {
 function ReadResults(id, lstResults) {
     debugger;
     var DS = WB.AppletList.Applet("DSApplet").App;
-    var Branch = DS.Tree.Branches(1);
+    var Branch = DS.Tree.Branches(1); //
     var out = new Array(lstResults.length);
 
     if (Branch.Results.Count > 0) {
@@ -29,6 +29,17 @@ function ReadResults(id, lstResults) {
     for (i = 0; i < out.length;i++){
         retStr = retStr + out[i];
     }
+
+    return retStr;
+}
+
+function ReadProps() {
+    debugger;
+    var DS = WB.AppletList.Applet("DSApplet").App;
+    var path = DS.Tree.Branches(1).Model.Children(1).Children(1)   // "path" to the desired mass value. as the model changes, this path may change too!
+
+    // stitch the out-array together to one single string
+    var retStr = path.Mass;
 
     return retStr;
 }
@@ -103,8 +114,9 @@ function write(id, string) {
     debugger;
     var fso = DS.Script.GetFileSystemObject();
     var str = fso.OpenTextFile(path, 1, false)
-    var str1 = str.ReadAll() + "\n" + 45 + "\t" + getDate() + "\t" + id.toString()  + "\t" + string + "\n"
-        + 50 + "\t" + getDate() + "\t" +id.toString() + "\t" + "done getting results";
+    var mass = ReadProps();
+    var str1 = str.ReadAll() + "\n" + 45 + "\t" + getDate() + "\t" + id.toString() + "\t" + string + "Mass:" + "\t" + mass + "\t" + /*"\n"
+        + 50 + "\t" + getDate() + "\t" +id.toString() + "\t" +*/ "done getting results";
     str.close();
     var file = fso.OpenTextFile(path, 2);
     file.Write(str1)

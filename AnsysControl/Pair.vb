@@ -1,7 +1,11 @@
-﻿Public Class Pair
+﻿''' <summary>
+''' Pair consisting of a job , individual and if necessary a result
+''' </summary>
+Public Class Pair
+    ' TODO writing getter & setter methods?
     Public Job As Integer
     Public indi As Integer
-    Public res As Integer() = {}
+    Public res As Double() = {}
 
     ' TODO write getter & setter methods
 

@@ -22,5 +22,258 @@ AnsysControl
   resource lookups using this strongly typed resource class.
 </summary>
 </member>
+<member name="T:AnsysControl.Ansys">
+ <summary>
+ Class for handling the 3rd party Programm Ansys
+ </summary>
+</member>
+<member name="M:AnsysControl.Ansys.#ctor">
+ <summary>
+ constructor. initialization without any parameters
+ </summary>
+</member>
+<member name="M:AnsysControl.Ansys.SetActFile(System.Int32)">
+ <summary>
+ Gives the python-script the file-name to work on.  Sets the same parameter in the <see cref="T:AnsysControl.Log"/>.
+ </summary>
+ <param name="i"></param>
+</member>
+<member name="M:AnsysControl.Ansys.sLogfile(System.String)">
+ <summary>
+ Sets the path for the logfile and creates the new Logfile
+ </summary>
+ <param name="s">name as path to the location of the logfile</param>
+</member>
+<member name="M:AnsysControl.Ansys.iniLog(System.String)">
+ <summary>
+ Initiates a new session for the log file and starts the filewatcher
+ </summary>
+ <param name="s"> path to the logfile</param>
+</member>
+<member name="M:AnsysControl.Ansys.Open">
+ <summary>
+ Starts the 3rd party programm Ansys in the so called "batch"-mode
+ </summary>
+</member>
+<member name="M:AnsysControl.Ansys.PokeAns">
+ <summary>
+ Checking whether the AnsysProcess-creation has finished.
+ </summary>
+ <remarks>Has to be used together with <seealso cref="M:AnsysControl.Ansys.AnsReady(System.Object,System.EventArgs)"/> and <seealso cref="M:AnsysControl.Ansys.AnsNotReady(System.Object,System.EventArgs)"/></remarks>
+</member>
+<member name="M:AnsysControl.Ansys.AnsReady(System.Object,System.EventArgs)">
+ <summary>
+ This method listens whether ProControl-class raises the <seealso cref="E:AnsysControl.ProControl.ObjReady"/>-event, gives notice and starts the dummy-project
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:AnsysControl.Ansys.AnsNotReady(System.Object,System.EventArgs)">
+ <summary>
+ Listens whether ProControl-class raises the <seealso cref="E:AnsysControl.ProControl.ObjNotReady"/>-event, gives notice and restarts the timer
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+</member>
+<member name="M:AnsysControl.Ansys.GetAnsys">
+ <returns>Returns the first out of a list of running ansys processes if more than one process is running.</returns>
+</member>
+<member name="M:AnsysControl.Ansys.ExistAnsys">
+ <summary>
+ Checks if ansys exists.
+ </summary>
+ <returns>Returns the running processes</returns>
+</member>
+<member name="M:AnsysControl.Ansys.PostMessageA(System.IntPtr,System.UInt32,System.UInt32,System.UInt32)">
+ <summary>
+ Custom function to send Messages to windows with known handle
+ </summary>
+ <param name="hWnd">Window handle off command window</param>
+ <param name="wMsg">Usually the message for the window to "press a button".</param>
+ <param name="wParam">The Button type to be pressed</param>
+ <param name="lParam">Not important := 0</param>
+ <returns></returns> 
+ <remarks>It needs the Window-handle, the specific window command in this case 258 means "KeyDown", then the type of the key that  was "pressed", a last not important parameter</remarks> 
+</member>
+<member name="M:AnsysControl.Ansys.TtoA(System.String)">
+ <summary>
+ Converts a given string into subsequently executed simulated keystrokes that are send to the Ansys window.
+ </summary>
+ <param name="s">String to be send to window.</param>
+</member>
+<member name="M:AnsysControl.Ansys.TtoA(System.String[])">
+ <overloads>
+ Calls the <seealso cref="M:AnsysControl.Ansys.TtoA(System.String)"/>-method for an array of strings.
+ </overloads>
+ <param name="s">Array of strings to be send to window</param>
+</member>
+<member name="M:AnsysControl.Ansys.ExitAnsys">
+ <summary>
+ Exits the Ansys-window and ends the process.
+ </summary>
+</member>
+<member name="M:AnsysControl.Ansys.Stepp(System.Object,AnsysControl.eString)">
+ <summary>
+ Handles the next step in handling the FEM-simulation or reading out data.
+ </summary>
+ <param name="sender"></param>
+ <param name="progress"></param>
+ <remarks>Actions performed by this method depend on the action that is passed by the event paramter</remarks>
+</member>
+<member name="M:AnsysControl.Ansys.Begin(System.Int32)">
+ <summary>
+ Begins the evaluation process of an individual
+ </summary>
+ <param name="i"></param>
+</member>
+<member name="T:AnsysControl.eString">
+ <summary>
+ This class stores the ID on an individual, the last actio, taken on it and the progress, which is an array of String read out a log-file
+ </summary>
+</member>
+<member name="M:AnsysControl.eString.#ctor(System.String[])">
+ <param name="s">last line read out the log file</param>
+</member>
+<member name="F:AnsysControl.JobManager.JobList">
+ <summary>
+ This class is for preventing unwanted handling of the <see cref="E:AnsysControl.Log.nxtStep"/>-event and for keeping track of the jobs.
+ </summary>
+</member>
+<member name="E:AnsysControl.JobManager.nextJob">
+ <summary>
+ Event fired, when <see cref="M:AnsysControl.JobManager.newJob(System.Object,AnsysControl.eString)"/> concludes, that a new job is added
+ </summary>
+</member>
+<member name="E:AnsysControl.JobManager.AllDone">
+ <summary>
+ Event under developoment
+ </summary>
+</member>
+<member name="M:AnsysControl.JobManager.#ctor(AnsysControl.Log)">
+ <summary>
+ Constructor. Initializes the class.
+ </summary>
+ <param name="l"></param>
+ <overloads>
+ Used when ther is already a running <see cref="T:AnsysControl.Log"/>-instance.
+ </overloads>>
+</member>
+<member name="M:AnsysControl.JobManager.newList(System.Int32[])">
+ <summary>
+ Sub under development
+ </summary>
+ <param name="iArr"></param>
+</member>
+<member name="M:AnsysControl.JobManager.newJob(System.Object,AnsysControl.eString)">
+ <summary>
+ Handles the <see cref="E:AnsysControl.Log.nxtStep"/>-event.
+ </summary>
+ <param name="sender"></param>
+ <param name="progress"><see cref="T:AnsysControl.eString"/></param>
+ <remarks>Searches the current <see cref="T:AnsysControl.Pair"/> of <see cref="F:AnsysControl.JobManager.JobList"/> determines wether the new job should be added oder rejected. Also deletes jobs that are done. 
+ The events raised to be handled by this sub can be raised in a very fast succession. Therefore a SyncLock ensures that this sub is only used by one thread at a time.</remarks>
+</member>
+<member name="M:AnsysControl.JobManager.CheckIfReady">
+ <summary>
+ Goes trough the joblist and checks whether all results are set 
+ </summary>
+ <returns>True if all results are set</returns>
+</member>
+<member name="M:AnsysControl.JobManager.GetRes">
+ <summary>
+ Sub under depelopment
+ </summary>
+ <returns></returns>
+</member>
+<member name="T:AnsysControl.Log">
+ <summary>
+ Creates an instance of the <see cref="T:System.IO.FileSystemWatcher"/>-class to monitor the textfile, which keeps track of the process.
+ </summary>
+</member>
+<member name="E:AnsysControl.Log.nxtStep">
+ <summary>
+ Is raised, if the textfile has been chenged and closed.
+ </summary>
+</member>
+<member name="M:AnsysControl.Log.#ctor">
+ <summary>
+ constructor
+ </summary>
+</member>
+<member name="M:AnsysControl.Log.SetActFile(System.Int32)">
+ <summary>
+ Sets the name for the text file.
+ </summary>
+ <param name="i">Name of text file without the path</param>
+</member>
+<member name="M:AnsysControl.Log.setPath(System.String,System.String)">
+ <summary>
+ Sets the Path to the textfile.
+ </summary>
+ <param name="p">p is the path to the log file</param>
+ <param name="n">n is the name of the logfile</param>
+</member>
+<member name="M:AnsysControl.Log.setExist(System.String,System.String)">
+ <summary>
+ Sets parameter for this object, when there is alreeady an existing text file with the same name.
+ </summary>
+ <param name="p">p is the path to the log file</param>
+ <param name="n">n is the name of the logfile</param>
+</member>
+<member name="M:AnsysControl.Log.Write(System.String,System.Int32,System.Int32)">
+ <summary>
+ Writes something into the text file.
+ </summary>
+ <param name="s">text to the log file</param>
+ <param name="stpNum"> Stepnumber of the process</param>
+ <param name="indi">The entry needs to be allocated to an </param>
+</member>
+<member name="M:AnsysControl.Log.Read">
+ <summary>
+ Reads out the last entry of the log file.
+ </summary>
+ <returns>An array of string</returns>
+ <remarks>The single entries of the returned array represent the strings in between the tabulator spaces</remarks>
+</member>
+<member name="M:AnsysControl.Log.OnClose(System.Object,System.EventArgs)">
+ <summary>
+ Handles the event of some instance changing the log-file, raises certain events, depending on the value of the last log-entry
+ </summary>
+ <param name="source"></param>
+ <param name="e"><see cref="T:AnsysControl.eString"/></param>
+ <remarks>As the textfile is closed the<see cref="T:System.IO.FileSystemWatcher"/>-class registers thias and raises the <see cref="E:System.IO.FileSystemWatcher.Changed"/>-event.
+ Caution! An normal application e.g. the "Notepad" might cause the FileSystemwatcher to fire multiple times and ruining the process handling. therefore the <see cref="T:AnsysControl.JobManager"/>-class</remarks>
+</member>
+<member name="M:AnsysControl.Log.MyFinalize">
+ <summary>
+ Sub currently under development
+ </summary>
+</member>
+<member name="M:AnsysControl.Log.Finalize">
+ <summary>
+ Sub currently under development
+ </summary>
+</member>
+<member name="T:AnsysControl.Pair">
+ <summary>
+ Pair consisting of a job , individual and if necessary a result
+ </summary>
+</member>
+<member name="T:AnsysControl.ProControl">
+ <summary>
+ Class for outsourcing timer-activity during waittime for a starting process of a 3rd party program to finish
+ </summary>
+</member>
+<member name="M:AnsysControl.ProControl.StartFirst(System.Diagnostics.Process)">
+ <summary>
+ Sets the chain in motion
+ </summary>
+ <param name="p"></param>
+ <remarks>Tries to do something with a process, that has already started, but is not fully created. 
+ This will start a timer. When this timer elapses, a new try to do something with the process follows</remarks>
+</member>
+<member name="M:AnsysControl.ProControl.TimerElapsed">
+ <remarks>As the timer elapses, if the given process responds to </remarks>
+</member>
 </members>
 </doc>

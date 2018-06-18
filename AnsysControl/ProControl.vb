@@ -1,29 +1,30 @@
 ﻿Imports System.Timers, System.Threading
+''' <summary>
+''' Class for outsourcing timer-activity during waittime for a starting process of a 3rd party program to finish
+''' </summary>
 Public Class ProControl
     WithEvents t As New System.Timers.Timer
-    Dim pr As Process = Nothing
-    'WithEvents oD As New ObjectDelay
-    Dim count As Integer = 0
+    Private pr As Process = Nothing
+    Private count As Integer = 0
 
     Public Event ObjReady As EventHandler(Of EventArgs)
     Public Event ObjNotReady As EventHandler(Of EventArgs)
     Public Event Test As EventHandler(Of EventArgs)
     Dim waitEvent As ManualResetEvent
 
+    ''' <summary>
+    ''' Sets the chain in motion
+    ''' </summary>
+    ''' <param name="p"></param>
+    ''' <remarks>Tries to do something with a process, that has already started, but is not fully created. 
+    ''' This will start a timer. When this timer elapses, a new try to do something with the process follows</remarks>
     Public Sub StartFirst(p As Process)
-        't.Interval = 2000
-        't.Start()
-        ''Debug.Print("TimerStart")
         setProc(p)
         Try
             Debug.Print("Prozess ID " & pr.Id)
             Dim e As New EventArgs
             RaiseEvent ObjReady(Me, e)
         Catch ex As Exception
-            'Dim thr As Thread
-            'thr = New Thread(AddressOf StartProc)
-            'thr.IsBackground = True
-            'thr.Start()
             waitEvent = New ManualResetEvent(False)
             StartProc()
             waitEvent.WaitOne()
@@ -37,23 +38,17 @@ Public Class ProControl
         pr = p
     End Sub
 
-    Public Sub StartProc()
-        'Try
-        '    Debug.Print("Tick")
-        '    Debug.Print("Prozess" & pr.Id)
-        '    OnObjReady(e)
-        'Catch ex As Exception
-        '    OnObjNotReady(e)
-        'End Try
-        t.Interval = 1000
+    'starts the timer
+    Private Sub StartProc()
+        t.Interval = 3000
         t.Start()
         Dim e As New EventArgs
         TimerElapsed()
     End Sub
 
 
-
-    Public Sub TimerElapsed() Handles t.Elapsed
+    ''' <remarks>As the timer elapses, if the given process responds to </remarks>
+    Private Sub TimerElapsed() Handles t.Elapsed
         Try
             Dim testID As Integer = pr.Id
             Debug.Print("Prozess ID " & testID)
@@ -63,22 +58,12 @@ Public Class ProControl
         Catch ex As Exception
             count += 1
             Dim e As New EventArgs
-            RaiseEvent ObjNotReady(Me, e)
-            If count >= 20 Then
+            If count <= 20 Then
+                RaiseEvent ObjNotReady(Me, e)
+            Else
                 Debug.Print("TimeOut")
             End If
         End Try
     End Sub
-
-    'Protected Overridable Sub OnObjReady(e As EventArgs)
-    '    t.Stop()
-    '    'Debug.Print("Timer Stop")
-    'End Sub
-
-    'Protected Overridable Sub OnObjNotReady(e As EventArgs)
-    '    t.Stop()
-    '    'Debug.Print("Timer Stop")
-    '    RaiseEvent ObjNotReady(Me, e)
-    'End Sub
 
 End Class

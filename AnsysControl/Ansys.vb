@@ -1,8 +1,11 @@
 ﻿Imports System.Timers, System.Text, System.IO, System.Threading
-
+''' <summary>
+''' Class for handling the 3rd party Programm Ansys
+''' </summary>
 Public Class Ansys
     'Dim ansproc As Process ' process, the command window is running on
-    Dim actfile As Integer ' individual, the ans-object is currently working on
+    Private actfile As Integer ' individual, the ans-object is currently working on
+    Private ID As Integer = Math.Ceiling(Rnd() * 1000) ' for test purposes
 
     ' TODO it might be necessary to create lock-object that protects the act-file, value as long as it is not finished with evaluation to prevent changing from other intances or threads
     WithEvents pc As New ProControl, ansproc As New Process, lg As New Log, JMan As New JobManager(lg)
@@ -12,33 +15,55 @@ Public Class Ansys
     Public Event EvalRdy As EventHandler(Of EventArgs)
     Public Event ObjRdy As EventHandler(Of EventArgs)
 
-    ' initialization without any parameters
+    ''' <summary>
+    ''' constructor. initialization without any parameters
+    ''' </summary>
     Public Sub New()
+        Randomize()
         If lg Is Nothing Then
             lg = New Log
         End If
     End Sub
 
+    ''' <summary>
+    ''' Gives the python-script the file-name to work on.  Sets the same parameter in the <see cref="Log"/>.
+    ''' </summary>
+    ''' <param name="i"></param>
     Public Sub SetActFile(i As Integer)
         actfile = i
         lg.SetActFile(i)
     End Sub
 
-    ' Sets the path for the logfile and creates the new Logfile
-    Public Sub slogfile(s As String)
+    ''' <summary>
+    ''' Sets the path for the logfile and creates the new Logfile
+    ''' </summary>
+    ''' <param name="s">name as path to the location of the logfile</param>
+    Public Sub sLogfile(s As String)
         logfile = s
 
         If Directory.Exists(logfile) Then
-            'If Not File.Exists(logfile & "Anslog.txt") Then
             lg.SetActFile(actfile)
-            lg.setNew(logfile, "AnsLog.txt")
-            'Else
-            '    lg.SetActFile(actfile)
-            '    lg.setExist(logfile, "Anslog.txt")
-            'End If
+            lg.setPath(logfile, "AnsLog.txt")
         End If
     End Sub
 
+
+    ''' <summary>
+    ''' Initiates a new session for the log file and starts the filewatcher
+    ''' </summary>
+    ''' <param name="s"> path to the logfile</param>
+    Public Sub iniLog(s As String)
+        logfile = s
+        If Directory.Exists(logfile) Then
+            lg.SetActFile(actfile)
+            lg.setPath(logfile, "AnsLog.txt")
+            lg.Write("New Session", 0, -1)
+        End If
+    End Sub
+
+    ''' <summary>
+    ''' Starts the 3rd party programm Ansys in the so called "batch"-mode
+    ''' </summary>
     Public Sub Open()
         ' check for existing running instances of Ansys
         ansproc = GetAnsys()
@@ -52,32 +77,40 @@ Public Class Ansys
         End If
     End Sub
 
-    ' Sub for checking whether the AnsysProcess-creation has finished
+    ''' <summary>
+    ''' Checking whether the AnsysProcess-creation has finished.
+    ''' </summary>
+    ''' <remarks>Has to be used together with <seealso cref="AnsReady(Object, EventArgs)"/> and <seealso cref="AnsNotReady(Object, EventArgs)"/></remarks>
     Public Sub PokeAns()
         pc.StartFirst(ansproc)
     End Sub
 
-    ' Sub listens whether ProControl-class raises the "Object is ready"-event, gives notice and starts the dummy-project
-    Public Sub AnsReady(sender As Object, e As EventArgs) Handles pc.ObjReady
+    ''' <summary>
+    ''' This method listens whether ProControl-class raises the <seealso cref="ProControl.ObjReady"/>-event, gives notice and starts the dummy-project
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Private Sub AnsReady(sender As Object, e As EventArgs) Handles pc.ObjReady
         Debug.Print("AnsysProzess erfolgreich zugewiesen")
         TtoA("actfile = " & CStr(actfile))
         AnsEnter()
-        slogfile("D:\Skripte\VBA\Splines\Test\Ichbinhier\")
-        'TtoA("RunScript(" & Chr(34) & "D:\AnsysSimulationen\OpenProject.py" & Chr(34) & ")")
-        'AnsEnter()
-        RaiseEvent ObjRdy(Me, e)
+        iniLog("D:\Skripte\VBA\Splines\Test\Ichbinhier\")
     End Sub
 
-    ' Sub listens whether ProControl-class raises the "Object is not ready"-event, gives notice and restarts the timer
-    Public Sub AnsNotReady(sender As Object, e As EventArgs) Handles pc.ObjNotReady
+    ''' <summary>
+    ''' Listens whether ProControl-class raises the <seealso cref="ProControl.ObjNotReady"/>-event, gives notice and restarts the timer
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Private Sub AnsNotReady(sender As Object, e As EventArgs) Handles pc.ObjNotReady
         Debug.Print("AnsysProzess noch nicht so weit")
         ansproc = GetAnsys()
         pc.setProc(ansproc)
     End Sub
 
-    ' returns the first out of a list of running processes
-    ' TODO overload this function to check for a process with a certain unique identification
+    ''' <returns>Returns the first out of a list of running ansys processes if more than one process is running.</returns>
     Public Function GetAnsys() As Process
+        ' TODO overload this function to check for a process with a certain unique identification
         Dim ap As Process() = ExistAnsys()
         Dim p As Process
 
@@ -91,7 +124,10 @@ Public Class Ansys
         Return p
     End Function
 
-    ' check if ansys exists and returns the running processes
+    ''' <summary>
+    ''' Checks if ansys exists.
+    ''' </summary>
+    ''' <returns>Returns the running processes</returns>
     Public Function ExistAnsys() As Process()
         Dim p As Process ' einzelner Prozess
         Dim pp() As Process ' Liste der Prozesse
@@ -112,11 +148,21 @@ Public Class Ansys
         Return ap
     End Function
 
-    ' Custom function to send Messages to windows with known handle
-    ' it needs the Window-handle, the specific window command in this case 258 means "KeyDown", then the type of the key that  was "pressed", a last not important parameter
+    ''' <summary>
+    ''' Custom function to send Messages to windows with known handle
+    ''' </summary>
+    ''' <param name="hWnd">Window handle off command window</param>
+    ''' <param name="wMsg">Usually the message for the window to "press a button".</param>
+    ''' <param name="wParam">The Button type to be pressed</param>
+    ''' <param name="lParam">Not important := 0</param>
+    ''' <returns></returns> 
+    ''' <remarks>It needs the Window-handle, the specific window command in this case 258 means "KeyDown", then the type of the key that  was "pressed", a last not important parameter</remarks> 
     Private Declare Function PostMessageA Lib "user32" (ByVal hWnd As IntPtr, ByVal wMsg As UInt32, ByVal wParam As UInt32, ByVal lParam As UInt32) As Long
 
-    ' Converts a given string into subsequently executed simulated keystrokes that are send to the Ansys window
+    ''' <summary>
+    ''' Converts a given string into subsequently executed simulated keystrokes that are send to the Ansys window.
+    ''' </summary>
+    ''' <param name="s">String to be send to window.</param>
     Public Sub TtoA(ByVal s As String)
         SyncLock Me
             ' the Ansys Window needs its messages in a certain format
@@ -126,7 +172,7 @@ Public Class Ansys
             For Each c As Byte In chars
                 ' charakter
                 PostMessageA(ansproc.MainWindowHandle, 258, Convert.ToUInt32(c), 0)
-                ' followed by an SPACE
+                ' followed by a SPACE
                 PostMessageA(ansproc.MainWindowHandle, 258, 64, 0)
                 ' followed by BACKSPACE, this is important to avoid wrong display of messages
                 PostMessageA(ansproc.MainWindowHandle, 258, 8, 0)
@@ -134,7 +180,10 @@ Public Class Ansys
         End SyncLock
     End Sub
 
-    ' same for an array of strings
+    ''' <overloads>
+    ''' Calls the <seealso cref="TtoA(String)"/>-method for an array of strings.
+    ''' </overloads>
+    ''' <param name="s">Array of strings to be send to window</param>
     Public Sub TtoA(ByVal s As String())
         SyncLock Me
             For Each text As String In s
@@ -146,7 +195,9 @@ Public Class Ansys
         End SyncLock
     End Sub
 
-    ' closes the ansys process and the command window
+    ''' <summary>
+    ''' Exits the Ansys-window and ends the process.
+    ''' </summary>
     Public Sub ExitAnsys()
         ' Enter
         PostMessageA(ansproc.MainWindowHandle, 258, 13, 0)
@@ -155,59 +206,54 @@ Public Class Ansys
         Me.Finalize()
     End Sub
 
-    Public Function ReadScript(ByVal p As String) As String()
-        Dim fs As New FileStream(p, FileMode.Open)
-        Dim sr As New StreamReader(fs)
-        Dim tt As String() = {}
-
-        Do
-            ReDim Preserve tt(tt.Length)
-            tt(tt.Length - 1) = sr.ReadLine()
-        Loop Until tt(tt.Length - 1) Is Nothing
-        'thfa.CleanText(sr.ReadToEnd)
-        sr.Close()
-        fs.Close()
-        Return tt
-    End Function
-
     ' sends the "Enter"-command to the ansys window
     Public Sub AnsEnter()
         PostMessageA(ansproc.MainWindowHandle, 258, 13, 0)
     End Sub
 
-    ' Sub handles always the next step of the work on an individual
-    Public Sub Stepp(sender As Object, progress As eString) Handles JMan.nextJob
+    ''' <summary>
+    ''' Handles the next step in handling the FEM-simulation or reading out data.
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="progress"></param>
+    ''' <remarks>Actions performed by this method depend on the action that is passed by the event paramter</remarks>
+    Private Sub Stepp(sender As Object, progress As eString) Handles JMan.nextJob
         SyncLock Me
             ' check if the previous action has been only taken but once for the individual, this prevents multiple consecutive clicks by the user on the same button
             ' TODO make the button unavailable until the work is finished
             ' If the last entry begins with an "*", it was a process specific command else it is a command to an specific individual
 
             Select Case progress.lstAction
-                Case 0
+                Case 0 'start of ansys software instance
                     TtoA("RunScript(" & Chr(34) & "D:\AnsysSimulationen\OpenProject.py" & Chr(34) & ")")
                     AnsEnter()
                     TtoA("RunScript(" & Chr(34) & "D:\Skripte\VBA\Splines\Test\Java.py" & Chr(34) & ")")
                     AnsEnter()
                 Case 10
                     ' do nothing
-                Case 20
-                    RaiseEvent ObjRdy(Me, progress)
-                Case 30
+                Case 20 'software instance ready
+                    Dim es As New EventArgs
+                    RaiseEvent ObjRdy(Me, es)
+                Case 30 ' begin evaluating individual
                     TtoA("RunScript(" & Chr(34) & "D:\AnsysSimulationen\LoadAndUpdateCAD.py" & Chr(34) & ")")
                     AnsEnter()
-                Case 40
+                Case 40 ' read results
                     TtoA("s.readResults(listOfResults)")
                     AnsEnter()
-                Case 45
-                    ' do nothing
-                Case 50
+                Case 45 ' evaluation ready
                     RaiseEvent EvalRdy(Me, progress)
+                Case 50
+                    ' do nothing
                 Case 60
                     ' do nothing
             End Select
         End SyncLock
     End Sub
 
+    ''' <summary>
+    ''' Begins the evaluation process of an individual
+    ''' </summary>
+    ''' <param name="i"></param>
     Public Sub Begin(i As Integer)
         SyncLock Me
             actfile = i
@@ -218,30 +264,19 @@ Public Class Ansys
         End SyncLock
     End Sub
 
-    ' tests how often the last action on the individual already has been taken
-    Public Function TestForDouble(sArr As String(), s As String)
-        Dim count As Integer = 0
-        For Each line As String In sArr
-            If s = line Then
-                count += 1
-            End If
-        Next
-        Return count
-    End Function
-
     Public Sub MyFinalize()
-        Finalize()
+        'Finalize()
     End Sub
 
-    Protected Overrides Sub Finalize()
-        If File.Exists("D:   \AnsysSimulationen\DevByTry\Das_System_files\.lock") Then
-            My.Computer.FileSystem.DeleteFile("D:\AnsysSimulationen\DevByTry\Das_System_files\.lock")
-        End If
-        Debug.Print("Ansys-Object destroyed")
-        If lg IsNot Nothing Then
-            lg.Write("Session closed", 60, -1)
-            lg.MyFinalize()
-            lg = Nothing
-        End If
-    End Sub
+    'Protected Overrides Sub Finalize()
+    '    If File.Exists("D:   \AnsysSimulationen\DevByTry\Das_System_files\.lock") Then
+    '        My.Computer.FileSystem.DeleteFile("D:\AnsysSimulationen\DevByTry\Das_System_files\.lock")
+    '    End If
+    '    Debug.Print("Ansys-Object destroyed")
+    '    If lg IsNot Nothing Then
+    '        lg.Write("Session closed", 60, -1)
+    '        lg.MyFinalize()
+    '        lg = Nothing
+    '    End If
+    'End Sub
 End Class

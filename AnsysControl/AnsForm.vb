@@ -1,5 +1,5 @@
 ﻿Imports System.Threading
-Public Class Form1
+Public Class AnsForm
 
     ' acE is just another reference to ac, it handles all the events raised by the ansys object
     WithEvents ac As New Ansys
@@ -24,8 +24,7 @@ Public Class Form1
     End Sub
 
     Private Sub ReadScript_Click(sender As Object, e As EventArgs) Handles ReadScript.Click
-        ac.TtoA(ac.ReadScript("D:\AnsysSimulationen\TestForAutomation.wbjn"))
-        ac.AnsEnter()
+
     End Sub
 
     Private Sub ExecuteScriptX_Click(sender As Object, e As EventArgs) Handles ExecuteScriptX.Click
@@ -105,6 +104,7 @@ Public Class Form1
 
     Public Sub EvalArr(sender As Object, e As eString) Handles ac.EvalRdy
         'Debug.Print("Thread3")
+        ' e passes the identification of the individual, then ac.begin is passed the individual with the position next to the one given by e
         If Array.IndexOf(iArr, e.ident) < iArr.Length - 1 Then
             ac.Begin(iArr(Array.IndexOf(iArr, e.ident) + 1))
         End If
