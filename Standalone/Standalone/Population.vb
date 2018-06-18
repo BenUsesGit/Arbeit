@@ -1,17 +1,20 @@
 ﻿Imports System.Text.RegularExpressions, Splines.SplineHandler, System.IO
+''' <summary>
+''' Class holds all individuals of type <see cref="Individuum"/> for an evolution.
+''' </summary>
 Public Class Population
 
-    Private Elders As Individuum() = {}
-    Private Youngsters As Individuum() = {}
-    Private NextGen As Individuum() = {}
-    Private EldersHome As String
-    Private YoungstersHome As String
+    Private Elders As Individuum() = {} ' parent generation
+    Private Youngsters As Individuum() = {} ' child generation
+    Private NextGen As Individuum() = {} ' storage generation during evolutionary cycle
+    Private EldersHome As String ' path to parent folder
+    Private YoungstersHome As String ' path to child folder
     Private NextGenHome As String
-    Private Best As Double
-    Private GenCount As Integer = 1
-    Private IndiCount As Integer = 0
+    Private GenCount As Integer = 1 ' permanently counts the number of generations respectively cycles created for a population
+    Private IndiCount As Integer = 0 ' permanently counts the number of individuals created for a population
     Private handler As New SplineHandler
-    Private cloner As New Clone
+    Private cloner As New Clone ' this object is needed to truly clone non-primitve datatypes
+    Private Best As New Individuum
 
     'Private name As String
 
@@ -37,10 +40,11 @@ Public Class Population
         Next
     End Sub
 
-    Public Function gElders()
+    Public Function gElders() As Individuum()
         Return Elders
     End Function
 
+    ''' <param name="p">Path to the elders folder</param>
     Public Sub sEldersHome(ByVal p As String)
         Dim check As New Regex("\\Elders\\$")
         If check.IsMatch(p) Then
@@ -48,7 +52,6 @@ Public Class Population
         Else
             EldersHome = p & "\Elders\"
         End If
-
     End Sub
 
     Public Function gEldersHome() As String
@@ -67,7 +70,7 @@ Public Class Population
         Next
     End Sub
 
-    Public Function gYoungsters()
+    Public Function gYoungsters() As Individuum()
         Return Youngsters
     End Function
 
@@ -96,7 +99,7 @@ Public Class Population
         Next
     End Sub
 
-    Public Function gNextGen()
+    Public Function gNextGen() As Individuum()
         Return NextGen
     End Function
 
@@ -113,33 +116,43 @@ Public Class Population
         Return NextGenHome
     End Function
     '---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-    ' Searches the best individual of the current generation
+    ''' <summary>
+    ''' Searches the best individual of the current generation and stores it.
+    ''' </summary>
     Public Sub sBest()
-        Best = Elders(0).gFitness
-
+        Dim Err As Boolean
         If Elders.Length = 0 Then
+            Debug.Print("Keine Zuweisung möglich, da Elterngeneration leer ist. Schaue in Kindgeneration...")
+            Err = True
         Else
+            Best.sFitness(Elders(0).gFitness)
             For Each member In Elders
-                Best = Math.Max(Best, member.gFitness)
+                If Best.gFitness <= member.gFitness Then
+                    Best = cloner.CloneDeep(member)
+                End If
             Next
-
         End If
 
-        ' first generation catch
-        If Youngsters.Length = 0 Then
+        If Youngsters.Length = 0 And Err Then
+            Debug.Print("Keine Zuweisung möglich, da beide Generationen leer sind")
         Else
             For Each member In Youngsters
-                Best = Math.Max(Best, member.gFitness)
+                If Best.gFitness <= member.gFitness Then
+                    Best = cloner.CloneDeep(member)
+                End If
             Next
         End If
     End Sub
 
-    Public Function gBest()
+    Public Function gBest() As Individuum
         Return Best
     End Function
 
-    ' Adds an individual to the population. the count for number of individuals is increased, target determines to which generation the new individual belongs
+    ''' <summary>
+    ''' Adds an individual to the population.
+    ''' </summary>
+    ''' <param name="indi"><see cref="Individuum"/></param>
+    ''' <param name="target">1,2,3 for Elders, Youngsters, nextGen</param>
     Public Sub AddIndi(ByVal indi As Individuum, ByVal target As Integer)
         ' TODO write a proper SplineWriteALL-Sub
         Select Case target
@@ -169,18 +182,26 @@ Public Class Population
         End Select
     End Sub
 
+    ''' <summary>
+    ''' increases generation count by 1
+    ''' </summary>
     Public Sub incGenCount()
-        GenCount = GenCount + 1
+        GenCount += 1
     End Sub
 
-    Public Function gGenCount()
+    Public Function gGenCount() As Integer
         Return GenCount
     End Function
 
-    Public Function gIndiCount()
+    Public Function gIndiCount() As Integer
         Return IndiCount
     End Function
 
+    ''' <summary>
+    ''' Writes the array of <see cref="Spline"/>s which build the genome of the individual into the corresponding a txt file
+    ''' </summary>
+    ''' <param name="indi"><see cref="Individuum"/></param>
+    ''' <param name="target">1,2,3 for Elders, Youngsters, nextGen</param>
     Public Sub WriteIndi(ByVal indi As Individuum, ByVal target As Integer)
         Dim s As String
         Dim fs As FileStream
@@ -220,7 +241,6 @@ Public Class Population
                 fs.Dispose()
 
                 handler.WriteSpline(indi.gGenome, s)
-
         End Select
     End Sub
 

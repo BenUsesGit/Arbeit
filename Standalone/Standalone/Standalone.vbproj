@@ -72,7 +72,9 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationManager.vb" />
     <Compile Include="Clone.vb" />
+    <Compile Include="eIndi.vb" />
     <Compile Include="Evo.vb" />
     <Compile Include="Fitness.vb" />
     <Compile Include="Form1.vb">

@@ -1,13 +1,18 @@
 ﻿Public Class Form1
-    Dim testEvo As Evo
+
+    WithEvents applMan As New ApplicationManager, testEvo As New Evo(applMan.gAns)
+
+    Delegate Sub act()
+    Public test As act
 
     Public Sub New()
 
         ' Dieser Aufruf ist für den Designer erforderlich.
         InitializeComponent()
-
+        BeginEvolution.Enabled = False
+        test = New act(AddressOf ActivateButtons)
         ' Fügen Sie Initialisierungen nach dem InitializeComponent()-Aufruf hinzu.
-        NeuAusNix("D:\Skripte\VBA\Splines\Test")
+        'NeuAusNix("D:\Skripte\VBA\Splines\Test")
         'i = 0
         'While i < 3
         '    testEvo.Cycle()
@@ -36,7 +41,7 @@
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        testEvo.Cycle()
+        testEvo.CycleUI()
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
@@ -56,39 +61,37 @@
 
     End Sub
 
-    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
-        ' TODO change Sub that the velue from the textbox is used 
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles BeginEvolution.Click
+        '' TODO change Sub that the value from the textbox is used 
         NeuAusNix("D:\Skripte\VBA\Splines\Test")
 
-        ' TODO make the Sub robust against faulty entries e.g. texts 
-        Dim f As Double
-        Dim mi, mg As Integer
+        '' TODO make the Sub robust against faulty entries e.g. texts 
+        'Dim f As Double
+        'Dim mi, mg As Integer
 
-        If ZielFitness.Text = "" Then
-            f = 1000000
-        Else
-            f = ZielFitness.Text
-        End If
+        'If ZielFitness.Text = "" Then
+        '    f = 1000000
+        'Else
+        '    f = ZielFitness.Text
+        'End If
 
-        If MaxIndi.Text = "" Then
-            mi = 100000000
-        Else
-            mi = MaxIndi.Text
-        End If
+        'If MaxIndi.Text = "" Then
+        '    mi = 100000000
+        'Else
+        '    mi = MaxIndi.Text
+        'End If
 
-        If MaxGen.Text = "" Then
-            mg = 100000
-        Else
-            mg = MaxGen.Text
-        End If
+        'If MaxGen.Text = "" Then
+        '    mg = 100000
+        'Else
+        '    mg = MaxGen.Text
+        'End If
 
-        If Not f = 1000000 And mi = 100000000 And mg = 0 Then
-            Do Until testEvo.PopInfo(0) >= mi Or testEvo.PopInfo(1) >= mg Or testEvo.PopInfo(2) >= f
-                testEvo.Cycle()
-            Loop
-        End If
-
-
+        'If Not f = 1000000 And mi = 100000000 And mg = 0 Then
+        '    Do Until testEvo.PopInfo(0) >= mi Or testEvo.PopInfo(1) >= mg Or testEvo.PopInfo(2) >= f
+        '        testEvo.Cycle()
+        '    Loop
+        'End If
     End Sub
 
     Public Sub NeuAusNix(ByVal s As String)
@@ -114,10 +117,26 @@
         Dim testIndi As New Individuum()
         testIndi.sGenome(handler.ReadAllSplines(p1))
 
-        testEvo = New Evo(p, "Ichbinhier", testIndi, 20)
+        testEvo.NewEvo(p, "Ichbinhier", testIndi, 3)
 
         TextBox1.Clear()
         TextBox1.AppendText(testEvo.gLivingSpace)
+    End Sub
+
+    Private Sub AnsStart_Click(sender As Object, e As EventArgs) Handles AnsStart.Click
+        applMan.startAns()
+    End Sub
+
+    Private Sub Endless(sender As Object, e As eIndi) Handles testEvo.CycleComplete
+        testEvo.Cycle()
+    End Sub
+
+    Private Sub ActivateButtons()
+        BeginEvolution.Enabled = True
+    End Sub
+
+    Private Sub React(sender As Object, e As EventArgs) Handles applMan.AnsRdy
+        BeginEvolution.Invoke(test)
     End Sub
 
 End Class

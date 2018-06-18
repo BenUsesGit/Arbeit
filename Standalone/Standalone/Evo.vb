@@ -1,5 +1,7 @@
 ﻿Imports System.IO, System.Text.RegularExpressions, System.Math, System.Object
-
+''' <summary>
+''' 'god-class'. Class manages the whole evelution-process. 
+''' </summary>
 Public Class Evo
 
     Private Pop As New Population
@@ -7,36 +9,42 @@ Public Class Evo
     Private Curpath As String
     Private name As String
     Private cloner As New Clone
-    Private mute As New Mutation(ans)
-    Private reco As New Recombination(ans)
-    Private fit As New Fitness(ans)
-    Private sel As New Selection(ans)
+    Private ans As New AnsysControl.Ansys
+    Private mute As New Mutation
+    Private reco As New Recombination
+    Private sel As New Selection
 
-    Private ans As AnsysControl.Ansys
+    WithEvents fit As New Fitness(ans)
+
+    Public Event CycleComplete As EventHandler(Of eIndi)
 
     ' TODO OPTIONAL recreate whole project in a way, that all objects are saved and managed in xml format
 
     'constructor
-    Public Sub New()
+    Public Sub New(AnsysInstance As AnsysControl.Ansys)
         ' Start of needed programms
         '-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-        ans = New AnsysControl.Ansys
+        ans = AnsysInstance
+        fit.sAns(AnsysInstance)
         '-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     End Sub
 
-    'location for the evolution with a name to take place, an individuum to get a starting population from and how many induviduals shall be created
-    Public Sub New(ByVal p As String, ByVal n As String, ByVal start As Individuum, ByVal size As Integer)
+    ''' <param name="p">Path to directory for evolution to take place</param>
+    ''' <param name="n">Name of the folder to be created</param>
+    ''' <param name="start">Individuum to derive a startpopulaiton from</param>
+    ''' <param name="size">Number of individuals for start population</param>
+    Public Sub NewEvo(ByVal p As String, ByVal n As String, ByVal start As Individuum, ByVal size As Integer)
 
         ' Start of needed programms
         '-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-        ans = New AnsysControl.Ansys
-
+        'ans = New AnsysControl.Ansys
+        'fit = f
         '-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
         ' population Stuff
         '-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         name = n
-        livingSpace = p & "\" & name
+        livingSpace = p & "\" & name & "\"
         If Directory.Exists(livingSpace) Then
             'Directory.SetCurrentDirectory(livingSpace)
         Else
@@ -46,32 +54,34 @@ Public Class Evo
 
         FileNew(livingSpace)
 
-        For Each member As Individuum In CreateStartPop(start, size)
-            member.sFitness(fit.EvalFitness(member))
-            Pop.AddIndi(member, 1)
-        Next
+        'For Each member As Individuum In CreateStartPop(start, size)
+        '    fit.AddToBatch(member)
+        '    'member.sFitness(fit.EvalFitness(member))
+        'Next
 
-        UpdatePop()
+        fit.EvalArr(CreateStartPop(start, size), True)
 
         '-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     End Sub
 
-    'constructor in case a Population with given name at given location is already at hand
-    Public Sub New(ByVal p As String, ByVal n As String)
-        name = n
-        livingSpace = p & "\" & name
 
-        If Directory.Exists(p & "\" & name) Then
-            livingSpace = p
-            'Directory.SetCurrentDirectory(livingSpace)
-            Debug.Print("Population gefunden")
-        Else
-            ' TODO setup proper error handling
-        End If
-    End Sub
+    'Public Sub NewEvo(ByVal p As String, ByVal n As String)
+    '    name = n
+    '    livingSpace = p & "\" & name
 
-    'location for the evolution to take place, a population to start with
+    '    If Directory.Exists(p & "\" & name) Then
+    '        livingSpace = p
+    '        'Directory.SetCurrentDirectory(livingSpace)
+    '        Debug.Print("Population gefunden")
+    '    Else
+    '        ' TODO setup proper error handling
+    '    End If
+    'End Sub
+
+    ''' <overloads>In case a starting population is already at hand.</overloads>
+    '''<param name="n">Name of evolution folder</param>
+    '''<param name="p">Path to evolution folder</param>
     Public Sub New(ByVal p As String, ByVal n As String, ByVal start As Population)
         name = n
         livingSpace = p & "\" & name
@@ -80,13 +90,31 @@ Public Class Evo
 
     End Sub
 
-    'Updates population info, by writing its properties into txt file
+    ''' <summary>
+    ''' set <see cref="AnsysControl.Ansys"/>-property
+    ''' </summary>
+    ''' <param name="a"></param>
+    Public Sub sAns(a As AnsysControl.Ansys)
+        ans = a
+    End Sub
+
+    ''' <summary>
+    ''' get <see cref="AnsysControl.Ansys"/>-property
+    ''' </summary>
+    ''' <returns></returns>
+    Public Function gAns()
+        Return ans
+    End Function
+
+    ''' <summary>
+    ''' Updates population info, by writing its properties into txt file
+    ''' </summary>
     Public Sub UpdatePop()
         ' Updating the popinfo.txt - file
 
         Pop.sBest()
 
-        Debug.Print(vbCrLf & "Bester aus Generation " & Pop.gGenCount & ":" & vbTab & Pop.gBest & vbCrLf)
+        Debug.Print(vbCrLf & "Bester aus Generation " & Pop.gGenCount & ":" & vbTab & Pop.gBest.gfitness & vbCrLf)
 
         Dim fs As New FileStream(livingSpace & "\PopInfo.txt", FileMode.Create)
         Dim sw As New StreamWriter(fs)
@@ -114,24 +142,28 @@ Public Class Evo
         Debug.Print(vbCrLf)
 
         ' -----------------------------------------------------------------------------
-
     End Sub
 
-    ' sets the living space
+    ''' <summary>
+    ''' Sets living space property
+    ''' </summary>
+    ''' <param name="s">path to evolution folder</param>
     Public Sub sLivingSpace(ByVal s As String)
         ' TODO make this sub robust against invalid strings
         livingSpace = s
     End Sub
 
-    ' sets the living space
+    ' gets the living space
     Public Function gLivingSpace()
         Return livingSpace
     End Function
 
-    ' simulates one evolutionary cycle, at this moment only with simple mating
-    ' TODO several parameters are possible: True or False for different aspects of the evolutionary cycle to toggle on and of (mutation, recombination, selection etc.)
-    ' also there could be parameters passed that indicate, which of the aspects to use, if there are more than one
+    ''' <summary>
+    ''' Simulates one evolutionary cycle.
+    ''' </summary>
     Public Sub Cycle()
+        ' TODO several parameters are possible: True or False for different aspects of the evolutionary cycle to toggle on and of (mutation, recombination, selection etc.)
+        ' also there could be parameters passed that indicate, which of the aspects to use, if there are more than one
         sel.BestSelect(Pop, 10)
         reco.SimpleMate(Pop.gNextGen, Pop)
         mute.SimpleMut(Pop.gNextGen)
@@ -182,30 +214,184 @@ Public Class Evo
         UpdatePop()
     End Sub
 
-    Public Function PopInfo()
-        Dim arr As Object() = {}
-        ReDim arr(2)
+    ''' <summary>
+    ''' Simulates one evolutionary cycle. Is triggered by <see cref="Fitness.EvalReady"/>
+    ''' </summary>
+    ''' <param name="e"><see cref="eIndi"/></param>
+    Public Sub Cycle1(sender As Object, e As eIndi) Handles fit.EvalReady
+        ' TODO several parameters are possible: True or False for different aspects of the evolutionary cycle to toggle on and of (mutation, recombination, selection etc.)
+        ' also there could be parameters passed that indicate, which of the aspects to use, if there are more than one
+        Select Case e.lstAction
+            Case -10 ' initalization of population, no cycle, just add indis to pop
+                For Each element In e.indis
+                    Pop.AddIndi(element, 1)
+                Next
+                Exit Sub
+            Case 0
+                If AnyUnEval(e.lstAction) Then ' make sure prerequisites are met for best selection
+                    sel.BestSelect(Pop, 5)
+                    e.lstAction += 10
+                    Cycle1(Me, e)
+                End If
+            Case 5
+                sel.BestSelect(Pop, 5)
+                e.lstAction += 5
+                Cycle1(Me, e)
+            Case 10
+                If AnyUnEval(e.lstAction) Then ' make sure prerequisites are met for simple mate
+                    reco.SimpleMate(Pop.gNextGen, Pop)
+                    e.lstAction += 10
+                    Cycle1(Me, e)
+                End If
+            Case 15
+                reco.SimpleMate(Pop.gNextGen, Pop)
+                e.lstAction += 5
+                Cycle1(Me, e)
+            Case 20
+                If AnyUnEval(e.lstAction) Then ' make sure prerequisites are met for simple mut
+                    mute.SimpleMut(Pop.gNextGen)
+                    e.lstAction += 10
+                    Cycle1(Me, e)
+                End If
+            Case 25
+                mute.SimpleMut(Pop.gNextGen)
+                e.lstAction += 5
+                Cycle1(Me, e)
+            Case 30
+                If AnyUnEval(e.lstAction) Then ' make sure prerequisites are met for fitness proportional selection
+                    sel.FitPropSel(Pop, 5)
+                    e.lstAction += 10
+                    Cycle1(Me, e)
+                End If
+            Case 35
+                sel.FitPropSel(Pop, 5)
+                e.lstAction += 5
+                Cycle1(Me, e)
+            Case 40
+                'do nothing ?
 
-        arr(0) = Pop.gIndiCount
-        arr(1) = Pop.gGenCount
-        arr(2) = Pop.gBest
+                ' building a new generation by shifting individuals from youngsters to elders and nextgen to youngsters
+                If Pop.gYoungsters.Length = 0 Then
+                    If Pop.gNextGen.length = 0 Then
+                        Debug.Print("Keine Kindgenerationen vorhanden")
+                    Else
+                        Pop.sYoungsters({})
+                        For Each member In Pop.gNextGen
+                            Pop.AddIndi(cloner.CloneDeep(member), 2)
+                        Next
+                    End If
+                Else
+                    Pop.sElders(cloner.CloneDeep(Pop.gYoungsters))
+                    If Pop.gNextGen.Length = 0 Then
+                        Debug.Print("Keine Kindgenerationen vorhanden")
+                    Else
+                        Pop.sYoungsters({})
+                        For Each member In Pop.gNextGen
+                            Pop.AddIndi(cloner.CloneDeep(member), 2)
+                        Next
+                    End If
+                End If
 
-        Return arr
+                Pop.sNextGen({})
+
+                ' write contents of the new built array into folders
+                Directory.Delete(Pop.gEldersHome, True)
+                Directory.CreateDirectory(Pop.gEldersHome)
+                For Each member In Pop.gElders
+                    Pop.WriteIndi(member, 1)
+                Next
+
+                Directory.Delete(Pop.gYoungstersHome, True)
+                Directory.CreateDirectory(Pop.gYoungstersHome)
+                For Each member In Pop.gYoungsters
+                    Pop.WriteIndi(member, 2)
+                Next
+
+                Directory.Delete(Pop.gNextGenHome, True)
+                Directory.CreateDirectory(Pop.gNextGenHome)
+
+                Pop.incGenCount()
+
+                UpdatePop()
+
+                RaiseEvent CycleComplete(Me, e)
+        End Select
+    End Sub
+
+    Public Sub CycleUI()
+        Dim cycleArr As New eIndi(Pop.gElders, 0)
+        Cycle1(Me, cycleArr)
+    End Sub
+
+    ''' <summary>
+    ''' checks if all individuals are evaluated, if not, all unevaluated individuals are passed for evaluation
+    ''' </summary>
+    ''' <param name="i"></param>
+    ''' <returns>True if any individual is not evaluated yet</returns> 
+    Private Function AnyUnEval(i As Integer)
+        Dim flag As Boolean = True
+        Dim unevalArr As Individuum() = {}
+
+        For Each element In Pop.gElders
+            If Not element.gEvaluated Then
+                ReDim Preserve unevalArr(unevalArr.Length)
+                unevalArr(unevalArr.Length - 1) = element
+                flag = False
+            End If
+        Next
+
+        For Each element In Pop.gYoungsters
+            If Not element.gevaluated Then
+                ReDim Preserve unevalArr(unevalArr.Length)
+                unevalArr(unevalArr.Length - 1) = element
+                flag = False
+            End If
+        Next
+
+        For Each element In Pop.gNextGen
+            If Not element.gevaluated Then
+                ReDim Preserve unevalArr(unevalArr.Length)
+                unevalArr(unevalArr.Length - 1) = element
+                flag = False
+            End If
+        Next
+
+        If Not flag Then
+            fit.EvalArr(unevalArr, False) ' passing the unevaluated individuals to fitness
+        End If
+        Return flag
     End Function
 
-    ' creates a new individual with random values determined by a given individual, the new individual is added to the actual generation
+    'Public Function PopInfo()
+    '    Dim arr As Object() = {}
+    '    ReDim arr(2)
+
+    '    arr(0) = Pop.gIndiCount
+    '    arr(1) = Pop.gGenCount
+    '    arr(2) = Pop.gBest
+
+    '    Return arr
+    'End Function
+
+    ''' <summary>
+    ''' Creates a new individual with random values determined by a given individual.
+    ''' </summary>
+    ''' <param name="indi"><see cref="Individuum"/></param>
+    ''' <remarks> The new individual is added to the current generation</remarks>
     Public Sub CreateIndi(ByVal indi As Individuum)
         Dim newIndi As Individuum
         newIndi = cloner.CloneDeep(indi)
         mute.SimpleMut(newIndi)
-        If Pop.gYoungsters = 0 Then
+        If Pop.gYoungsters.Length = 0 Then
             Pop.AddIndi(newIndi, 1)
         Else
             Pop.AddIndi(cloner.CloneDeep(newIndi), 2)
         End If
     End Sub
 
-    ' creates a new individual with random values, base individual is a randomly chosen member of the actual generation
+    ''' <overloads>
+    ''' 
+    ''' </overloads>
     Public Sub CreateIndi()
         Randomize()
         Dim newIndi As Individuum
@@ -243,7 +429,9 @@ Public Class Evo
 
     End Sub
 
-    ' clears all generations, population data and files
+    ''' <summary>
+    ''' clears all generations, population data and files
+    ''' </summary>
     Public Sub clearPop()
 
         ' TODO make Sub robust
@@ -260,7 +448,10 @@ Public Class Evo
 
     End Sub
 
-    'creation of generation folders assumes the current directory is already the right one
+    ''' <summary>
+    ''' Creation of generation folders assumes the current directory is already the right one
+    ''' </summary>
+    ''' <param name="p">Path to the evolution folder</param>
     Private Sub FileNew(ByVal p As String)
 
         Pop.sEldersHome(p)
@@ -289,7 +480,12 @@ Public Class Evo
     '    End If
     'End Function
 
-    'creates a startpopulation with a given start individuum
+    ''' <summary>
+    ''' Creates a startpopulation with a given start individual
+    ''' </summary>
+    ''' <param name="startI">Startindividual to derive from</param>
+    ''' <param name="size">Number of individuals</param>
+    ''' <returns></returns>
     Private Function CreateStartPop(ByVal startI As Individuum, ByVal size As Integer)
         Dim group As Individuum()
         ReDim group(size - 1)
@@ -298,9 +494,17 @@ Public Class Evo
         For i = 0 To group.Length - 1
             group(i) = New Individuum()
             group(i) = mute.SimpleMut(cloner.CloneDeep(startI))
+            group(i).sName(i)
         Next
 
         Return group
     End Function
+
+    ' adding individuals to population after evaluation is finished
+    'Public Sub IndiToPop(sender As Object, e As eIndi) Handles fit.EvalReady
+    '    For Each element In e.indis
+    '        Pop.AddIndi(element, 1)
+    '    Next
+    'End Sub
 
 End Class

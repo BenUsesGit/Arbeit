@@ -1,22 +1,31 @@
 ﻿Imports System.Math
-
+''' <summary>
+''' Holds different methods for mutationg the genome of an individual
+''' ''' </summary>
 Public Class Mutation
-    Dim ans As AnsysControl.Ansys
+    'Dim ans As AnsysControl.Ansys
 
-    Dim fit As New Fitness(ans)
+    'Dim fit As Fitness
 
-    Public Sub New(a As AnsysControl.Ansys)
-        ans = a
+    ' WithEvents f As New Fitness(ans)
+
+    Public Sub New()
+        'ans = a
+        ' fit = f
     End Sub
 
-    'applies a very simple random generator on all control points of splines of given individual
+    ''' <summary>
+    ''' Applies a very simple random generator on all control points of splines of given individual
+    ''' </summary>
+    ''' <param name="indi"></param>
+    ''' <returns></returns>
     Public Function SimpleMut(ByVal indi As Individuum)
         Dim s As Spline() = indi.gGenome
 
-        ' DEBUG------------------------------------------------------------------------------------
-        Dim text As String
-        text = indi.gName & vbTab & indi.gFitness & vbTab & vbTab & "=>" & vbTab
-        ' -----------------------------------------------------------------------------------------
+        '' DEBUG------------------------------------------------------------------------------------
+        'Dim text As String
+        'text = indi.gName & vbTab & indi.gFitness & vbTab & vbTab & "=>" & vbTab
+        '' -----------------------------------------------------------------------------------------
         For Each member As Spline In s
             Dim pts As Point() = member.gPoints()
 
@@ -30,22 +39,23 @@ Public Class Mutation
         Next
 
         indi.sGenome(s)
-        indi.sFitness(fit.EvalFitness(indi))
-        text = text & indi.gFitness
-        ' DEBUG------------------------------------------------------------------------------------
-        Debug.Print(text & vbCrLf)
-        ' -----------------------------------------------------------------------------------------
+        'indi.sFitness(fit.EvalFitness(indi))
+        indi.sEvaluated(False)
+        'text = text & indi.gFitness
+        '' DEBUG------------------------------------------------------------------------------------
+        'Debug.Print(text & vbCrLf)
+        '' -----------------------------------------------------------------------------------------
         Return indi
     End Function
 
-    ' same as simpleMut but uses an array of individuals
+    ''' <overloads>calls <see cref="SimpleMut(Individuum)"/> for each item in an array of <see cref="Individuum"/>s</overloads>
     Public Function SimpleMut(ByVal arr As Individuum())
         If arr.Length = 0 Then
         Else
-            Debug.Print("Gaussche Mutation um Stützpunkte:")
-            Debug.Print("Mutiere Genom..." & vbCrLf &
-                        "Fitnesswert" & vbCrLf &
-                        "vor der Mutation" & vbTab & vbTab & "nach der Mutation" & vbCrLf)
+            'Debug.Print("Gaussche Mutation um Stützpunkte:")
+            'Debug.Print("Mutiere Genom..." & vbCrLf &
+            '            "Fitnesswert" & vbCrLf &
+            '            "vor der Mutation" & vbTab & vbTab & "nach der Mutation" & vbCrLf)
             For Each member In arr
                 SimpleMut(member)
             Next
@@ -53,8 +63,12 @@ Public Class Mutation
         Return 0
     End Function
 
-    ' generates random numbers with gaussian distribution arround a given value
-    Public Function Gauss(ByVal x As Double)
+    ''' <summary>
+    ''' Generates random numbers with gaussian distribution arround a given value
+    ''' </summary>
+    ''' <param name="x"></param>
+    ''' <returns></returns>
+    Private Function Gauss(ByVal x As Double)
         Randomize()
         Dim u1, u2, q, p As Double
 

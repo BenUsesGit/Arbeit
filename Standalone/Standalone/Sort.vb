@@ -1,9 +1,18 @@
 ﻿Imports System.Math
+''' <summary>
+''' Class for sorting algorithms
+''' </summary>
 Public Class Sort
 
     ' Qicksort
     '------------------------------------------------------------------------------------------------------------------------------------------------------------ 
-    Public Function QuickSort(ByVal ArrayToSort As Individuum(), ByVal ascending As Boolean)
+    ''' <summary>
+    ''' Quicksort
+    ''' </summary>
+    ''' <param name="ArrayToSort"></param>
+    ''' <param name="ascending"></param>
+    ''' <returns></returns>
+    Public Function QuickSort(ByVal ArrayToSort As Individuum(), ByVal ascending As Boolean) As Individuum()
         If ascending Then
             Return QuickSort(ArrayToSort, 0, ArrayToSort.Length - 1)
         Else
@@ -22,8 +31,15 @@ Public Class Sort
 
     End Function
 
-    ' per default this function sorts an array from lowest to highest -- ascending
-    Public Function QuickSort(ByVal ArrayToSort As Individuum(), ByVal Low As Long, ByVal High As Long)
+    ' per default this function sorts an array from lowest to highest --> ascending
+    ''' <overloads>
+    ''' per default this function sorts an array from lowest to highest --> ascending
+    ''' </overloads>
+    ''' <param name="ArrayToSort"></param>
+    ''' <param name="Low"></param>
+    ''' <param name="High"></param>
+    ''' <returns></returns>
+    Public Function QuickSort(ByVal ArrayToSort As Individuum(), ByVal Low As Long, ByVal High As Long) As Individuum()
         Dim vPartition As Individuum, vTemp As Individuum
         Dim i As Long, j As Long
 

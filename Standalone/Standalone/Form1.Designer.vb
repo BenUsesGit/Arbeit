@@ -27,13 +27,14 @@ Partial Class Form1
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Button3 = New System.Windows.Forms.Button()
-        Me.Button4 = New System.Windows.Forms.Button()
+        Me.BeginEvolution = New System.Windows.Forms.Button()
         Me.ZielFitness = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.MaxGen = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.MaxIndi = New System.Windows.Forms.TextBox()
+        Me.AnsStart = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'Button1
@@ -79,14 +80,14 @@ Partial Class Form1
         Me.Button3.Text = "Lösche aktuelle Evolution"
         Me.Button3.UseVisualStyleBackColor = True
         '
-        'Button4
+        'BeginEvolution
         '
-        Me.Button4.Location = New System.Drawing.Point(218, 90)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(103, 36)
-        Me.Button4.TabIndex = 6
-        Me.Button4.Text = "Beginne Evolution"
-        Me.Button4.UseVisualStyleBackColor = True
+        Me.BeginEvolution.Location = New System.Drawing.Point(218, 90)
+        Me.BeginEvolution.Name = "BeginEvolution"
+        Me.BeginEvolution.Size = New System.Drawing.Size(103, 36)
+        Me.BeginEvolution.TabIndex = 6
+        Me.BeginEvolution.Text = "Beginne Evolution"
+        Me.BeginEvolution.UseVisualStyleBackColor = True
         '
         'ZielFitness
         '
@@ -136,18 +137,28 @@ Partial Class Form1
         Me.MaxIndi.Size = New System.Drawing.Size(100, 20)
         Me.MaxIndi.TabIndex = 11
         '
+        'AnsStart
+        '
+        Me.AnsStart.Location = New System.Drawing.Point(28, 197)
+        Me.AnsStart.Name = "AnsStart"
+        Me.AnsStart.Size = New System.Drawing.Size(103, 36)
+        Me.AnsStart.TabIndex = 13
+        Me.AnsStart.Text = "Starte Ansys"
+        Me.AnsStart.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(740, 185)
+        Me.ClientSize = New System.Drawing.Size(740, 265)
+        Me.Controls.Add(Me.AnsStart)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.MaxIndi)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.MaxGen)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.ZielFitness)
-        Me.Controls.Add(Me.Button4)
+        Me.Controls.Add(Me.BeginEvolution)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.TextBox1)
@@ -165,11 +176,12 @@ Partial Class Form1
     Friend WithEvents TextBox1 As TextBox
     Friend WithEvents Label1 As Label
     Friend WithEvents Button3 As Button
-    Friend WithEvents Button4 As Button
+    Friend WithEvents BeginEvolution As Button
     Friend WithEvents ZielFitness As TextBox
     Friend WithEvents Label2 As Label
     Friend WithEvents Label3 As Label
     Friend WithEvents MaxGen As TextBox
     Friend WithEvents Label4 As Label
     Friend WithEvents MaxIndi As TextBox
+    Friend WithEvents AnsStart As Button
 End Class

@@ -1,8 +1,14 @@
-﻿<Serializable> Public Class Individuum
+﻿''' <summary>
+''' Basically an array of <see cref="Spline"/>s and a little additional information.
+''' </summary>
+''' <remarks>Builds the core for things like mutation, selection and so on.</remarks>
+<Serializable> Public Class Individuum
 
-    Private Fitness As Double
+    Private Fitness As Double ' fitness value
+    Private Evaluated As Boolean ' falg to see whether this individual has been evaluated by ansys yet
+    Public Corporal As Boolean ' flag to see wether this individual has a corporal form yet, a phenotype if you will
     Private Genome As Spline()
-    Private Name As Integer
+    Private Name As Integer ' unique ID
 
     'constructor
     Public Sub New()
@@ -14,6 +20,8 @@
         Fitness = f
         Name = n
         Genome = g
+        Evaluated = False
+        Corporal = False
     End Sub
 
     Public Sub sFitness(ByVal f As Double)
@@ -52,6 +60,14 @@
 
     Public Function gName() As Integer
         Return Name
+    End Function
+
+    Public Sub sEvaluated(b As Boolean)
+        Evaluated = b
+    End Sub
+
+    Public Function gEvaluated()
+        Return Evaluated
     End Function
 
 End Class

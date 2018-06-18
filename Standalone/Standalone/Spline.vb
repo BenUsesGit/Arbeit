@@ -1,7 +1,9 @@
-﻿
+﻿''' <summary>
+''' Class holds all important information for a CAD system to draw a NURB
+''' </summary>
 <Serializable()> Public Class Spline
 
-    Private ID As Integer
+    Private ID As Integer ' unique ID
     Private degree As Integer
     Private order As Integer
     Private knots As Double()
@@ -14,7 +16,6 @@
 
     End Sub
 
-    'Überladung new1
     Public Sub New(ByVal dgr As Integer, ByVal knts As Double(), ByVal pnts As Point())
         degree = dgr
         order = dgr - 1
@@ -134,8 +135,14 @@
         Return closed
     End Function
 
-    'checks wether the spline is drawable: it needs the knots, the points and the order
-    Private Function SCheck(ByVal k As Double(), ByVal p As Point(), ByVal o As Integer)
+    ''' <summary>
+    ''' Checks wether the spline is drawable: it needs the knots, the points and the order
+    ''' </summary>
+    ''' <param name="k"></param>
+    ''' <param name="p"></param>
+    ''' <param name="o"></param>
+    ''' <returns>True when the Spline is drawable</returns>
+    Private Function SCheck(ByVal k As Double(), ByVal p As Point(), ByVal o As Integer) As Boolean
         Dim w As Boolean
 
         If k Is Nothing Or p Is Nothing Then

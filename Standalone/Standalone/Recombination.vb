@@ -1,16 +1,22 @@
 ﻿Imports System.Math
-
+''' <summary>
+''' Class holds different methods to recombine genomes of individuals with each other
+''' </summary>
 Public Class Recombination
     Dim cloner As New Clone
-    Dim fit As New Fitness(ans)
+    'Dim fit As New Fitness(ans)
 
-    Dim ans As AnsysControl.Ansys
+    'Dim ans As AnsysControl.Ansys
 
-    Public Sub New(a As AnsysControl.Ansys)
-        ans = a
+    Public Sub New() 'a As AnsysControl.Ansys)
+        'ans = a
     End Sub
 
-    ' Simulates a simple mating process by choosing mating partners randomly by choosing the max values of each control point, input is the parent group, output is the childrengroup
+    ''' <summary>
+    ''' Simulates a simple mating process by choosing mating partners randomly by choosing the max values of each control point, input is the parent group, output is the childrengroup
+    ''' </summary>
+    ''' <param name="parents"></param>
+    ''' <param name="Pop"></param>
     Public Sub SimpleMate(ByVal parents As Individuum(), ByVal Pop As Population)
         Randomize()
         Dim mem As Individuum() = {}
@@ -50,7 +56,8 @@ Public Class Recombination
             ReDim Preserve mem(mem.Length)
             Dim child As Individuum = cloner.CloneDeep(parents(first))
             child.sGenome(childSp)
-            child.sFitness(fit.EvalFitness(child))
+            'child.sFitness(fit.EvalFitness(child))
+            child.sEvaluated(False)
             mem(i) = child
         Next
         Pop.sNextGen(mem)

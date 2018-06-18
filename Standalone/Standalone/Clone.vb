@@ -1,6 +1,8 @@
-﻿Public Class Clone
+﻿''' <summary>
+''' Cloner-Class to trully clone non-primitives that have the attribute "serializable"
+''' </summary>
+Public Class Clone
     Implements ICloneable
-
     Public Sub New()
 
     End Sub

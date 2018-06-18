@@ -1,15 +1,22 @@
 ﻿Imports System.Math
+''' <summary>
+''' class holds different methods for selecting individuals.
+''' </summary>
 Public Class Selection
     Private cloner As New Clone
     Private sort As New Sort
-    Dim ans As AnsysControl.Ansys
+    'Dim ans As AnsysControl.Ansys
 
-    Public Sub New(a As AnsysControl.Ansys)
-        ans = a
+    Public Sub New() 'a As AnsysControl.Ansys)
+        'ans = a
     End Sub
 
-    ' Selection of the best individuals, input is a population and a number of individuals to be chosen, the choice for a individual is made alternating from the best individuals of
-    ' the older and the younger generation
+    ''' <summary>
+    ''' Selection of the best individuals, input is a population and a number of individuals to be chosen, the choice for a individual is made alternating from the best individuals of
+    ''' the older and the younger generation
+    ''' </summary>
+    ''' <param name="Pop"></param>
+    ''' <param name="n">Number of individuals to be chosen</param>
     Public Sub BestSelect(ByVal Pop As Population, ByVal n As Integer)
         Dim i As Integer = 0
         Dim j As Integer = 0
@@ -34,7 +41,7 @@ Public Class Selection
                 " Individuen gewählt." & vbCrLf)
         End If
 
-        ' the loop picks alternating the best individuals from elders and youngsters, loop breaks if no more individual can be chosen or if a given value is reached
+        ' the loop picks alternating the best individuals from elders and youngsters. loop breaks if no individual can be chosen or if a given value is reached
         While Pop.gNextGen.length < n And k + j < Pop.gElders.length + Pop.gYoungsters.length
             If trig Then
                 If j <= Pop.gElders.length - 1 Then
@@ -60,6 +67,11 @@ Public Class Selection
                     & k & " Individuen aus der Kindgeneration" & vbCrLf)
     End Sub
 
+    ''' <summary>
+    ''' selection of fittest n individuals proportional to ther fitness value
+    ''' </summary>
+    ''' <param name="Pop"></param>
+    ''' <param name="n">number of <see cref="Individuum"/>s to be selected</param>
     Public Sub FitPropSel(ByVal Pop As Population, ByVal n As Integer)
         Dim all As Individuum()
         ReDim all(Pop.gNextGen.length - 1)

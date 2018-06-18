@@ -1,5 +1,8 @@
 ﻿Imports System.IO, System.Text.RegularExpressions
 
+''' <summary>
+''' Class for reading out, writing and interpret <see cref="Spline"/>s
+''' </summary>
 Public Class SplineHandler
     Dim SplineArr As Spline()
     Dim iPath As String
@@ -10,7 +13,11 @@ Public Class SplineHandler
 
     End Sub
 
-    'Writes Splineparameter of given spline into a file on the given path
+    ''' <summary>
+    ''' Writes Splineparameter of given spline into a file on the given path
+    ''' </summary>
+    ''' <param name="s"></param>
+    ''' <param name="path"></param>
     Public Sub WriteSpline(ByVal s As Spline, ByVal path As String)
         Dim fs As FileStream
         Dim sw As StreamWriter
@@ -48,22 +55,31 @@ Public Class SplineHandler
         fs.Dispose()
     End Sub
 
-    ' same as writespline but with an array a input and information that is written prior to the splineinformation
+    ''' <overloads> Calls <see cref="WriteSpline(Spline(), String)"/> for each item in a given array of <see cref="Spline"/>s</overloads>
     Public Sub WriteSpline(ByVal arr As Spline(), ByVal path As String)
         For Each element In arr
             WriteSpline(element, path)
         Next
     End Sub
 
-    ' converting Spline to String
-    Public Function SplineToString(ByVal spline As Spline)
+    ''' <summary>
+    ''' under development
+    ''' </summary>
+    ''' <param name="spline"></param>
+    ''' <returns></returns>
+    Public Function SplineToString(ByVal spline As Spline) As String
         Dim s As String
 
         Return s
     End Function
 
-    'reads out a spline with given ID from given path
-    Public Function ReadSpline(ByVal k As Integer, ByVal p As String)
+    ''' <summary>
+    ''' Read out a spline with given ID from given path
+    ''' </summary>
+    ''' <param name="id"></param>
+    ''' <param name="p"></param>
+    ''' <returns></returns>
+    Public Function ReadSpline(ByVal id As Integer, ByVal p As String) As Spline
         Dim s As New Spline
         Dim chain As String
 
@@ -71,7 +87,7 @@ Public Class SplineHandler
             Dim fs = New FileStream(p, FileMode.Open)
             Dim sr = New StreamReader(fs)
             chain = sr.ReadToEnd()
-            Dim interest As Match = Regex.Match(chain, "ID" & vbTab & k & ".*")
+            Dim interest As Match = Regex.Match(chain, "ID" & vbTab & id & ".*")
 
             If interest.Success Then
                 s = tearString(interest.Value)
@@ -88,8 +104,12 @@ Public Class SplineHandler
         End If
     End Function
 
-    'reads out all splines out of file with given path
-    Public Function ReadAllSplines(ByVal p As String)
+    ''' <summary>
+    ''' Reads out all splines out of file with given path
+    ''' </summary>
+    ''' <param name="p"></param>
+    ''' <returns></returns>
+    Public Function ReadAllSplines(ByVal p As String) As Spline()
         Dim s As New Spline
         Dim arr As Spline() = {}
         Dim chain As String
@@ -111,8 +131,12 @@ Public Class SplineHandler
         Return arr
     End Function
 
-    'Deletes the spline with given ID out of a file with given path
-    Public Sub DelSpline(ByVal k As Integer, ByVal p As String)
+    ''' <summary>
+    ''' Deletes the spline with given ID out of a file with given path
+    ''' </summary>
+    ''' <param name="id"></param>
+    ''' <param name="p"></param>
+    Public Sub DelSpline(ByVal id As Integer, ByVal p As String)
         ' TODO at the moment the whole string is copied, certain parts are deleted and whole string is written back to file;
         'it would be better if the method would work directly in the textfile
         Dim s As New Spline
@@ -126,10 +150,10 @@ Public Class SplineHandler
             chain = sr.ReadToEnd()
             sr.Close()
             fs.Dispose()
-            Dim interest As Match = Regex.Match(chain, "ID" & vbTab & k & ".*")
+            Dim interest As Match = Regex.Match(chain, "ID" & vbTab & id & ".*")
             If interest.Success Then
                 Dim replc As String
-                Dim pattern As String = "ID\s" & k & "+.*Ende" & vbCrLf
+                Dim pattern As String = "ID\s" & id & "+.*Ende" & vbCrLf
                 Dim rgx As New Regex(pattern)
                 replc = rgx.Replace(chain, "")
                 File.WriteAllText(p, "")
@@ -143,8 +167,12 @@ Public Class SplineHandler
 
     End Sub
 
-    'Assembles the string to write into a textfile from given spline
-    Public Function stitchString(ByVal s As Spline)
+    ''' <summary>
+    ''' Assembles the string to write into a textfile from given spline
+    ''' </summary>
+    ''' <param name="s"></param>
+    ''' <returns></returns>
+    Public Function stitchString(ByVal s As Spline) As String
         Dim splString As String
         splString = "ID" & vbTab & s.gID & vbTab & "Order" & vbTab & s.gOrder
 
@@ -187,8 +215,12 @@ Public Class SplineHandler
         Return splString
     End Function
 
-    'seperates the given String into arrays and matches the values to spline parameters
-    Private Function tearString(ByVal chain As String)
+    ''' <summary>
+    ''' Separates the given String into arrays and matches the values to spline parameters
+    ''' </summary>
+    ''' <param name="chain"></param>
+    ''' <returns></returns>
+    Private Function tearString(ByVal chain As String) As Spline
         ' TODO more convenient conversion of the integers out of the former extracted string; End this match of match of match ..
         Dim s As New Spline
         ' first match extracts keyword + corresponding numbers, second match extracts numbers with ; and ,
@@ -216,8 +248,12 @@ Public Class SplineHandler
         Return s
     End Function
 
-    'puts comma-values out of a given string into an array
-    Private Function StrToArr(ByVal chain As String)
+    ''' <summary>
+    ''' Puts comma-values out of a given string into an array
+    ''' </summary>
+    ''' <param name="chain"></param>
+    ''' <returns></returns>
+    Private Function StrToArr(ByVal chain As String) As Double()
         Dim Arr As Double()
         Dim substring As String()
 
@@ -232,7 +268,9 @@ Public Class SplineHandler
         Return Arr
     End Function
 
-    'sorts the splines in a file according their IDs
+    ''' <summary>
+    ''' Under development. sorts the splines in a file according their IDs
+    ''' </summary>
     Private Sub SplineSort()
         ' TODO a algorithm thats sorts the splines in the given string or whatever according to their IDs
     End Sub

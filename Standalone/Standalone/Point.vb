@@ -1,10 +1,16 @@
-﻿<Serializable()> Public Class Point
+﻿''' <summary>
+''' Point class
+''' </summary>
+''' <remarks> The only diffrence this class has from other,maybe predefined 3D point-classes ist the <see cref="iW"/>-property
+''' which corresponds to the "weight" attribute for control points of splines</remarks>
+<Serializable()> Public Class Point
     Private iX As Double
     Private iY As Double
     Private iZ As Double
     Private iW As Double
 
     'new with all
+    ''' <overloads> All values, not passed are set to "0" respectively "1" for the weight</overloads>
     Public Sub New(ByVal x As Double, ByVal y As Double, ByVal z As Double, ByVal w As Double)
         iX = x
         iY = y
@@ -28,6 +34,7 @@
         iW = 1
     End Sub
 
+    ''' <remarks>when this constructor is used, use setter functions to initiate attribute values</remarks>
     Public Sub New()
 
     End Sub
