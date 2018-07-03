@@ -1,0 +1,6 @@
+# encoding: utf-8
+# Release 17.2
+SetScriptVersion(Version="17.2.225")
+
+
+Save(FilePath="D:\AnsysSimulationen\DevByTry\DasSystem.wbpj")

@@ -1,0 +1,7 @@
+# encoding: utf-8
+# Release 17.2	
+
+modelComponent1 = sys.GetComponent(Name="Model")
+modelComponent1.Refresh()
+
+Project.Update()

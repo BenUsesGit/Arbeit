@@ -1,0 +1,973 @@
+﻿# encoding: utf-8
+# Release 17.2
+SetScriptVersion(Version="17.2.225")
+RunScript(FilePath="D:/Skripte/VBA/Splines/Test/Java.py")
+system1 = GetSystem(Name="SYS")
+setup1 = system1.GetContainer(ComponentName="Setup")
+setup1.SendCommand(Command="""debugger;
+
+function Update() {
+    //Get DesignSpace object
+        var DS = WB.AppletList.Applet(\"DSApplet\").App;
+        var Branch = DS.Tree.Branches(1);
+        var MeshCtrlGrp = Branch.MeshControlGroup;
+
+        //change Meshelementsize
+
+        MeshCtrlGrp.RelevanceCenter = 2;    // Fine
+
+        var object = new Object(null);
+        DS.AlbionSimAddinCaller.OnUpdateMeshCell.Fire(object, object);
+        return 0;
+}
+
+function ReadResults(lstResults) {
+    var DS = WB.AppletList.Applet(\"DSApplet\").App;
+    var Branch = DS.Tree.Branches(1);
+    new out(lstResults.length)
+
+    if (Branch.Results.Count > 0) {
+        for (i = 0; i < lstResults.length; i++) {
+            for (j = 0; j < Branch.Results.Count; j++) {
+                if (Branch.Results(j).Name==lstResults[i]){
+                    out[i] = Branch.Results(j).Name;
+                    break;
+                }
+                else {
+                    out[i] = \"NaN\";
+                }
+            }
+        }
+    }
+
+    return 0;
+}
+
+function getDate() {
+    var stamp = new Date();
+    var st = stamp.getDay + \".\" + stamp.getMonth + \".\" + stamp.getFullYear + '\\t' + stamp.getHours + \":\" + stamp.getMinutes + \":\" + stamp.getSeconds
+}
+
+function writeResults(path, data) {
+    var DS = WB.AppletList.Applet(\"DSApplet\").App;
+    var fso = DS.Script.GetFileSystemObject();
+    var file = fso.OpenTextFile(path);
+    var str = file.WriteLine(data)
+        file.close();
+    return 0;
+}
+
+writeResults(\"D:\\\\Skripte\\\\VBA\\\\Splines\\\\Test\\\\Ichbinhier\\\\AnsLog.txt\", \"*\" + \"\\t\" + getDate() + \"\\t\" + \"Javatest\" + \"\\t\" +\"*\");Update();""")
+setup1.SendCommand(Command="""debugger;
+
+function Update() {
+    //Get DesignSpace object
+        var DS = WB.AppletList.Applet(\"DSApplet\").App;
+        var Branch = DS.Tree.Branches(1);
+        var MeshCtrlGrp = Branch.MeshControlGroup;
+
+        //change Meshelementsize
+
+        MeshCtrlGrp.RelevanceCenter = 2;    // Fine
+
+        var object = new Object(null);
+        DS.AlbionSimAddinCaller.OnUpdateMeshCell.Fire(object, object);
+        return 0;
+}
+
+function ReadResults(lstResults) {
+    var DS = WB.AppletList.Applet(\"DSApplet\").App;
+    var Branch = DS.Tree.Branches(1);
+    new out(lstResults.length)
+
+    if (Branch.Results.Count > 0) {
+        for (i = 0; i < lstResults.length; i++) {
+            for (j = 0; j < Branch.Results.Count; j++) {
+                if (Branch.Results(j).Name==lstResults[i]){
+                    out[i] = Branch.Results(j).Name;
+                    break;
+                }
+                else {
+                    out[i] = \"NaN\";
+                }
+            }
+        }
+    }
+
+    return 0;
+}
+
+function getDate() {
+    //var stamp = new Date();
+    //var st = stamp.getDay + \".\" + stamp.getMonth + \".\" + stamp.getFullYear + '\\t' + stamp.getHours + \":\" + stamp.getMinutes + \":\" + stamp.getSeconds
+    DateFormat df = new SimpleDateFormat(\"dd/MM/yyy HH:mm:ss\");
+    Date today = Calendar.getInstance().GetTime();
+    String reportDate = df.format(today);
+    return reportDate;
+}
+
+function writeResults(path, data) {
+    var DS = WB.AppletList.Applet(\"DSApplet\").App;
+    var fso = DS.Script.GetFileSystemObject();
+    var file = fso.OpenTextFile(path);
+    var str = file.WriteLine(data)
+        file.close();
+    return 0;
+}
+
+writeResults(\"D:\\\\Skripte\\\\VBA\\\\Splines\\\\Test\\\\Ichbinhier\\\\AnsLog.txt\", \"*\" + \"\\t\" + getDate() + \"\\t\" + \"Javatest\" + \"\\t\" +\"*\");Update();""")
+setup1.SendCommand(Command="""debugger;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
+
+function Update() {
+    //Get DesignSpace object
+        var DS = WB.AppletList.Applet(\"DSApplet\").App;
+        var Branch = DS.Tree.Branches(1);
+        var MeshCtrlGrp = Branch.MeshControlGroup;
+
+        //change Meshelementsize
+
+        MeshCtrlGrp.RelevanceCenter = 2;    // Fine
+
+        var object = new Object(null);
+        DS.AlbionSimAddinCaller.OnUpdateMeshCell.Fire(object, object);
+        return 0;
+}
+
+function ReadResults(lstResults) {
+    var DS = WB.AppletList.Applet(\"DSApplet\").App;
+    var Branch = DS.Tree.Branches(1);
+    new out(lstResults.length)
+
+    if (Branch.Results.Count > 0) {
+        for (i = 0; i < lstResults.length; i++) {
+            for (j = 0; j < Branch.Results.Count; j++) {
+                if (Branch.Results(j).Name==lstResults[i]){
+                    out[i] = Branch.Results(j).Name;
+                    break;
+                }
+                else {
+                    out[i] = \"NaN\";
+                }
+            }
+        }
+    }
+
+    return 0;
+}
+
+function getDate() {
+    //var stamp = new Date();
+    //var st = stamp.getDay + \".\" + stamp.getMonth + \".\" + stamp.getFullYear + '\\t' + stamp.getHours + \":\" + stamp.getMinutes + \":\" + stamp.getSeconds
+    DateFormat df = new SimpleDateFormat(\"dd/MM/yyy HH:mm:ss\");
+    Date today = Calendar.getInstance().GetTime();
+    String reportDate = df.format(today);
+    return reportDate;
+}
+
+function writeResults(path, data) {
+    var DS = WB.AppletList.Applet(\"DSApplet\").App;
+    var fso = DS.Script.GetFileSystemObject();
+    var file = fso.OpenTextFile(path);
+    var str = file.WriteLine(data)
+        file.close();
+    return 0;
+}
+
+writeResults(\"D:\\\\Skripte\\\\VBA\\\\Splines\\\\Test\\\\Ichbinhier\\\\AnsLog.txt\", \"*\" + \"\\t\" + getDate() + \"\\t\" + \"Javatest\" + \"\\t\" +\"*\");Update();""")
+setup1.SendCommand(Command="""debugger;
+
+function Update() {
+    //Get DesignSpace object
+        var DS = WB.AppletList.Applet(\"DSApplet\").App;
+        var Branch = DS.Tree.Branches(1);
+        var MeshCtrlGrp = Branch.MeshControlGroup;
+
+        //change Meshelementsize
+
+        MeshCtrlGrp.RelevanceCenter = 2;    // Fine
+
+        var object = new Object(null);
+        DS.AlbionSimAddinCaller.OnUpdateMeshCell.Fire(object, object);
+        return 0;
+}
+
+function ReadResults(lstResults) {
+    var DS = WB.AppletList.Applet(\"DSApplet\").App;
+    var Branch = DS.Tree.Branches(1);
+    new out(lstResults.length)
+
+    if (Branch.Results.Count > 0) {
+        for (i = 0; i < lstResults.length; i++) {
+            for (j = 0; j < Branch.Results.Count; j++) {
+                if (Branch.Results(j).Name==lstResults[i]){
+                    out[i] = Branch.Results(j).Name;
+                    break;
+                }
+                else {
+                    out[i] = \"NaN\";
+                }
+            }
+        }
+    }
+
+    return 0;
+}
+
+function getDate() {
+    var stamp = new Date();
+    var st = stamp.getDay + \".\" + stamp.getMonth + \".\" + stamp.getFullYear + '\\t' + stamp.getHours + \":\" + stamp.getMinutes + \":\" + stamp.getSeconds
+    //DateFormat df = new SimpleDateFormat(\"dd/MM/yyy HH:mm:ss\");
+    //Date today = Calendar.getInstance().GetTime();
+    //String reportDate = df.format(today);
+    return 0;
+}
+
+function writeResults(path, data) {
+    var DS = WB.AppletList.Applet(\"DSApplet\").App;
+    var fso = DS.Script.GetFileSystemObject();
+    var file = fso.OpenTextFile(path);
+    var str = file.WriteLine(data)
+        file.close();
+    return 0;
+}
+
+writeResults(\"D:\\\\Skripte\\\\VBA\\\\Splines\\\\Test\\\\Ichbinhier\\\\AnsLog.txt\", \"*\" + \"\\t\" + getDate() + \"\\t\" + \"Javatest\" + \"\\t\" +\"*\");Update();""")
+setup1.SendCommand(Command="""debugger;
+
+function Update() {
+    //Get DesignSpace object
+        var DS = WB.AppletList.Applet(\"DSApplet\").App;
+        var Branch = DS.Tree.Branches(1);
+        var MeshCtrlGrp = Branch.MeshControlGroup;
+
+        //change Meshelementsize
+
+        MeshCtrlGrp.RelevanceCenter = 2;    // Fine
+
+        var object = new Object(null);
+        DS.AlbionSimAddinCaller.OnUpdateMeshCell.Fire(object, object);
+        return 0;
+}
+
+function ReadResults(lstResults) {
+    var DS = WB.AppletList.Applet(\"DSApplet\").App;
+    var Branch = DS.Tree.Branches(1);
+    new out(lstResults.length)
+
+    if (Branch.Results.Count > 0) {
+        for (i = 0; i < lstResults.length; i++) {
+            for (j = 0; j < Branch.Results.Count; j++) {
+                if (Branch.Results(j).Name==lstResults[i]){
+                    out[i] = Branch.Results(j).Name;
+                    break;
+                }
+                else {
+                    out[i] = \"NaN\";
+                }
+            }
+        }
+    }
+
+    return 0;
+}
+
+function getDate() {
+    var stamp = new Date();
+    var st = stamp.getDay + \".\" + stamp.getMonth + \".\" + stamp.getFullYear + '\\t' + stamp.getHours + \":\" + stamp.getMinutes + \":\" + stamp.getSeconds
+    //DateFormat df = new SimpleDateFormat(\"dd/MM/yyy HH:mm:ss\");
+    //Date today = Calendar.getInstance().GetTime();
+    //String reportDate = df.format(today);
+    return 0;
+}
+
+function writeResults(path, data) {
+    var DS = WB.AppletList.Applet(\"DSApplet\").App;
+    var fso = DS.Script.GetFileSystemObject();
+    var file = fso.OpenTextFile(path);
+    var str = file.WriteLine(data)
+        file.close();
+    return 0;
+}
+
+writeResults(\"D:\\\\Skripte\\\\VBA\\\\Splines\\\\Test\\\\Ichbinhier\\\\AnsLog.txt\", \"*\" + \"\\t\" + getDate() + \"\\t\" + \"Javatest\" + \"\\t\" +\"*\");Update();""")
+setup1.SendCommand(Command="""debugger;
+
+function Update() {
+    //Get DesignSpace object
+        var DS = WB.AppletList.Applet(\"DSApplet\").App;
+        var Branch = DS.Tree.Branches(1);
+        var MeshCtrlGrp = Branch.MeshControlGroup;
+
+        //change Meshelementsize
+
+        MeshCtrlGrp.RelevanceCenter = 2;    // Fine
+
+        var object = new Object(null);
+        DS.AlbionSimAddinCaller.OnUpdateMeshCell.Fire(object, object);
+        return 0;
+}
+
+function ReadResults(lstResults) {
+    var DS = WB.AppletList.Applet(\"DSApplet\").App;
+    var Branch = DS.Tree.Branches(1);
+    new out(lstResults.length)
+
+    if (Branch.Results.Count > 0) {
+        for (i = 0; i < lstResults.length; i++) {
+            for (j = 0; j < Branch.Results.Count; j++) {
+                if (Branch.Results(j).Name==lstResults[i]){
+                    out[i] = Branch.Results(j).Name;
+                    break;
+                }
+                else {
+                    out[i] = \"NaN\";
+                }
+            }
+        }
+    }
+
+    return 0;
+}
+
+function getDate() {
+    var stamp = new Date();
+    var h = stamp.getFullYear;
+    var st = stamp.getDay + \".\" + stamp.getMonth + \".\" + stamp.getFullYear + '\\t' + stamp.getHours + \":\" + stamp.getMinutes + \":\" + stamp.getSeconds;
+    //DateFormat df = new SimpleDateFormat(\"dd/MM/yyy HH:mm:ss\");
+    //Date today = Calendar.getInstance().GetTime();
+    //String reportDate = df.format(today);
+    return 0;
+}
+
+function writeResults(path, data) {
+    var DS = WB.AppletList.Applet(\"DSApplet\").App;
+    var fso = DS.Script.GetFileSystemObject();
+    var file = fso.OpenTextFile(path);
+    var str = file.WriteLine(data)
+        file.close();
+    return 0;
+}
+
+writeResults(\"D:\\\\Skripte\\\\VBA\\\\Splines\\\\Test\\\\Ichbinhier\\\\AnsLog.txt\", \"*\" + \"\\t\" + getDate() + \"\\t\" + \"Javatest\" + \"\\t\" +\"*\");Update();""")
+setup1.SendCommand(Command="""debugger;
+
+function Update() {
+    //Get DesignSpace object
+        var DS = WB.AppletList.Applet(\"DSApplet\").App;
+        var Branch = DS.Tree.Branches(1);
+        var MeshCtrlGrp = Branch.MeshControlGroup;
+
+        //change Meshelementsize
+
+        MeshCtrlGrp.RelevanceCenter = 2;    // Fine
+
+        var object = new Object(null);
+        DS.AlbionSimAddinCaller.OnUpdateMeshCell.Fire(object, object);
+        return 0;
+}
+
+function ReadResults(lstResults) {
+    var DS = WB.AppletList.Applet(\"DSApplet\").App;
+    var Branch = DS.Tree.Branches(1);
+    new out(lstResults.length)
+
+    if (Branch.Results.Count > 0) {
+        for (i = 0; i < lstResults.length; i++) {
+            for (j = 0; j < Branch.Results.Count; j++) {
+                if (Branch.Results(j).Name==lstResults[i]){
+                    out[i] = Branch.Results(j).Name;
+                    break;
+                }
+                else {
+                    out[i] = \"NaN\";
+                }
+            }
+        }
+    }
+
+    return 0;
+}
+
+function getDate() {
+    var stamp = new Date();
+    var h = stamp.getFullYear();
+    var st = stamp.getDay + \".\" + stamp.getMonth + \".\" + stamp.getFullYear + '\\t' + stamp.getHours + \":\" + stamp.getMinutes + \":\" + stamp.getSeconds;
+    //DateFormat df = new SimpleDateFormat(\"dd/MM/yyy HH:mm:ss\");
+    //Date today = Calendar.getInstance().GetTime();
+    //String reportDate = df.format(today);
+    return 0;
+}
+
+function writeResults(path, data) {
+    var DS = WB.AppletList.Applet(\"DSApplet\").App;
+    var fso = DS.Script.GetFileSystemObject();
+    var file = fso.OpenTextFile(path);
+    var str = file.WriteLine(data)
+        file.close();
+    return 0;
+}
+
+writeResults(\"D:\\\\Skripte\\\\VBA\\\\Splines\\\\Test\\\\Ichbinhier\\\\AnsLog.txt\", \"*\" + \"\\t\" + getDate() + \"\\t\" + \"Javatest\" + \"\\t\" +\"*\");Update();""")
+setup1.SendCommand(Command="""debugger;
+
+function Update() {
+    //Get DesignSpace object
+        var DS = WB.AppletList.Applet(\"DSApplet\").App;
+        var Branch = DS.Tree.Branches(1);
+        var MeshCtrlGrp = Branch.MeshControlGroup;
+
+        //change Meshelementsize
+
+        MeshCtrlGrp.RelevanceCenter = 2;    // Fine
+
+        var object = new Object(null);
+        DS.AlbionSimAddinCaller.OnUpdateMeshCell.Fire(object, object);
+        return 0;
+}
+
+function ReadResults(lstResults) {
+    var DS = WB.AppletList.Applet(\"DSApplet\").App;
+    var Branch = DS.Tree.Branches(1);
+    new out(lstResults.length)
+
+    if (Branch.Results.Count > 0) {
+        for (i = 0; i < lstResults.length; i++) {
+            for (j = 0; j < Branch.Results.Count; j++) {
+                if (Branch.Results(j).Name==lstResults[i]){
+                    out[i] = Branch.Results(j).Name;
+                    break;
+                }
+                else {
+                    out[i] = \"NaN\";
+                }
+            }
+        }
+    }
+
+    return 0;
+}
+
+function getDate() {
+    var stamp = new Date();
+    var h = stamp.getFullYear();
+    var st = stamp.getDay() + \".\" + stamp.getMonth() + \".\" + stamp.getFullYear() + '\\t' + stamp.getHours() + \":\" + stamp.getMinutes() + \":\" + stamp.getSeconds();
+    //DateFormat df = new SimpleDateFormat(\"dd/MM/yyy HH:mm:ss\");
+    //Date today = Calendar.getInstance().GetTime();
+    //String reportDate = df.format(today);
+    return 0;
+}
+
+function writeResults(path, data) {
+    var DS = WB.AppletList.Applet(\"DSApplet\").App;
+    var fso = DS.Script.GetFileSystemObject();
+    var file = fso.OpenTextFile(path);
+    var str = file.WriteLine(data)
+        file.close();
+    return 0;
+}
+
+writeResults(\"D:\\\\Skripte\\\\VBA\\\\Splines\\\\Test\\\\Ichbinhier\\\\AnsLog.txt\", \"*\" + \"\\t\" + getDate() + \"\\t\" + \"Javatest\" + \"\\t\" +\"*\");Update();""")
+setup1.SendCommand(Command="""debugger;
+
+function Update() {
+    //Get DesignSpace object
+        var DS = WB.AppletList.Applet(\"DSApplet\").App;
+        var Branch = DS.Tree.Branches(1);
+        var MeshCtrlGrp = Branch.MeshControlGroup;
+
+        //change Meshelementsize
+
+        MeshCtrlGrp.RelevanceCenter = 2;    // Fine
+
+        var object = new Object(null);
+        DS.AlbionSimAddinCaller.OnUpdateMeshCell.Fire(object, object);
+        return 0;
+}
+
+function ReadResults(lstResults) {
+    var DS = WB.AppletList.Applet(\"DSApplet\").App;
+    var Branch = DS.Tree.Branches(1);
+    new out(lstResults.length)
+
+    if (Branch.Results.Count > 0) {
+        for (i = 0; i < lstResults.length; i++) {
+            for (j = 0; j < Branch.Results.Count; j++) {
+                if (Branch.Results(j).Name==lstResults[i]){
+                    out[i] = Branch.Results(j).Name;
+                    break;
+                }
+                else {
+                    out[i] = \"NaN\";
+                }
+            }
+        }
+    }
+
+    return 0;
+}
+
+function getDate() {
+    var cal = new Calendar;
+    var stamp = cal.get(Calendar.DAY_OF_MONTH);
+    //var stamp = new Date();
+    //var h = stamp.getFullYear();
+    //var st = stamp.getDay() + \".\" + stamp.getMonth() + \".\" + stamp.getFullYear() + '\\t' + stamp.getHours() + \":\" + stamp.getMinutes() + \":\" + stamp.getSeconds();
+    //DateFormat df = new SimpleDateFormat(\"dd/MM/yyy HH:mm:ss\");
+    //Date today = Calendar.getInstance().GetTime();
+    //String reportDate = df.format(today);
+    return 0;
+}
+
+function writeResults(path, data) {
+    var DS = WB.AppletList.Applet(\"DSApplet\").App;
+    var fso = DS.Script.GetFileSystemObject();
+    var file = fso.OpenTextFile(path);
+    var str = file.WriteLine(data)
+        file.close();
+    return 0;
+}
+
+writeResults(\"D:\\\\Skripte\\\\VBA\\\\Splines\\\\Test\\\\Ichbinhier\\\\AnsLog.txt\", \"*\" + \"\\t\" + getDate() + \"\\t\" + \"Javatest\" + \"\\t\" +\"*\");Update();""")
+setup1.SendCommand(Command="""debugger;
+
+function Update() {
+    //Get DesignSpace object
+        var DS = WB.AppletList.Applet(\"DSApplet\").App;
+        var Branch = DS.Tree.Branches(1);
+        var MeshCtrlGrp = Branch.MeshControlGroup;
+
+        //change Meshelementsize
+
+        MeshCtrlGrp.RelevanceCenter = 2;    // Fine
+
+        var object = new Object(null);
+        DS.AlbionSimAddinCaller.OnUpdateMeshCell.Fire(object, object);
+        return 0;
+}
+
+function ReadResults(lstResults) {
+    var DS = WB.AppletList.Applet(\"DSApplet\").App;
+    var Branch = DS.Tree.Branches(1);
+    new out(lstResults.length)
+
+    if (Branch.Results.Count > 0) {
+        for (i = 0; i < lstResults.length; i++) {
+            for (j = 0; j < Branch.Results.Count; j++) {
+                if (Branch.Results(j).Name==lstResults[i]){
+                    out[i] = Branch.Results(j).Name;
+                    break;
+                }
+                else {
+                    out[i] = \"NaN\";
+                }
+            }
+        }
+    }
+
+    return 0;
+}
+
+function getDate() {
+    var cal = new Calendar();
+    var stamp = cal.get(Calendar.DAY_OF_MONTH);
+    //var stamp = new Date();
+    //var h = stamp.getFullYear();
+    //var st = stamp.getDay() + \".\" + stamp.getMonth() + \".\" + stamp.getFullYear() + '\\t' + stamp.getHours() + \":\" + stamp.getMinutes() + \":\" + stamp.getSeconds();
+    //DateFormat df = new SimpleDateFormat(\"dd/MM/yyy HH:mm:ss\");
+    //Date today = Calendar.getInstance().GetTime();
+    //String reportDate = df.format(today);
+    return 0;
+}
+
+function writeResults(path, data) {
+    var DS = WB.AppletList.Applet(\"DSApplet\").App;
+    var fso = DS.Script.GetFileSystemObject();
+    var file = fso.OpenTextFile(path);
+    var str = file.WriteLine(data)
+        file.close();
+    return 0;
+}
+
+writeResults(\"D:\\\\Skripte\\\\VBA\\\\Splines\\\\Test\\\\Ichbinhier\\\\AnsLog.txt\", \"*\" + \"\\t\" + getDate() + \"\\t\" + \"Javatest\" + \"\\t\" +\"*\");Update();""")
+setup1.SendCommand(Command="""debugger;
+
+function Update() {
+    //Get DesignSpace object
+        var DS = WB.AppletList.Applet(\"DSApplet\").App;
+        var Branch = DS.Tree.Branches(1);
+        var MeshCtrlGrp = Branch.MeshControlGroup;
+
+        //change Meshelementsize
+
+        MeshCtrlGrp.RelevanceCenter = 2;    // Fine
+
+        var object = new Object(null);
+        DS.AlbionSimAddinCaller.OnUpdateMeshCell.Fire(object, object);
+        return 0;
+}
+
+function ReadResults(lstResults) {
+    var DS = WB.AppletList.Applet(\"DSApplet\").App;
+    var Branch = DS.Tree.Branches(1);
+    new out(lstResults.length)
+
+    if (Branch.Results.Count > 0) {
+        for (i = 0; i < lstResults.length; i++) {
+            for (j = 0; j < Branch.Results.Count; j++) {
+                if (Branch.Results(j).Name==lstResults[i]){
+                    out[i] = Branch.Results(j).Name;
+                    break;
+                }
+                else {
+                    out[i] = \"NaN\";
+                }
+            }
+        }
+    }
+
+    return 0;
+}
+
+function getDate() {
+    var stamp = new Date();
+    var h = stamp.getDate();
+    var st = stamp.getDay() + \".\" + stamp.getMonth() + \".\" + stamp.getFullYear() + '\\t' + stamp.getHours() + \":\" + stamp.getMinutes() + \":\" + stamp.getSeconds();
+    //DateFormat df = new SimpleDateFormat(\"dd/MM/yyy HH:mm:ss\");
+    //Date today = Calendar.getInstance().GetTime();
+    //String reportDate = df.format(today);
+    return 0;
+}
+
+function writeResults(path, data) {
+    var DS = WB.AppletList.Applet(\"DSApplet\").App;
+    var fso = DS.Script.GetFileSystemObject();
+    var file = fso.OpenTextFile(path);
+    var str = file.WriteLine(data)
+        file.close();
+    return 0;
+}
+
+writeResults(\"D:\\\\Skripte\\\\VBA\\\\Splines\\\\Test\\\\Ichbinhier\\\\AnsLog.txt\", \"*\" + \"\\t\" + getDate() + \"\\t\" + \"Javatest\" + \"\\t\" +\"*\");Update();""")
+setup1.SendCommand(Command="""debugger;
+
+function Update() {
+    //Get DesignSpace object
+        var DS = WB.AppletList.Applet(\"DSApplet\").App;
+        var Branch = DS.Tree.Branches(1);
+        var MeshCtrlGrp = Branch.MeshControlGroup;
+
+        //change Meshelementsize
+
+        MeshCtrlGrp.RelevanceCenter = 2;    // Fine
+
+        var object = new Object(null);
+        DS.AlbionSimAddinCaller.OnUpdateMeshCell.Fire(object, object);
+        return 0;
+}
+
+function ReadResults(lstResults) {
+    var DS = WB.AppletList.Applet(\"DSApplet\").App;
+    var Branch = DS.Tree.Branches(1);
+    new out(lstResults.length)
+
+    if (Branch.Results.Count > 0) {
+        for (i = 0; i < lstResults.length; i++) {
+            for (j = 0; j < Branch.Results.Count; j++) {
+                if (Branch.Results(j).Name==lstResults[i]){
+                    out[i] = Branch.Results(j).Name;
+                    break;
+                }
+                else {
+                    out[i] = \"NaN\";
+                }
+            }
+        }
+    }
+
+    return 0;
+}
+
+function getDate() {
+    var stamp = new Date();
+    var h = stamp.toLocaleTimeString;
+    var st = stamp.getDate() + \".\" + stamp.getMonth() + \".\" + stamp.getFullYear() + '\\t' + stamp.getHours() + \":\" + stamp.getMinutes() + \":\" + stamp.getSeconds();
+    //DateFormat df = new SimpleDateFormat(\"dd/MM/yyy HH:mm:ss\");
+    //Date today = Calendar.getInstance().GetTime();
+    //String reportDate = df.format(today);
+    return 0;
+}
+
+function writeResults(path, data) {
+    var DS = WB.AppletList.Applet(\"DSApplet\").App;
+    var fso = DS.Script.GetFileSystemObject();
+    var file = fso.OpenTextFile(path);
+    var str = file.WriteLine(data)
+        file.close();
+    return 0;
+}
+
+writeResults(\"D:\\\\Skripte\\\\VBA\\\\Splines\\\\Test\\\\Ichbinhier\\\\AnsLog.txt\", \"*\" + \"\\t\" + getDate() + \"\\t\" + \"Javatest\" + \"\\t\" +\"*\");Update();""")
+setup1.SendCommand(Command="""debugger;
+
+function Update() {
+    //Get DesignSpace object
+        var DS = WB.AppletList.Applet(\"DSApplet\").App;
+        var Branch = DS.Tree.Branches(1);
+        var MeshCtrlGrp = Branch.MeshControlGroup;
+
+        //change Meshelementsize
+
+        MeshCtrlGrp.RelevanceCenter = 2;    // Fine
+
+        var object = new Object(null);
+        DS.AlbionSimAddinCaller.OnUpdateMeshCell.Fire(object, object);
+        return 0;
+}
+
+function ReadResults(lstResults) {
+    var DS = WB.AppletList.Applet(\"DSApplet\").App;
+    var Branch = DS.Tree.Branches(1);
+    new out(lstResults.length)
+
+    if (Branch.Results.Count > 0) {
+        for (i = 0; i < lstResults.length; i++) {
+            for (j = 0; j < Branch.Results.Count; j++) {
+                if (Branch.Results(j).Name==lstResults[i]){
+                    out[i] = Branch.Results(j).Name;
+                    break;
+                }
+                else {
+                    out[i] = \"NaN\";
+                }
+            }
+        }
+    }
+
+    return 0;
+}
+
+function getDate() {
+    var stamp = new Date();    
+    var st = stupidConverion(stamp.getDate()) + \".\" + stupidConverion(stamp.getMonth()) + 1 + \".\" + stupidConverion(stamp.getFullYear()) + '\\t' + stupidConverion(stamp.getHours()) + \":\" + stupidConverion(stamp.getMinutes()) + \":\" + stupidConverion(stamp.getSeconds());
+    return 0;
+}
+
+function stupidConversion(i) {
+    if (i <= 9) {
+        return \"0\" + String.valueOf(i)
+    }
+    else {
+        return String.valueOf(i)
+    }
+}
+
+function writeResults(path, data) {
+    var DS = WB.AppletList.Applet(\"DSApplet\").App;
+    var fso = DS.Script.GetFileSystemObject();
+    var file = fso.OpenTextFile(path);
+    var str = file.WriteLine(data)
+        file.close();
+    return 0;
+}
+
+writeResults(\"D:\\\\Skripte\\\\VBA\\\\Splines\\\\Test\\\\Ichbinhier\\\\AnsLog.txt\", \"*\" + \"\\t\" + getDate() + \"\\t\" + \"Javatest\" + \"\\t\" +\"*\");Update();""")
+setup1.SendCommand(Command="""debugger;
+
+function Update() {
+    //Get DesignSpace object
+        var DS = WB.AppletList.Applet(\"DSApplet\").App;
+        var Branch = DS.Tree.Branches(1);
+        var MeshCtrlGrp = Branch.MeshControlGroup;
+
+        //change Meshelementsize
+
+        MeshCtrlGrp.RelevanceCenter = 2;    // Fine
+
+        var object = new Object(null);
+        DS.AlbionSimAddinCaller.OnUpdateMeshCell.Fire(object, object);
+        return 0;
+}
+
+function ReadResults(lstResults) {
+    var DS = WB.AppletList.Applet(\"DSApplet\").App;
+    var Branch = DS.Tree.Branches(1);
+    new out(lstResults.length)
+
+    if (Branch.Results.Count > 0) {
+        for (i = 0; i < lstResults.length; i++) {
+            for (j = 0; j < Branch.Results.Count; j++) {
+                if (Branch.Results(j).Name==lstResults[i]){
+                    out[i] = Branch.Results(j).Name;
+                    break;
+                }
+                else {
+                    out[i] = \"NaN\";
+                }
+            }
+        }
+    }
+
+    return 0;
+}
+
+function getDate() {
+    var stamp = new Date();    
+    var st = stupidConverion(stamp.getDate());// + \".\" + stupidConverion(stamp.getMonth()) + 1 + \".\" + stupidConverion(stamp.getFullYear()) + '\\t' + stupidConverion(stamp.getHours()) + \":\" + stupidConverion(stamp.getMinutes()) + \":\" + stupidConverion(stamp.getSeconds());
+    return 0;
+}
+
+function stupidConversion(i) {
+    if (i <= 9) {
+        return \"0\" + String.valueOf(i)
+    }
+    else {
+        return String.valueOf(i)
+    }
+}
+
+function writeResults(path, data) {
+    var DS = WB.AppletList.Applet(\"DSApplet\").App;
+    var fso = DS.Script.GetFileSystemObject();
+    var file = fso.OpenTextFile(path);
+    var str = file.WriteLine(data)
+        file.close();
+    return 0;
+}
+
+writeResults(\"D:\\\\Skripte\\\\VBA\\\\Splines\\\\Test\\\\Ichbinhier\\\\AnsLog.txt\", \"*\" + \"\\t\" + getDate() + \"\\t\" + \"Javatest\" + \"\\t\" +\"*\");Update();""")
+setup1.SendCommand(Command="""debugger;
+
+function Update() {
+    //Get DesignSpace object
+        var DS = WB.AppletList.Applet(\"DSApplet\").App;
+        var Branch = DS.Tree.Branches(1);
+        var MeshCtrlGrp = Branch.MeshControlGroup;
+
+        //change Meshelementsize
+
+        MeshCtrlGrp.RelevanceCenter = 2;    // Fine
+
+        var object = new Object(null);
+        DS.AlbionSimAddinCaller.OnUpdateMeshCell.Fire(object, object);
+        return 0;
+}
+
+function ReadResults(lstResults) {
+    var DS = WB.AppletList.Applet(\"DSApplet\").App;
+    var Branch = DS.Tree.Branches(1);
+    new out(lstResults.length)
+
+    if (Branch.Results.Count > 0) {
+        for (i = 0; i < lstResults.length; i++) {
+            for (j = 0; j < Branch.Results.Count; j++) {
+                if (Branch.Results(j).Name==lstResults[i]){
+                    out[i] = Branch.Results(j).Name;
+                    break;
+                }
+                else {
+                    out[i] = \"NaN\";
+                }
+            }
+        }
+    }
+
+    return 0;
+}
+
+function getDate() {
+    var stamp = new Date();    
+    var st = stupidConverion(Integer.valueOf(stamp.getDate()));// + \".\" + stupidConverion(stamp.getMonth()) + 1 + \".\" + stupidConverion(stamp.getFullYear()) + '\\t' + stupidConverion(stamp.getHours()) + \":\" + stupidConverion(stamp.getMinutes()) + \":\" + stupidConverion(stamp.getSeconds());
+    return 0;
+}
+
+function stupidConversion(i) {
+    if (i <= 9) {
+        return \"0\" + String.valueOf(i)
+    }
+    else {
+        return String.valueOf(i)
+    }
+}
+
+function writeResults(path, data) {
+    var DS = WB.AppletList.Applet(\"DSApplet\").App;
+    var fso = DS.Script.GetFileSystemObject();
+    var file = fso.OpenTextFile(path);
+    var str = file.WriteLine(data)
+        file.close();
+    return 0;
+}
+
+writeResults(\"D:\\\\Skripte\\\\VBA\\\\Splines\\\\Test\\\\Ichbinhier\\\\AnsLog.txt\", \"*\" + \"\\t\" + getDate() + \"\\t\" + \"Javatest\" + \"\\t\" +\"*\");Update();""")
+setup1.SendCommand(Command="""debugger;
+
+function Update() {
+    //Get DesignSpace object
+        var DS = WB.AppletList.Applet(\"DSApplet\").App;
+        var Branch = DS.Tree.Branches(1);
+        var MeshCtrlGrp = Branch.MeshControlGroup;
+
+        //change Meshelementsize
+
+        MeshCtrlGrp.RelevanceCenter = 2;    // Fine
+
+        var object = new Object(null);
+        DS.AlbionSimAddinCaller.OnUpdateMeshCell.Fire(object, object);
+        return 0;
+}
+
+function ReadResults(lstResults) {
+    var DS = WB.AppletList.Applet(\"DSApplet\").App;
+    var Branch = DS.Tree.Branches(1);
+    new out(lstResults.length)
+
+    if (Branch.Results.Count > 0) {
+        for (i = 0; i < lstResults.length; i++) {
+            for (j = 0; j < Branch.Results.Count; j++) {
+                if (Branch.Results(j).Name==lstResults[i]){
+                    out[i] = Branch.Results(j).Name;
+                    break;
+                }
+                else {
+                    out[i] = \"NaN\";
+                }
+            }
+        }
+    }
+
+    return 0;
+}
+
+function getDate() {
+    var stamp = new Date();    
+    var cal = new java.util.Date()
+    //var st = stupidConverion(Integer.valueOf(stamp.getDate()));// + \".\" + stupidConverion(stamp.getMonth()) + 1 + \".\" + stupidConverion(stamp.getFullYear()) + '\\t' + stupidConverion(stamp.getHours()) + \":\" + stupidConverion(stamp.getMinutes()) + \":\" + stupidConverion(stamp.getSeconds());
+    return 0;
+}
+
+function stupidConversion(i) {
+    if (i <= 9) {
+        return \"0\" + String.valueOf(i)
+    }
+    else {
+        return String.valueOf(i)
+    }
+}
+
+function writeResults(path, data) {
+    var DS = WB.AppletList.Applet(\"DSApplet\").App;
+    var fso = DS.Script.GetFileSystemObject();
+    var file = fso.OpenTextFile(path);
+    var str = file.WriteLine(data)
+        file.close();
+    return 0;
+}
+
+writeResults(\"D:\\\\Skripte\\\\VBA\\\\Splines\\\\Test\\\\Ichbinhier\\\\AnsLog.txt\", \"*\" + \"\\t\" + getDate() + \"\\t\" + \"Javatest\" + \"\\t\" +\"*\");Update();""")

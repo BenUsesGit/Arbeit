@@ -1,0 +1,11 @@
+# encoding: utf-8
+# Release 17.2
+SetScriptVersion(Version="17.2.225")
+
+#Send Commands to APDL Editor with set of commands from a given source
+
+APDLscript = Open("D:\AnsysSimulationen\APDL\IN\DummySet.txt")
+APDLcmd = APDLscript.read()
+APDLscript.close()	
+apdlSetCont.SendCommand(APDLcmd)
+APDLscript = None

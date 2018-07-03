@@ -1,0 +1,582 @@
+
+ ANSYS Academic Research                           
+
+
+ *------------------------------------------------------------------*
+ |                                                                  |
+ |   W E L C O M E   T O   T H E   A N S Y S (R)  P R O G R A M     |
+ |                                                                  |
+ *------------------------------------------------------------------*
+
+
+
+
+ ***************************************************************
+ *            ANSYS Release 17.2     LEGAL NOTICES             *
+ ***************************************************************
+ *                                                             *
+ * Copyright 2016 SAS IP, Inc.  All rights reserved.           *
+ * Unauthorized use, distribution or duplication is            *
+ * prohibited.                                                 *
+ *                                                             *
+ * Ansys is a registered trademark of ANSYS, Inc. or its       *
+ * subsidiaries in the United States or other countries.       *
+ * See the ANSYS, Inc. online documentation or the ANSYS, Inc. *
+ * documentation CD or online help for the complete Legal      *
+ * Notice.                                                     *
+ *                                                             *
+ ***************************************************************
+ *                                                             *
+ * THIS ANSYS SOFTWARE PRODUCT AND PROGRAM DOCUMENTATION       *
+ * INCLUDE TRADE SECRETS AND CONFIDENTIAL AND PROPRIETARY      *
+ * PRODUCTS OF ANSYS, INC., ITS SUBSIDIARIES, OR LICENSORS.    *
+ * The software products and documentation are furnished by    *
+ * ANSYS, Inc. or its subsidiaries under a software license    *
+ * agreement that contains provisions concerning               *
+ * non-disclosure, copying, length and nature of use,          *
+ * compliance with exporting laws, warranties, disclaimers,    *
+ * limitations of liability, and remedies, and other           *
+ * provisions.  The software products and documentation may be *
+ * used, disclosed, transferred, or copied only in accordance  *
+ * with the terms and conditions of that software license      *
+ * agreement.                                                  *
+ *                                                             *
+ * ANSYS, Inc. is a UL registered                              *
+ * ISO 9001:2008 company.                                      *
+ *                                                             *
+ ***************************************************************
+ *                                                             *
+ * This product is subject to U.S. laws governing export and   *
+ * re-export.                                                  *
+ *                                                             *
+ * For U.S. Government users, except as specifically granted   *
+ * by the ANSYS, Inc. software license agreement, the use,     *
+ * duplication, or disclosure by the United States Government  *
+ * is subject to restrictions stated in the ANSYS, Inc.        *
+ * software license agreement and FAR 12.212 (for non-DOD      *
+ * licenses).                                                  *
+ *                                                             *
+ ***************************************************************
+
+ Release 17.2
+     
+ Point Releases and Patches installed:   
+     
+ ANSYS, Inc. Products Release 17.2   
+ ANSYS Mechanical Products Release 17.2  
+ ANSYS Customization Files for User Programmable Features Release 17.2   
+ ANSYS Autodyn Release 17.2  
+ ANSYS LS-DYNA Release 17.2  
+ ANSYS AIM Release 17.2  
+ ANSYS CFX (includes ANSYS CFD-Post) Release 17.2
+ ANSYS Fluent (includes ANSYS CFD-Post) Release 17.2 
+ ANSYS TurboGrid Release 17.2
+ ANSYS Polyflow (includes ANSYS CFD-Post) Release 17.2   
+ ANSYS CFD-Post only Release 17.2
+ ANSYS Forte Release 17.2
+ ANSYS ICEM CFD Release 17.2 
+ ANSYS Aqwa Release 17.2 
+ ANSYS Composite PrepPost Release 17.2   
+ ANSYS Icepak (includes ANSYS CFD-Post) Release 17.2 
+ AutoCAD Release 17.2
+ ACIS Release 17.2   
+ Catia, Version 5 Release 17.2   
+ Catia, Version 6 Release 17.2   
+ Creo Elements/Direct Modeling Release 17.2  
+ Inventor Release 17.2   
+ JTOpen Release 17.2 
+ NX Release 17.2 
+ Parasolid Release 17.2  
+ Creo Parametric (formerly Pro/ENGINEER) Release 17.2
+ Solid Edge Release 17.2 
+ SolidWorks Release 17.2 
+ ANSYS, Inc. License Manager Release 17.2
+
+
+          *****  ANSYS COMMAND LINE ARGUMENTS  *****
+  BATCH MODE REQUESTED (-b)    = NOLIST
+  INPUT FILE COPY MODE (-c)    = COPY
+  DISTRIBUTED MEMORY PARALLEL REQUESTED
+       2 PARALLEL PROCESSES REQUESTED WITH SINGLE THREAD PER PROCESS
+    TOTAL OF     2 CORES REQUESTED
+  DESIGNXPLORER REQUESTED
+  MPI OPTION                   = INTELMPI
+  INPUT FILE NAME              = D:\AnsysSimulationen\DevByTry\_ProjectScratch\ScrAF00\dummy.dat
+  OUTPUT FILE NAME             = D:\AnsysSimulationen\DevByTry\_ProjectScratch\ScrAF00\solve.out
+  START-UP FILE MODE           = NOREAD
+  STOP FILE MODE               = NOREAD
+
+ RELEASE= Release 17.2         BUILD= 17.2      UP20160718   VERSION=WINDOWS x64 
+ CURRENT JOBNAME=file0  15:42:19  JUN 18, 2018 CP=      0.766
+
+
+ PARAMETER _DS_PROGRESS =     999.0000000    
+
+ /INPUT FILE= ds.dat  LINE=       0
+
+
+
+ *** NOTE ***                            CP =       0.875   TIME= 15:42:19
+ The /CONFIG,NOELDB command is not valid in a Distributed ANSYS          
+ solution.  Command is ignored.                                          
+
+ *GET  _WALLSTRT  FROM  ACTI  ITEM=TIME WALL  VALUE=  15.7052778    
+
+ TITLE= 
+ Das_System--Static Structural (A5)                                            
+
+
+ SET PARAMETER DIMENSIONS ON  _WB_PROJECTSCRATCH_DIR
+  TYPE=STRI  DIMENSIONS=      248        1        1
+
+ PARAMETER _WB_PROJECTSCRATCH_DIR(1) = D:\AnsysSimulationen\DevByTry\_ProjectScratch\ScrAF00\
+
+ SET PARAMETER DIMENSIONS ON  _WB_SOLVERFILES_DIR
+  TYPE=STRI  DIMENSIONS=      248        1        1
+
+ PARAMETER _WB_SOLVERFILES_DIR(1) = D:\AnsysSimulationen\DevByTry\Das_System_files\dp0\SYS\MECH\
+
+ SET PARAMETER DIMENSIONS ON  _WB_USERFILES_DIR
+  TYPE=STRI  DIMENSIONS=      248        1        1
+
+ PARAMETER _WB_USERFILES_DIR(1) = D:\AnsysSimulationen\DevByTry\Das_System_files\user_files\
+ --- Data in consistent NMM units. See Solving Units in the help system for more
+
+ MPA UNITS SPECIFIED FOR INTERNAL    
+  LENGTH      = MILLIMETERS (mm)
+  MASS        = TONNE (Mg)
+  TIME        = SECONDS (sec)
+  TEMPERATURE = CELSIUS (C)
+  TOFFSET     = 273.0
+  FORCE       = NEWTON (N)
+  HEAT        = MILLIJOULES (mJ)
+
+ INPUT  UNITS ARE ALSO SET TO MPA 
+
+ *** ANSYS - ENGINEERING ANALYSIS SYSTEM  RELEASE Release 17.2     17.2     ***
+ DISTRIBUTED ANSYS Academic Research                           
+
+ 00407677  VERSION=WINDOWS x64   15:42:19  JUN 18, 2018 CP=      0.875
+
+ Das_System--Static Structural (A5)                                            
+
+
+
+          ***** ANSYS ANALYSIS DEFINITION (PREP7) *****
+ *********** Nodes for the whole assembly ***********
+ *********** Elements for Body 1 "RechteckTest.ipt" ***********
+ *********** Send User Defined Coordinate System(s) ***********
+ *********** Set Reference Temperature ***********
+ *********** Send Materials ***********
+ *********** Send Named Selection as Node Component ***********
+ *********** Send Named Selection as Node Component ***********
+
+
+ ***** ROUTINE COMPLETED *****  CP =         0.891
+
+
+ --- Number of total nodes = 7166
+ --- Number of contact elements = 0
+ --- Number of spring elements = 0
+ --- Number of bearing elements = 0
+ --- Number of solid elements = 3751
+ --- Number of total elements = 3751
+
+ *GET  _WALLBSOL  FROM  ACTI  ITEM=TIME WALL  VALUE=  15.7052778    
+ ****************************************************************************
+ *************************    SOLUTION       ********************************
+ ****************************************************************************
+
+ *****  ANSYS SOLUTION ROUTINE  *****
+
+
+ PERFORM A STATIC ANALYSIS
+  THIS WILL BE A NEW ANALYSIS
+
+ USE PRECONDITIONED CONJUGATE GRADIENT SOLVER
+  CONVERGENCE TOLERANCE = 1.00000E-08
+  MAXIMUM ITERATION     = NumNode*DofPerNode*  1.0000    
+
+ CONTACT INFORMATION PRINTOUT LEVEL       1
+
+ DO NOT COMBINE ELEMENT MATRIX FILES (.emat) AFTER DISTRIBUTED PARALLEL SOLUTION
+
+ DO NOT COMBINE ELEMENT SAVE DATA FILES (.esav) AFTER DISTRIBUTED PARALLEL SOLUTION
+
+ NLDIAG: Nonlinear diagnostics CONT option is set to ON. 
+         Writing frequency : each ITERATION.
+
+ DO NOT SAVE ANY RESTART FILES AT ALL
+ ****************************************************
+ ******************* SOLVE FOR LS 1 ****************
+
+ PRINTOUT RESUMED BY /GOP
+
+ USE       1 SUBSTEPS INITIALLY THIS LOAD STEP FOR ALL  DEGREES OF FREEDOM
+ FOR AUTOMATIC TIME STEPPING:
+   USE      1 SUBSTEPS AS A MAXIMUM
+   USE      1 SUBSTEPS AS A MINIMUM
+
+ TIME=  1.0000    
+
+ ERASE THE CURRENT DATABASE OUTPUT CONTROL TABLE.
+
+
+ WRITE ALL  ITEMS TO THE DATABASE WITH A FREQUENCY OF NONE
+   FOR ALL APPLICABLE ENTITIES
+
+ WRITE NSOL ITEMS TO THE DATABASE WITH A FREQUENCY OF ALL 
+   FOR ALL APPLICABLE ENTITIES
+
+ WRITE RSOL ITEMS TO THE DATABASE WITH A FREQUENCY OF ALL 
+   FOR ALL APPLICABLE ENTITIES
+
+ WRITE STRS ITEMS TO THE DATABASE WITH A FREQUENCY OF ALL 
+   FOR ALL APPLICABLE ENTITIES
+
+ WRITE EPEL ITEMS TO THE DATABASE WITH A FREQUENCY OF ALL 
+   FOR ALL APPLICABLE ENTITIES
+
+ WRITE EPPL ITEMS TO THE DATABASE WITH A FREQUENCY OF ALL 
+   FOR ALL APPLICABLE ENTITIES
+
+ NONLINEAR STABILIZATION CONTROL:
+ KEY=OFF 
+
+
+ *** WARNING ***                         CP =       0.922   TIME= 15:42:19
+ ET is not a recognized SOLUTION command, abbreviation, or macro.        
+  This command will be ignored.                                          
+
+ SELECT      COMPONENT T_FEST                          
+
+ SPECIFIED CONSTRAINT UX   FOR SELECTED NODES         1 TO     7166 BY        1
+ REAL=  0.00000000       IMAG=  0.00000000    
+ ADDITIONAL DOFS=  UY    UZ  
+
+ ALL SELECT   FOR ITEM=NODE COMPONENT=    
+  IN RANGE         1 TO       7166 STEP          1
+
+       7166  NODES (OF       7166  DEFINED) SELECTED BY NSEL  COMMAND.
+
+ SELECT      COMPONENT T_KRAFT                         
+
+ SPECIFIED NODAL LOAD FY   FOR SELECTED NODES         1 TO     7166 BY        1
+  REAL= -20000.0000       IMAG=  0.00000000    
+
+ ALL SELECT   FOR ITEM=NODE COMPONENT=    
+  IN RANGE         1 TO       7166 STEP          1
+
+       7166  NODES (OF       7166  DEFINED) SELECTED BY NSEL  COMMAND.
+
+ *GET  ANSINTER_  FROM  ACTI  ITEM=INT        VALUE=  0.00000000    
+
+ *IF  ANSINTER_                         ( =   0.00000     )  NE  
+      0                                 ( =   0.00000     )  THEN    
+
+ *ENDIF
+
+ *****  ANSYS SOLVE    COMMAND  *****
+
+ *** WARNING ***                         CP =       0.922   TIME= 15:42:19
+ Element shape checking is currently inactive.  Issue SHPP,ON or         
+ SHPP,WARN to reactivate, if desired.                                    
+
+ *** NOTE ***                            CP =       0.953   TIME= 15:42:19
+ The model data was checked and warning messages were found.             
+  Please review output or errors file (                                  
+ D:\AnsysSimulationen\DevByTry\_ProjectScratch\ScrAF00\file0.err ) for   
+ these warning messages.                                                 
+
+ *** SELECTION OF ELEMENT TECHNOLOGIES FOR APPLICABLE ELEMENTS ***
+      --- GIVE SUGGESTIONS AND RESET THE KEY OPTIONS ---
+
+ ELEMENT TYPE    1 IS SOLID187. IT IS NOT ASSOCIATED WITH FULLY INCOMPRESSIBLE
+ HYPERELASTIC MATERIALS. NO SUGGESTION IS AVAILABLE AND NO RESETTING IS NEEDED.
+
+
+
+ *** ANSYS - ENGINEERING ANALYSIS SYSTEM  RELEASE Release 17.2     17.2     ***
+ DISTRIBUTED ANSYS Academic Research                           
+
+ 00407677  VERSION=WINDOWS x64   15:42:19  JUN 18, 2018 CP=      0.953
+
+ Das_System--Static Structural (A5)                                            
+
+
+
+                       S O L U T I O N   O P T I O N S
+
+   PROBLEM DIMENSIONALITY. . . . . . . . . . . . .3-D                  
+   DEGREES OF FREEDOM. . . . . . UX   UY   UZ  
+   ANALYSIS TYPE . . . . . . . . . . . . . . . . .STATIC (STEADY-STATE)
+   OFFSET TEMPERATURE FROM ABSOLUTE ZERO . . . . .  273.15    
+   EQUATION SOLVER OPTION. . . . . . . . . . . . .PCG                
+      TOLERANCE. . . . . . . . . . . . . . . . . . 1.00000E-08
+   GLOBALLY ASSEMBLED MATRIX . . . . . . . . . . .SYMMETRIC  
+
+ *** NOTE ***                            CP =       0.953   TIME= 15:42:19
+ The conditions for direct assembly have been met.  No .emat or .erot    
+ files will be produced.                                                 
+
+  
+  
+     D I S T R I B U T E D   D O M A I N   D E C O M P O S E R
+  
+  ...Number of elements: 3751
+  ...Number of nodes:    7166
+  ...Decompose to 2 CPU domains
+  ...Element load balance ratio =     1.001
+
+
+                      L O A D   S T E P   O P T I O N S
+
+   LOAD STEP NUMBER. . . . . . . . . . . . . . . .     1
+   TIME AT END OF THE LOAD STEP. . . . . . . . . .  1.0000    
+   NUMBER OF SUBSTEPS. . . . . . . . . . . . . . .     1
+   STEP CHANGE BOUNDARY CONDITIONS . . . . . . . .    NO
+   PRINT OUTPUT CONTROLS . . . . . . . . . . . . .NO PRINTOUT
+   DATABASE OUTPUT CONTROLS
+      ITEM     FREQUENCY   COMPONENT
+       ALL       NONE               
+      NSOL        ALL               
+      RSOL        ALL               
+      STRS        ALL               
+      EPEL        ALL               
+      EPPL        ALL               
+
+
+ SOLUTION MONITORING INFO IS WRITTEN TO FILE= file.mntr                                                                                                                                                                                                                                                           
+
+
+ *** NOTE ***                            CP =       1.047   TIME= 15:42:19
+ The PCG solver has automatically set the level of difficulty for this   
+ model to 1.                                                             
+
+
+                         ***********  PRECISE MASS SUMMARY  ***********
+
+   TOTAL RIGID BODY MASS MATRIX ABOUT ORIGIN
+               Translational mass               |   Coupled translational/rotational mass
+        0.12624E-04    0.0000        0.0000     |     0.0000       0.63121E-04  -0.25762E-04
+         0.0000       0.12624E-04    0.0000     |   -0.63121E-04    0.0000       0.22926E-03
+         0.0000        0.0000       0.12624E-04 |    0.25762E-04  -0.22926E-03    0.0000    
+     ------------------------------------------ | ------------------------------------------
+                                                |         Rotational mass (inertia)
+                                                |    0.50591E-03  -0.31534E-03  -0.11463E-02
+                                                |   -0.31534E-03   0.70402E-02  -0.12881E-03
+                                                |   -0.11463E-02  -0.12881E-03   0.67045E-02
+
+   TOTAL MASS = 0.12624E-04
+     The mass principal axes coincide with the global Cartesian axes
+
+   CENTER OF MASS (X,Y,Z)=    18.160        2.0407        5.0000    
+
+   TOTAL INERTIA ABOUT CENTER OF MASS
+        0.13774E-03   0.15250E-03  -0.57194E-10
+        0.15250E-03   0.25613E-02   0.15250E-11
+       -0.57194E-10   0.15250E-11   0.24886E-02
+
+   PRINCIPAL INERTIAS =   0.12818E-03   0.25708E-02   0.24886E-02
+   ORIENTATION VECTORS OF THE INERTIA PRINCIPAL AXES IN GLOBAL CARTESIAN
+     ( 0.998,-0.063, 0.000) ( 0.063, 0.998,-0.000) (-0.000, 0.000, 1.000) 
+
+
+  *** MASS SUMMARY BY ELEMENT TYPE ***
+
+  TYPE      MASS
+     1  0.126242E-04
+
+ Range of element maximum matrix coefficients in global coordinates
+ Maximum = 993385.224 at element 2672.                                   
+ Minimum = 74716.2743 at element 954.                                    
+
+   *** ELEMENT MATRIX FORMULATION TIMES
+  TYPE    NUMBER   ENAME      TOTAL CP  AVE CP
+
+     1      3751  SOLID187      0.453   0.000121
+ Time at end of element matrix formulation CP = 1.359375.                
+ curEqn=    450  totEqn=    450 Job CP sec=      1.562
+      Factor Done= 100% Factor Wall sec=      0.796 rate=       4.0 Mflops
+ Iteration=    10 Ratio=  8.892431E-02 Limit=  1.000000E-08 Wall=     0.0
+ Iteration=    50 Ratio=  8.078102E-04 Limit=  1.000000E-08 Wall=     0.1
+ Iteration=   110 Ratio=  1.380746E-06 Limit=  1.000000E-08 Wall=     0.1
+
+ DISTRIBUTED PCG SOLVER SOLUTION CONVERGED
+
+ DISTRIBUTED PCG SOLVER SOLUTION STATISTICS
+
+   NUMBER OF DOMAINS   =         104
+   NUMBER OF ITERATIONS=         143
+   NUMBER OF EQUATIONS =       21498
+   LEVEL OF CONVERGENCE=           1
+   CALCULATED NORM     = 0.91137E-08
+   SPECIFIED TOLERANCE = 0.10000E-07
+   TOTAL CPU TIME (sec)=        0.39
+   TOTAL WALL TIME(sec)=        1.02
+   TOTAL MEMORY (GB)   =        0.00
+
+
+   *** ELEMENT RESULT CALCULATION TIMES
+  TYPE    NUMBER   ENAME      TOTAL CP  AVE CP
+
+     1      3751  SOLID187      0.188   0.000050
+
+   *** NODAL LOAD CALCULATION TIMES
+  TYPE    NUMBER   ENAME      TOTAL CP  AVE CP
+
+     1      3751  SOLID187      0.000   0.000000
+ *** LOAD STEP     1   SUBSTEP     1  COMPLETED.    CUM ITER =      1
+ *** TIME =   1.00000         TIME INC =   1.00000      NEW TRIANG MATRIX
+
+
+ *** ANSYS BINARY FILE STATISTICS
+  BUFFER SIZE USED= 16384
+        1.812 MB WRITTEN ON RESULTS FILE: file0.rst
+ *************** Write FE CONNECTORS *********
+
+ WRITE OUT CONSTRAINT EQUATIONS TO FILE= file.ce                                                                                                                                                                                                                                                             
+ ****************************************************
+ *************** FINISHED SOLVE FOR LS 1 *************
+
+ PARAMETER _DS_PROGRESS  DELETED.
+
+ *GET  _WALLASOL  FROM  ACTI  ITEM=TIME WALL  VALUE=  15.7058333    
+
+ PRINTOUT RESUMED BY /GOP
+
+ *GET  _PCGITER  FROM  ACTI  ITEM=SOLU CGIT  VALUE=  143.000000    
+
+ FINISH SOLUTION PROCESSING
+
+
+ ***** ROUTINE COMPLETED *****  CP =         1.891
+
+
+
+ *** ANSYS - ENGINEERING ANALYSIS SYSTEM  RELEASE Release 17.2     17.2     ***
+ DISTRIBUTED ANSYS Academic Research                           
+
+ 00407677  VERSION=WINDOWS x64   15:42:21  JUN 18, 2018 CP=      1.906
+
+ Das_System--Static Structural (A5)                                            
+
+
+
+          ***** ANSYS RESULTS INTERPRETATION (POST1) *****
+
+ *** NOTE ***                            CP =       1.906   TIME= 15:42:21
+ Reading results into the database (SET command) will update the current 
+ displacement and force boundary conditions in the database with the     
+ values from the results file for that load set.  Note that any          
+ subsequent solutions will use these values unless action is taken to    
+ either SAVE the current values or not overwrite them (/EXIT,NOSAVE).    
+
+ Set Encoding of XML File to:ISO-8859-1
+
+ Set Output of XML File to:
+     PARM,     ,     ,     ,     ,     ,     ,     ,     ,     ,     ,     ,
+         ,     ,     ,     ,     ,     ,     ,
+
+ DATABASE WRITTEN ON FILE  parm.xml                                                                                                                                                                                                                                                            
+
+ EXIT THE ANSYS POST1 DATABASE PROCESSOR
+
+
+ ***** ROUTINE COMPLETED *****  CP =         1.906
+
+
+
+ PRINTOUT RESUMED BY /GOP
+
+ *GET  _WALLDONE  FROM  ACTI  ITEM=TIME WALL  VALUE=  15.7058333    
+
+ PARAMETER _PREPTIME =     0.000000000    
+
+ PARAMETER _SOLVTIME =     2.000000000    
+
+ PARAMETER _POSTTIME =     0.000000000    
+
+ PARAMETER _TOTALTIM =     2.000000000    
+
+ EXIT ANSYS WITHOUT SAVING DATABASE
+
+
+ NUMBER OF WARNING MESSAGES ENCOUNTERED=          2
+ NUMBER OF ERROR   MESSAGES ENCOUNTERED=          0
+
++--------- D I S T R I B U T E D   A N S Y S   S T A T I S T I C S ------------+
+
+Release: Release 17.2       Build: 17.2       Update: UP20160718   Platform: WINDOWS x64 
+Date Run: 06/18/2018   Time: 15:42
+Operating System: Windows 10  (Build: 10240)
+Windows Process ID: 5360        
+
+Processor Model:         Intel(R) Core(TM) i7-3770 CPU @ 3.40GHz
+
+Compiler: Intel(R) FORTRAN Compiler Version 15.0.2  (Build: 20150121)
+          Intel(R) C/C++ Compiler Version 15.0.2  (Build: 20150121)
+          Intel(R) Math Kernel Library Version 11.2.3 Product Build 20150413
+
+Number of machines requested            :    1
+Total number of cores available         :    8
+Number of physical cores available      :    4
+Number of processes requested           :    2
+Number of threads per process requested :    1
+Total number of cores requested         :    2 (Distributed Memory Parallel)               
+MPI Type: INTELMPI
+MPI Version: Intel(R) MPI Library 5.0 Update 3 for Windows* OS
+
+
+GPU Acceleration: Not Requested
+
+Job Name: file0
+Input File: dummy.dat
+
+  Core                Machine Name   Working Directory
+  ----------------------------------------------------
+     0   WZM125-Studi-2.iwf2.tu-be   D:\AnsysSimulationen\DevByTry\_ProjectScratch\ScrAF00
+     1   WZM125-Studi-2.iwf2.tu-be   D:\AnsysSimulationen\DevByTry\_ProjectScratch\ScrAF00
+ 
+Latency time from master to core    1 =    0.847 microseconds
+ 
+Communication speed from master to core    1 =  4459.33 MB/sec
+
+Total CPU time for main thread                    :        1.5 seconds
+Total CPU time summed for all threads             :        1.9 seconds
+
+Elapsed time spent pre-processing model (/PREP7)  :        0.0 seconds
+Elapsed time spent solution - preprocessing       :        0.1 seconds
+Elapsed time spent computing solution             :        1.3 seconds
+Elapsed time spent solution - postprocessing      :        0.0 seconds
+Elapsed time spent post-processing model (/POST1) :        0.0 seconds
+ 
+Equation solver used                              :            PCG (symmetric)
+Equation solver computational rate                :     7999.2 Mflops
+
+Maximum total memory used                         :       92.0 MB
+Maximum total memory allocated                    :     3136.0 MB
+Maximum total memory available                    :         32 GB
+
++------ E N D   D I S T R I B U T E D   A N S Y S   S T A T I S T I C S -------+
+
+
+ *---------------------------------------------------------------------------*
+ |                                                                           |
+ |                       DISTRIBUTED ANSYS RUN COMPLETED                     |
+ |                                                                           |
+ |---------------------------------------------------------------------------|
+ |                                                                           |
+ | Ansys Release 17.2          Build 17.2         UP20160718     WINDOWS x64 |
+ |                                                                           |
+ |---------------------------------------------------------------------------|
+ |                                                                           |
+ | Database Requested(-db)  1024 MB    Scratch Memory Requested      1024 MB |
+ | Maximum Database Used       5 MB    Maximum Scratch Memory Used     45 MB |
+ |                                                                           |
+ |---------------------------------------------------------------------------|
+ |                                                                           |
+ |        CP Time      (sec) =          1.906       Time  =  15:42:21        |
+ |        Elapsed Time (sec) =          4.000       Date  =  06/18/2018      |
+ |                                                                           |
+ *---------------------------------------------------------------------------*

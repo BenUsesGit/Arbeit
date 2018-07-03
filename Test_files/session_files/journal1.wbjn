@@ -1,0 +1,9 @@
+﻿# encoding: utf-8
+# Release 17.2
+SetScriptVersion(Version="17.2.225")
+RunScript(FilePath="D:/AnsysSimulationen/TestForAutomation1.wbjn")
+RunScript(FilePath="D:/AnsysSimulationen/StartnewMechanical.wbjn")
+RunScript(FilePath="D:/AnsysSimulationen/LoadCADModel.wbjn")
+RunScript(FilePath="D:/AnsysSimulationen/Edit.wbjn")
+RunScript(FilePath="D:/AnsysSimulationen/Exit.wbjn")
+RunScript(FilePath="D:/AnsysSimulationen/TestForAutomation1.wbjn")

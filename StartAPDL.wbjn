@@ -1,0 +1,37 @@
+# encoding: utf-8
+# Release 17.2
+SetScriptVersion(Version="17.2.225")
+def openAPDl(system):
+# opens an APDL-Session when a APDL-block was found in the Project
+	sim = system.GetContainer("Setup")
+	sim.Edit(Interactive=True,LoadInputFiles=True)
+
+def newAPDL():
+#creates a new APDL-Block for the project and starts an APDL-Session
+	for statsys in GetAllSystems():
+		if statsys.DisplayText=="Static Structural":
+			mechanical=statsys
+			break
+
+	# create APDL-System
+	template2 = GetTemplate(TemplateName="Mechanical APDL")
+	simulation = template2.CreateSystem()
+	# connect both Systems
+	mechModelComp = mechanical.GetComponent("Model")
+	apdlSetupComp = simulation.GetComponent("Setup")
+	mechModelComp.TransferData(TargetComponent=apdlSetupComp)
+	# Update/Refresh
+	mechanical.Update()
+	simulation.Refresh()
+	openAPDl(simulation)
+
+simOpen=False
+for sys in GetAllSystems():
+	if sys.DisplayText=="Mechanical APDL":
+		openAPDl(sys)
+		simOpen=True
+		break
+if simOpen==False:
+	newAPDL()
+
+

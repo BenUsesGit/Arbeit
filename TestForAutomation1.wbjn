@@ -1,0 +1,9 @@
+﻿# encoding: utf-8
+# Release 17.2
+SetScriptVersion(Version="17.2.225")
+system1 = GetSystem(Name="SYS")
+model1 = system1.GetContainer(ComponentName="Model")
+model1.Exit()
+Save(
+    FilePath="D:/AnsysSimulationen/Test.wbpj",
+    Overwrite=True)

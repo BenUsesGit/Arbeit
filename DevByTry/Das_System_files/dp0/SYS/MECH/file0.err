@@ -1,0 +1,9 @@
+/COM,ANSYS RELEASE Release 17.2      BUILD 17.2      UP20160718       15:42:18
+
+ *** WARNING ***                         CP =       0.922   TIME= 15:42:19
+ ET is not a recognized SOLUTION command, abbreviation, or macro.        
+  This command will be ignored.                                          
+
+ *** WARNING ***                         CP =       0.922   TIME= 15:42:19
+ Element shape checking is currently inactive.  Issue SHPP,ON or         
+ SHPP,WARN to reactivate, if desired.                                    

@@ -1,0 +1,2046 @@
+// Generated .IDL file (by the OLE/COM Object Viewer)
+// 
+// typelib filename: <could not determine filename>
+
+[
+  uuid(18929D20-76AB-4868-8D10-7580E6D72CC7),
+  version(12.0),
+  helpstring("DSWBApplet 12.0 Type Library"),
+  custom(DE77BA64-517C-11D1-A2DA-0000F8773CE9, 134218323),
+  custom(DE77BA63-517C-11D1-A2DA-0000F8773CE9, 1469606917),
+  custom(DE77BA65-517C-11D1-A2DA-0000F8773CE9, "Created by MIDL version 8.00.0595 at Wed Jul 27 04:08:36 2016
+")
+
+]
+library DSWBAPPLETLib
+{
+    // TLib : OLE Automation : {00020430-0000-0000-C000-000000000046}
+    importlib("stdole2.tlb");
+
+    // Forward declare all types defined in this typelib
+    interface ISimulationFilter;
+    interface ISimulationFilterCollection;
+    interface IAnsProcessingStateEventArgs;
+    interface IAnsObjectChangedEventArgs;
+    interface ITemporaryDatabaseSaveEventArgs;
+    interface IRefreshEventArgs;
+    interface IDSCaptionChangedEventArgs;
+    interface IDSAddCADMaterialsEventArgs;
+    interface IDSEnvironmentDuplicatedEventArgs;
+    interface IDSExternalLoadGroupDeletedEventArgs;
+    interface IDSLightweightRetrievalCompleteEventArgs;
+    interface IAnsBeforeActionEventArgs;
+    interface IAnsBSTRColl;
+    interface IAnsEDOperationEventArgs;
+    interface IDSAppObject;
+    interface IAnsDelegate;
+    interface IAnsVARIANTColl;
+    interface IAnsUINTColl;
+    interface IModelAssemblyFileOption;
+    interface IModelAssemblyIdMapping;
+    interface IAnsTransformColl;
+    interface IAnsTransform;
+    interface IAnsDoubleColl;
+    interface IAnsXYZ;
+    interface IModelAssemblyOptions;
+    interface IAnsProgress;
+    interface IAnsIDispColl;
+    interface IAnsIntColl;
+    interface IDSAlbionSimAddinCaller;
+    interface IDSUserSettings;
+    interface IAnsAttributeEventArgs;
+    interface IDSAllowBusyAPICallEventArgs;
+    interface IAnsCreateParameterEventArgs;
+    interface IAnsCreateCustomParameterEventArgs;
+    interface IAnsCreateUseCustomParameterInputEventArgs;
+    interface IDSRemoteJobInformationEventArgs;
+    interface IDSModelAssemblyUpdateRigidTransformsEventArgs;
+    interface IWBApplet;
+    interface IWBAppletFrame;
+    interface IWBAppletFramePanes;
+    interface IWBAppletFramePane;
+    interface IWBApplet2;
+    interface IWBProjectSystemInterop;
+    interface ISimulationFilterConsumer;
+    interface IWBACLEProvider;
+
+    [
+      odl,
+      uuid(D044A462-946C-403C-AF7A-75F952A03311),
+      helpstring("ISimulationFilter Interface"),
+      dual,
+      oleautomation
+    ]
+    interface ISimulationFilter : IDispatch {
+        [id(0x00000001), propget, helpstring("property PhysicsType")]
+        HRESULT PhysicsType([out, retval] BSTR* pVal);
+        [id(0x00000001), propput, helpstring("property PhysicsType")]
+        HRESULT PhysicsType([in] BSTR pVal);
+        [id(0x00000002), propget, helpstring("property AnalysisType")]
+        HRESULT AnalysisType([out, retval] BSTR* pVal);
+        [id(0x00000002), propput, helpstring("property AnalysisType")]
+        HRESULT AnalysisType([in] BSTR pVal);
+        [id(0x00000003), propget, helpstring("property SolverName")]
+        HRESULT SolverName([out, retval] BSTR* pVal);
+        [id(0x00000003), propput, helpstring("property SolverName")]
+        HRESULT SolverName([in] BSTR pVal);
+        [id(0x00000004), propget, helpstring("property Location")]
+        HRESULT Location([out, retval] int* pVal);
+        [id(0x00000004), propput, helpstring("property Location")]
+        HRESULT Location([in] int pVal);
+    };
+
+    [
+      odl,
+      uuid(4068D3AF-2E70-4E64-A765-E425E46B4643),
+      helpstring("ISimulationFilterCollection Interface"),
+      dual,
+      oleautomation
+    ]
+    interface ISimulationFilterCollection : IDispatch {
+        [id(0x00000001), propget, helpstring("property Count")]
+        HRESULT Count([out, retval] int* pVal);
+        [id(0x00000002), propget, helpstring("property Item")]
+        HRESULT Item(
+                        int index, 
+                        IDispatch** pVal);
+        [id(0x00000003), helpstring("method AddSimulationFilter")]
+        HRESULT AddSimulationFilter([out, retval] IDispatch** ppDisp);
+    };
+
+    typedef enum {
+        kGridFill = 0,
+        kGridCheckout = 1,
+        kGridCancel = 2,
+        kGridPreferences = 3,
+        kGridCachePrefs = 4,
+        kGridSavePrefCache = 5
+    } eGridOperation;
+
+    typedef enum {
+        DS_ProcessingStateTypeUnknown = 0,
+        DS_ATTACH_GEOMETRY = 1,
+        DS_FIND_ANSWERS = 2,
+        DS_PARAMETER_ROW_SOLVE = 3,
+        DS_PARAMETER_SET_SOLVE = 4,
+        DS_OBJECT_PASTE = 5,
+        DS_FILE_IO = 6,
+        DS_MULTIPLE_OBJECT_ADD = 7,
+        DS_REPORT_PROCESSING = 8,
+        DS_GENERIC_LONG_OPERATION = 9,
+        DS_CLEAN_RESULTS = 10,
+        DS_LOAD_MESH_FROM_FILE = 11,
+        DS_GEOMETRY_CONFIGURATION_CHANGE = 12,
+        DS_FIND_ANSWERS_SOLVE = 15,
+        DS_FIND_ANSWERS_POST = 16,
+        DS_CLOAK_FOR_SAVE = 17,
+        DS_CLEAR_RESULTS_WB2 = 18,
+        DS_IMPORT_LOAD = 19,
+        DS_CLEAN_SETUP_FILES_AND_RESULTS = 20,
+        DS_GEOMETRY_REFS_RELINKED = 21,
+        DS_GEOMETRY_REFRESH = 22,
+        DS_IMPORT_EXTERNAL_ENHANCEDMODEL = 23,
+        DS_IMPORT_NAMED_SELECTIONS = 24,
+        DS_DATABASE_MERGE = 25,
+        DS_MESH_READONLY = 26,
+        DS_RELINK_MODEL_ASSEMBLY_ATTACHMENTS = 27,
+        DS_GENERATE_ELEMENTORIENTATION = 28,
+        DS_CLEAN_CONDENSED_GEOMETRY = 29,
+        DS_CLEAR_EXPANSION_FILES = 30
+    } DSProcessingStateType;
+
+    typedef enum {
+        DS_ProcessingUnknown = 0,
+        DS_AddingObjects = 1,
+        DS_UpdatingMultipleSelectedObjects = 2,
+        DS_RemovingMultipleSelectedObjects = 3,
+        DS_RelinkingGeometry = 4,
+        DS_AutoContactGeneration = 5,
+        DS_AutoVirtualCellGeneration = 6,
+        DS_ProcessingWritingAnsysInput = 7,
+        DS_ProcessingMeshing = 8,
+        DS_ProcessingPostResults = 9,
+        DS_ProcessingSolve = 10,
+        DS_UpdateGeometryWithMesh = 11,
+        DS_AutoMeshConnectionsGeneration = 12,
+        DS_GenerateCDBSolve = 13,
+        DS_ProcessingSCRestart = 14,
+        DS_ProcessingConnectionsSolve = 15
+    } DSProcessingStateSubType;
+
+    typedef enum {
+        DS_OutcomeUnknown = 0,
+        DS_OutcomeFailure = 1,
+        DS_OutcomeFullSolve = 2,
+        DS_OutcomePost = 3,
+        DS_OutcomeAsyncSolving = 4,
+        DS_OutcomePartialSolve = 5,
+        DS_OutcomeNoChange = 6,
+        DS_OutcomeWroteInputFile = 7,
+        DS_OutcomeUserAbort = 8,
+        DS_OutComeShareLicenseFailure = 9,
+        DS_OutcomeSolvePostSnippet = 10
+    } DSProcessingOutcome;
+
+    [
+      odl,
+      uuid(2603120A-4EB8-4E4B-BAE1-F17678E266AD),
+      helpstring("IAnsProcessingStateEventArgs Interface"),
+      dual,
+      oleautomation
+    ]
+    interface IAnsProcessingStateEventArgs : IDispatch {
+        [id(0x00000001), propget, helpstring("Type property")]
+        HRESULT Type([out, retval] DSProcessingStateType* pVal);
+        [id(0x00000002), propget, helpstring("SubType property")]
+        HRESULT SubType([out, retval] DSProcessingStateSubType* pVal);
+        [id(0x00000003), propget, helpstring("Outcome property")]
+        HRESULT Outcome([out, retval] DSProcessingOutcome* pVal);
+    };
+
+    [
+      odl,
+      uuid(6D37C83C-5B3E-4AEA-B14A-3F4DB2F4BDD7),
+      helpstring("IAnsObjectChangedEventArgs Interface"),
+      dual,
+      oleautomation
+    ]
+    interface IAnsObjectChangedEventArgs : IDispatch {
+        [id(0x00000001), propget, helpstring("Event value")]
+        HRESULT Value([out, retval] VARIANT_BOOL* pVal);
+        [id(0x00000002), propget, helpstring("Property ObjectCLSID")]
+        HRESULT ObjectCLSID([out, retval] int* pVal);
+    };
+
+    [
+      odl,
+      uuid(0A7E3D88-9AB2-49A0-BC7B-BBC1742A1B50),
+      helpstring("ITemporaryDatabaseSaveEventArgs Interface"),
+      dual,
+      oleautomation
+    ]
+    interface ITemporaryDatabaseSaveEventArgs : IDispatch {
+        [id(0x00000001), propget, helpstring("Event Filename")]
+        HRESULT Filename([out, retval] BSTR* pbsFilename);
+        [id(0x00000002), propget, helpstring("Event Key")]
+        HRESULT Key([out, retval] BSTR* pbsKey);
+        [id(0x00000003), propget, helpstring("Event ImagesDirectoryName")]
+        HRESULT ImagesDirectoryName([out, retval] BSTR* pbsDirectoryName);
+        [id(0x00000004), propget, helpstring("Event FileSaveError")]
+        HRESULT FileSaveError([out, retval] BSTR* pbsFileSaveError);
+        [id(0x00000004), propput, helpstring("Event FileSaveError")]
+        HRESULT FileSaveError([in] BSTR pbsFileSaveError);
+    };
+
+    [
+      odl,
+      uuid(3D47A4F8-0417-4FCC-B5C8-9C239D62FDE1),
+      helpstring("IRefreshEventArgs Interface"),
+      dual,
+      oleautomation
+    ]
+    interface IRefreshEventArgs : IDispatch {
+        [id(0x00000001), propput, helpstring("Property ID")]
+        HRESULT ID([in] int pID);
+        [id(0x00000001), propget, helpstring("Property ID")]
+        HRESULT ID([out, retval] int* pID);
+        [id(0x00000002), propput, helpstring("Property FolderID")]
+        HRESULT FolderID([in] int pFolderID);
+        [id(0x00000002), propget, helpstring("Property FolderID")]
+        HRESULT FolderID([out, retval] int* pFolderID);
+    };
+
+    [
+      odl,
+      uuid(67D65FEC-E3B7-42F8-B8EB-E3B906F547C9),
+      helpstring("IDSCaptionChangedEventArgs Interface"),
+      dual,
+      oleautomation
+    ]
+    interface IDSCaptionChangedEventArgs : IDispatch {
+        [id(0x00000001), propget, helpstring("Event Id")]
+        HRESULT ID([out, retval] int* pnId);
+        [id(0x00000001), propput, helpstring("Event Id")]
+        HRESULT ID([in] int pnId);
+        [id(0x00000002), propget, helpstring("Event NewCaption")]
+        HRESULT NewCaption([out, retval] BSTR* pbsCaption);
+        [id(0x00000002), propput, helpstring("Event NewCaption")]
+        HRESULT NewCaption([in] BSTR pbsCaption);
+    };
+
+    [
+      odl,
+      uuid(BFB18101-F667-4F62-BBD1-9DE2F64BCEF0),
+      helpstring("IDSAddCADMaterialsEventArgs Interface"),
+      dual,
+      oleautomation
+    ]
+    interface IDSAddCADMaterialsEventArgs : IDispatch {
+        [id(0x00000001), propget, helpstring("FileName")]
+        HRESULT Filename([out, retval] BSTR* pbsFilename);
+        [id(0x00000001), propput, helpstring("FileName")]
+        HRESULT Filename([in] BSTR pbsFilename);
+    };
+
+    [
+      odl,
+      uuid(A12211B1-A4A8-4422-99A1-2A32715B6C0A),
+      helpstring("IDSEnvironmentDuplicatedEventArgs Interface"),
+      dual,
+      oleautomation
+    ]
+    interface IDSEnvironmentDuplicatedEventArgs : IDispatch {
+        [id(0x00000001), propget, helpstring("EnvironmentId")]
+        HRESULT EnvironmentId([out, retval] int* pnId);
+        [id(0x00000001), propput, helpstring("EnvironmentId")]
+        HRESULT EnvironmentId([in] int pnId);
+        [id(0x00000002), propget, helpstring("DuplicateWithoutResults")]
+        HRESULT DuplicateWithoutResults([out, retval] VARIANT_BOOL* pvntbDuplicate);
+        [id(0x00000002), propput, helpstring("DuplicateWithoutResults")]
+        HRESULT DuplicateWithoutResults([in] VARIANT_BOOL pvntbDuplicate);
+    };
+
+    [
+      odl,
+      uuid(043E3349-B423-4CED-9E39-88CB37D9BECC),
+      helpstring("IDSExternalLoadGroupDeletedEventArgs Interface"),
+      dual,
+      oleautomation
+    ]
+    interface IDSExternalLoadGroupDeletedEventArgs : IDispatch {
+        [id(0x00000001), propget, helpstring("ExternalLoadGroupId")]
+        HRESULT ExternalLoadGroupId([out, retval] int* pnId);
+        [id(0x00000001), propput, helpstring("ExternalLoadGroupId")]
+        HRESULT ExternalLoadGroupId([in] int pnId);
+        [id(0x00000002), propget, helpstring("EnvironmentId")]
+        HRESULT EnvironmentId([out, retval] int* pnId);
+        [id(0x00000002), propput, helpstring("EnvironmentId")]
+        HRESULT EnvironmentId([in] int pnId);
+        [id(0x00000003), propget, helpstring("ExternalDataIdentifier")]
+        HRESULT ExternalDataIdentifier([out, retval] BSTR* pbsId);
+        [id(0x00000003), propput, helpstring("ExternalDataIdentifier")]
+        HRESULT ExternalDataIdentifier([in] BSTR pbsId);
+        [id(0x00000004), propget, helpstring("OnAfterErase")]
+        HRESULT OnAfterErase([out, retval] VARIANT_BOOL* pvbAfterErase);
+        [id(0x00000004), propput, helpstring("OnAfterErase")]
+        HRESULT OnAfterErase([in] VARIANT_BOOL pvbAfterErase);
+    };
+
+    [
+      odl,
+      uuid(82B5A730-B806-46A5-A612-8CF50622DB5B),
+      helpstring("IDSLightweightRetrievalCompleteEventArgs Interface"),
+      dual,
+      oleautomation
+    ]
+    interface IDSLightweightRetrievalCompleteEventArgs : IDispatch {
+        [id(0x00000001), propget, helpstring("ModelID")]
+        HRESULT ModelID([out, retval] int* iModelID);
+        [id(0x00000001), propput, helpstring("ModelID")]
+        HRESULT ModelID([in] int iModelID);
+    };
+
+    [
+      odl,
+      uuid(BE56B55C-B168-4994-8528-4F94D2A32B99),
+      helpstring("IAnsBeforeActionEventArgs Interface"),
+      dual,
+      oleautomation
+    ]
+    interface IAnsBeforeActionEventArgs : IDispatch {
+        [id(0x00000001), propget, helpstring("Event ObjectID")]
+        HRESULT ObjectID([out, retval] int* pVal);
+        [id(0x00000002), propget, helpstring("Event ContactToolDirName")]
+        HRESULT ContactToolDirectoryName([out, retval] BSTR* pVal);
+        [id(0x00000003), propget, helpstring("property FilesToKeep")]
+        HRESULT FilesToKeep([out, retval] IAnsBSTRColl** pVal);
+        [id(0x00000004), propget, helpstring("property AdditionalFilesToBackup")]
+        HRESULT AdditionalFilesToBackup([out, retval] IAnsBSTRColl** pVal);
+    };
+
+    [
+      odl,
+      uuid(0F9CAC6B-29E9-4449-838C-5F8E0B63CA81),
+      helpstring("IAnsBSTRColl Interface"),
+      dual,
+      oleautomation
+    ]
+    interface IAnsBSTRColl : IDispatch {
+        [id(0x00000001), propget, helpstring("property Count")]
+        HRESULT Count([out, retval] unsigned int* plCount);
+        [id(00000000), propget, helpstring("property Item")]
+        HRESULT Item(
+                        [in] unsigned int lNum, 
+                        [out, retval] BSTR* pdVal);
+        [id(0xfffffffc), propget, helpstring("property NewEnum")]
+        HRESULT _NewEnum([out, retval] IUnknown** ppunkEnum);
+        [id(0x00000002), helpstring("method Add")]
+        HRESULT Add([in] BSTR bsNewVal);
+        [id(0x00000003), helpstring("method Remove")]
+        HRESULT RemoveAt(unsigned int index);
+        [id(0x00000004), helpstring("method Clear")]
+        HRESULT Clear();
+        [id(0x00000005), propget, helpstring("property FindItem")]
+        HRESULT FindItem(
+                        [in] BSTR bszItem, 
+                        [out, retval] unsigned int* pVal);
+    };
+
+    [
+      odl,
+      uuid(ADB2523D-A50B-4A4C-8A03-C229F1707415),
+      helpstring("IAnsEDOperationEventArgs Interface"),
+      dual,
+      oleautomation
+    ]
+    interface IAnsEDOperationEventArgs : IDispatch {
+        [id(0x00000001), propget, helpstring("property Operation")]
+        HRESULT Operation([out, retval] BSTR* pVal);
+        [id(0x00000001), propput, helpstring("property Operation")]
+        HRESULT Operation([in] BSTR pVal);
+    };
+
+    [
+      odl,
+      uuid(193FE0D0-549C-4579-9892-7C54BCAF94B2),
+      helpstring("IDSAppObject Interface"),
+      dual,
+      oleautomation
+    ]
+    interface IDSAppObject : IDispatch {
+        [id(0x00000001), helpstring("method FileNew")]
+        HRESULT FileNew();
+        [id(0x00000002), helpstring("method FileOpen")]
+        HRESULT FileOpen([in] BSTR Filename);
+        [id(0x00000003), helpstring("method FileSave")]
+        HRESULT FileSave();
+        [id(0x00000004), helpstring("method FileSaveAs")]
+        HRESULT FileSaveAs([in] BSTR Filename);
+        [id(0x00000005), propget, helpstring("The path to the open file")]
+        HRESULT ActiveFile([out, retval] BSTR* pVal);
+        [id(0x00000006), propget, helpstring("The date of the build")]
+        HRESULT BuildDate([out, retval] BSTR* pVal);
+        [id(0x00000007), propget, helpstring("property Tree")]
+        HRESULT Tree([out, retval] IDispatch** pVal);
+        [id(0x00000008), propget, helpstring("property AccessControl")]
+        HRESULT AccessControl([out, retval] IDispatch** pVal);
+        [id(0x00000009), propget, helpstring("The Graphics system dispatch pointer")]
+        HRESULT Graphics([out, retval] IDispatch** pGfxDisp);
+        [id(0x0000000a), propget, helpstring("UserSettings")]
+        HRESULT UserSettings([out, retval] IDispatch** ppUserSettings);
+        [id(0x0000000b), propget, helpstring("UnitSystem")]
+        HRESULT UnitSystem([out, retval] IDispatch** ppUnitSys);
+        [id(0x0000000b), propput, helpstring("UnitSystem")]
+        HRESULT UnitSystem([in] IDispatch* ppUnitSys);
+        [id(0x0000000c), propget, helpstring("UnitSystemID")]
+        HRESULT UnitSystemID([out, retval] int* pID);
+        [id(0x0000000c), propput, helpstring("UnitSystemID")]
+        HRESULT UnitSystemID([in] int pID);
+        [id(0x0000000d), propget, helpstring("property ErrorState")]
+        HRESULT ErrorState([out, retval] IDispatch** ppObj);
+        [id(0x0000000e), propget, helpstring("property SelectionManager")]
+        HRESULT SelectionManager([out, retval] IDispatch** ppObj);
+        [id(0x0000000f), propget, helpstring("property Script")]
+        HRESULT Script([out, retval] IDispatch** ppScriptObj);
+        [id(0x0000000f), propput, helpstring("property Script")]
+        HRESULT Script([in] IDispatch* ppScriptObj);
+        [id(0x00000011), propget, helpstring("To get an access to PreferenceManager")]
+        HRESULT PreferenceManager([out, retval] IDispatch** ppPrefMgr);
+        [id(0x00000012), propget, helpstring("To get an access to GUIState")]
+        HRESULT GUIState([out, retval] IDispatch** ppGUIState);
+        [id(0x00000013), propget, helpstring("property ReadOnlyMode")]
+        HRESULT ReadOnlyMode([out, retval] long* pVal);
+        [id(0x00000014), helpstring("method IsModified")]
+        HRESULT IsModified([out, retval] VARIANT_BOOL* pbModified);
+        [id(0x00000015), helpstring("method readCurrentUnitSysID")]
+        HRESULT readCurrentUnitSysID([out, retval] int* plId);
+        [id(0x00000016), propput, helpstring("property CanExit")]
+        HRESULT CanExit([in] VARIANT_BOOL pVal);
+        [id(0x00000016), propget, helpstring("property CanExit")]
+        HRESULT CanExit([out, retval] VARIANT_BOOL* pVal);
+        [id(0x00000017), propget, helpstring("property CustomizedMode")]
+        HRESULT CustomizedMode([out, retval] long* pVal);
+        [id(0x00000018), helpstring("method Export")]
+        HRESULT Export(
+                        BSTR Filename, 
+                        BSTR types);
+        [id(0x00000019), propget, helpstring("property FileDetails")]
+        HRESULT FileDetails(
+                        [in] BSTR Filename, 
+                        [out, retval] BSTR* pDetails);
+        [id(0x0000001a), propget, helpstring("The path to the templates directory")]
+        HRESULT TemplatesDirectory([out, retval] BSTR* pVal);
+        [id(0x0000001c), propget, helpstring("property StartupMode(Ansys - 1 DesignSpace -0)")]
+        HRESULT StartupMode([out, retval] unsigned int* ulStartupMode);
+        [id(0x00000020), propget, helpstring("property WorkingDir")]
+        HRESULT WorkingDir([out, retval] BSTR* pVal);
+        [id(0x00000021), propget, helpstring("property JobName")]
+        HRESULT JobName([out, retval] BSTR* pVal);
+        [id(0x00000022), helpstring("method SetWorkingDirAndJob")]
+        HRESULT SetWorkingDirAndJob(
+                        [in] BSTR bsWorkDir, 
+                        [in] BSTR bsJobName);
+        [id(0x00000023), helpstring("method FileSaveCopyAs")]
+        HRESULT FileSaveCopyAs([in] BSTR Filename);
+        [id(0x00000024), propget, helpstring("StructuralFilterStatus")]
+        HRESULT StructuralFilterStatus([out, retval] VARIANT_BOOL* pvbFlag);
+        [id(0x00000024), propput, helpstring("StructuralFilterStatus")]
+        HRESULT StructuralFilterStatus([in] VARIANT_BOOL pvbFlag);
+        [id(0x00000025), propget, helpstring("ThermalFilterStatus")]
+        HRESULT ThermalFilterStatus([out, retval] VARIANT_BOOL* pvbFlag);
+        [id(0x00000025), propput, helpstring("ThermalFilterStatus")]
+        HRESULT ThermalFilterStatus([in] VARIANT_BOOL pvbFlag);
+        [id(0x00000026), propget, helpstring("ElectromagneticFilterStatus")]
+        HRESULT ElectromagneticFilterStatus([out, retval] VARIANT_BOOL* pvbFlag);
+        [id(0x00000026), propput, helpstring("ElectromagneticFilterStatus")]
+        HRESULT ElectromagneticFilterStatus([in] VARIANT_BOOL pvbFlag);
+        [id(0x00000027), propget, helpstring("ShowAngleAsDegrees")]
+        HRESULT ShowAngleAsDegrees([out, retval] VARIANT_BOOL* pvbFlag);
+        [id(0x00000027), propput, helpstring("ShowAngleAsDegrees")]
+        HRESULT ShowAngleAsDegrees([in] VARIANT_BOOL pvbFlag);
+        [id(0x00000028), propget, helpstring("ShowAngularVelocityAsRads")]
+        HRESULT ShowAngularVelocityAsRads([out, retval] VARIANT_BOOL* pvbFlag);
+        [id(0x00000028), propput, helpstring("ShowAngularVelocityAsRads")]
+        HRESULT ShowAngularVelocityAsRads([in] VARIANT_BOOL pvbFlag);
+        [id(0x00000029), propget, helpstring("LicenseReleased")]
+        HRESULT LicenseReleased([out, retval] VARIANT_BOOL* bLicReleased);
+        [id(0x00000032), propput, helpstring("property EnableRefreshParameters")]
+        HRESULT EnableRefreshParameters([in] VARIANT_BOOL pVal);
+        [id(0x00000032), propget, helpstring("property EnableRefreshParameters")]
+        HRESULT EnableRefreshParameters([out, retval] VARIANT_BOOL* pVal);
+        [id(0x00000033), propget, helpstring("property Solvers")]
+        HRESULT Solvers([out, retval] IUnknown** ppIUnkSolvers);
+        [id(0x00000034), propget, helpstring("MessageWindowVisibility")]
+        HRESULT MessageWindowVisibility([out, retval] VARIANT_BOOL* pvbFlag);
+        [id(0x00000034), propput, helpstring("MessageWindowVisibility")]
+        HRESULT MessageWindowVisibility([in] VARIANT_BOOL pvbFlag);
+        [id(0x00000035), propget, helpstring("property AppletMode")]
+        HRESULT AppletMode([out, retval] BSTR* pVal);
+        [id(0x00000035), propput, helpstring("property AppletMode")]
+        HRESULT AppletMode([in] BSTR pVal);
+        [id(0x00000036), propget, helpstring("SectionPlaneWindowVisibility")]
+        HRESULT SectionPlaneWindowVisibility([out, retval] VARIANT_BOOL* pvbFlag);
+        [id(0x00000036), propput, helpstring("SectionPlaneWindowVisibility")]
+        HRESULT SectionPlaneWindowVisibility([in] VARIANT_BOOL pvbFlag);
+        [id(0x00000037), propget, helpstring("AnnotationsWindowVisibility")]
+        HRESULT AnnotationsWindowVisibility([out, retval] VARIANT_BOOL* pvbFlag);
+        [id(0x00000037), propput, helpstring("AnnotationsWindowVisibility")]
+        HRESULT AnnotationsWindowVisibility([in] VARIANT_BOOL pvbFlag);
+        [id(0x00000038), propget, helpstring("property FileProductVersionNumber")]
+        HRESULT FileProductVersionNumber(
+                        [in] BSTR Filename, 
+                        [out, retval] BSTR* pFielProdVerNum);
+        [id(0x00000039), helpstring("method AddParameterSet")]
+        HRESULT AddParameterSet([out, retval] IDispatch** ppParamSet);
+        [id(0x0000003a), propget, helpstring("property ParameterSet")]
+        HRESULT ParameterSet([out, retval] IDispatch** ppParamSet);
+        [id(0x0000003b), helpstring("method RemoveParameterSet")]
+        HRESULT RemoveParameterSet();
+        [id(0x0000003c), propget, helpstring("ToolBarVisible")]
+        HRESULT ToolBarVisible(
+                        [in] BSTR bsName, 
+                        [out, retval] VARIANT_BOOL* pvbFlag);
+        [id(0x0000003c), propput, helpstring("ToolBarVisible")]
+        HRESULT ToolBarVisible(
+                        [in] BSTR bsName, 
+                        [in] VARIANT_BOOL pvbFlag);
+        [id(0x0000003d), helpstring("ConvertMeshToSimulation")]
+        HRESULT ConvertMeshToSimulation();
+        [id(0x0000003e), propput, helpstring("TabClosing")]
+        HRESULT TabClosing([in] VARIANT_BOOL rhs);
+        [id(0x00000064), propget, helpstring("method OnSave")]
+        HRESULT OnSave([out, retval] IDispatch** ppIMethodName);
+        [id(0x00000065), propget, helpstring("method OnLoad")]
+        HRESULT OnLoad([out, retval] IDispatch** ppIMethodName);
+        [id(0x00000066), propget, helpstring("method OnAfterLoad")]
+        HRESULT OnAfterLoad([out, retval] IAnsDelegate** ppIAnsDelegate);
+        [id(0x00000067), propget, helpstring("method OnAfterSave")]
+        HRESULT OnAfterSave([out, retval] IAnsDelegate** ppIAnsDelegate);
+        [id(0x00000068), propget, helpstring("method OnAfterNew")]
+        HRESULT OnAfterNew([out, retval] IAnsDelegate** ppIAnsDelegate);
+        [id(0x00000069), propget, helpstring("method OnObjectSelected")]
+        HRESULT OnObjectSelected([out, retval] IAnsDelegate** pVal);
+        [id(0x0000006a), propget, helpstring("method OnObjectChanged")]
+        HRESULT OnObjectChanged([out, retval] IAnsDelegate** pVal);
+        [id(0x0000006b), propget, helpstring("method OnObjectCreated")]
+        HRESULT OnObjectCreated([out, retval] IAnsDelegate** pVal);
+        [id(0x0000006c), propget, helpstring("method OnObjectDeleted")]
+        HRESULT OnObjectDeleted([out, retval] IAnsDelegate** pVal);
+        [id(0x0000006d), propget, helpstring("method OnAppletModeChanged")]
+        HRESULT OnAppletModeChanged([out, retval] IAnsDelegate** pVal);
+        [id(0x0000006e), propget, helpstring("method OnProcessingStateStarted")]
+        HRESULT OnProcessingStateStarted([out, retval] IAnsDelegate** pVal);
+        [id(0x0000006f), propget, helpstring("method OnProcessingStateFinished")]
+        HRESULT OnProcessingStateFinished([out, retval] IAnsDelegate** pVal);
+        [id(0x00000070), propget, helpstring("method OnCreateParameter")]
+        HRESULT OnCreateParameter([out, retval] IAnsDelegate** pVal);
+        [id(0x00000071), propget, helpstring("method OnRemoveParameter")]
+        HRESULT OnRemoveParameter([out, retval] IAnsDelegate** pVal);
+        [id(0x00000072), propget, helpstring("method OnAddParameterAttribute")]
+        HRESULT OnAddParameterAttribute([out, retval] IAnsDelegate** pVal);
+        [id(0x00000073), propget, helpstring("method OnRemoveParameterAttribute")]
+        HRESULT OnRemoveParameterAttribute([out, retval] IAnsDelegate** pVal);
+        [id(0x00000074), propget, helpstring("method OnChangeParameterAttribute")]
+        HRESULT OnChangeParameterAttribute([out, retval] IAnsDelegate** pVal);
+        [id(0x0000007b), propget, helpstring("method OnOutputParameterChanged")]
+        HRESULT OnOutputParameterChanged([out, retval] IAnsDelegate** pVal);
+        [id(0x0000007c), propget, helpstring("method OnObjectModified")]
+        HRESULT OnObjectModified([out, retval] IAnsDelegate** ppVal);
+        [id(0x0000007d), propget, helpstring("method OnObjectAdded")]
+        HRESULT OnObjectAdded([out, retval] IAnsDelegate** ppVal);
+        [id(0x0000007e), propget, helpstring("method OnActiveObjectChanged")]
+        HRESULT OnActiveObjectChanged([out, retval] IAnsDelegate** ppVal);
+        [id(0x0000007f), propget, helpstring("method OnSuppressedStateChanged")]
+        HRESULT OnSuppressedStateChanged([out, retval] IAnsDelegate** ppVal);
+        [id(0x00000075), helpstring("method CreateParameter")]
+        HRESULT CreateParameter([in] IDispatch* pParameterItf);
+        [id(0x00000076), helpstring("method AddParamAttribute")]
+        HRESULT AddParamAttribute(
+                        [in] IDispatch* pParameterItf, 
+                        [in] IDispatch* pAttributeItf);
+        [id(0x00000077), helpstring("method ChangeParamAttribute")]
+        HRESULT ChangeParamAttribute(
+                        [in] IDispatch* pAttributeItf, 
+                        [in] IDispatch* pAttributeValueItf);
+        [id(0x00000078), helpstring("method RemoveParamAttribute")]
+        HRESULT RemoveParamAttribute(
+                        [in] IDispatch* pParameterItf, 
+                        [in] IDispatch* pAttributeItf);
+        [id(0x00000079), helpstring("method RemoveParam")]
+        HRESULT RemoveParam([in] IDispatch* pParameterItf);
+        [id(0x0000007a), helpstring("method OutputParameterChanged")]
+        HRESULT OutputParameterChanged([in] IDispatch* pParameterItf);
+        [id(0x0000003f), helpstring("UserTransactionStarted indicates the very beginning of a user transaction. Script assigns a unique id for reference")]
+        HRESULT UserTransactionStarted([in] int iOperationId);
+        [id(0x00000040), helpstring("UserTransactionEnded indicates the end of the user transaction.  The id must match the one used to start it")]
+        HRESULT UserTransactionEnded([in] int iOperationId);
+        [id(0x00000041), helpstring("UserTransactionCancelled indicates the transaction was aborted.  The id must match the one used to start it")]
+        HRESULT UserTransactionCancelled([in] int iOperationId);
+        [id(0x00000042), helpstring("GenerateNewTransactionId produces an id to be used for a new transaction")]
+        HRESULT GenerateNewTransactionId([out, retval] int* iOperationId);
+        [id(0x00000043), helpstring("run cfx post")]
+        HRESULT RunCFXPost(
+                        [in] BSTR bsInFile, 
+                        [in] BSTR bsOutFile);
+        [id(0x00000044), propget, helpstring("Obtain access to the Solver Manager")]
+        HRESULT SolverManager([out, retval] IUnknown** ppSolverManager);
+        [id(0x00000045), propget, helpstring("property get the tree root WITHOUT creating one")]
+        HRESULT TreeNoCreate([out, retval] IDispatch** ppIDispVal);
+        [id(0x00000046), propget, helpstring("property AlbionSimAddinCaller")]
+        HRESULT AlbionSimAddinCaller([out, retval] IDispatch** ppIDispVal);
+        [id(0x00000080), propget, helpstring("property OnTemporaryDatabaseSave")]
+        HRESULT OnTemporaryDatabaseSave([out, retval] IAnsDelegate** ppVal);
+        [id(0x00000081), propget, helpstring("property SaveTemporaryDSDBStatus")]
+        HRESULT SaveTemporaryDSDBStatus([out, retval] BSTR* pbsStatus);
+        [id(0x00000082), helpstring("method SaveTemporaryDSDB")]
+        HRESULT SaveTemporaryDSDB([in] BSTR bsKey);
+        [id(0x00000083), propget, helpstring("property OnUserTransactionStarted")]
+        HRESULT OnUserTransactionStarted([out, retval] IAnsDelegate** pVal);
+        [id(0x00000084), propget, helpstring("property OnUserTransactionFinished")]
+        HRESULT OnUserTransactionFinished([out, retval] IAnsDelegate** pVal);
+        [id(0x00000085), propget, helpstring("ShowMetricTemperatureInCelsius")]
+        HRESULT ShowMetricTemperatureInCelsius([out, retval] VARIANT_BOOL* pvbFlag);
+        [id(0x00000085), propput, helpstring("ShowMetricTemperatureInCelsius")]
+        HRESULT ShowMetricTemperatureInCelsius([in] VARIANT_BOOL pvbFlag);
+        [id(0x00000086), helpstring("Split DSDB into separate models")]
+        HRESULT SplitDatabaseIntoModels(
+                        [in] BSTR bsWorkingDirectory, 
+                        [in] BSTR bsFileFolder, 
+                        [in] BSTR bsFilename, 
+                        [in] BSTR bsFullPath, 
+                        [in] VARIANT_BOOL vbSetThisAsSource, 
+                        [in] BSTR bsPersistenceId, 
+                        [out, retval] IAnsVARIANTColl** ppModelData);
+        [id(0x00000087), propget, helpstring("method OnAddCADMaterials")]
+        HRESULT OnAddCADMaterials([out, retval] IAnsDelegate** pVal);
+        [id(0x00000088), helpstring("method AddCADMaterials")]
+        HRESULT AddCADMaterials([in] BSTR bsFilename);
+        [id(0x00000089), helpstring("Get model info")]
+        HRESULT GetModelInfo(
+                        [in] int ModelID, 
+                        [in] BSTR fullCopyPath, 
+                        [in] BSTR bsWorkingDirectory, 
+                        BSTR bsModelDirectory, 
+                        [out, retval] IAnsVARIANTColl** ppModelData);
+        [id(0x0000008a), propget, helpstring("method ReadOnlyModeForVista")]
+        HRESULT ReadOnlyModeForVista([out, retval] long* pVal);
+        [id(0x00000047), helpstring("BrowseModeAfterDelete")]
+        HRESULT BrowseModeAfterDelete(VARIANT_BOOL* vbReadMode);
+        [id(0x0000008b), propget, helpstring("method OnRefreshAll")]
+        HRESULT OnRefreshAll([out, retval] IAnsDelegate** pVal);
+        [id(0x0000008c), propget, helpstring("method OnRefreshMaterials")]
+        HRESULT OnRefreshMaterials([out, retval] IAnsDelegate** pVal);
+        [id(0x0000008d), propget, helpstring("method OnRefreshGeometry")]
+        HRESULT OnRefreshGeometry([out, retval] IAnsDelegate** pVal);
+        [id(0x0000008e), propget, helpstring("method OnRefreshExternalLoad")]
+        HRESULT OnRefreshExternalLoad([out, retval] IAnsDelegate** pVal);
+        [id(0x0000008f), propget, helpstring("method OnCADParameterValueChanged")]
+        HRESULT OnCADParameterValueChanged([out, retval] IAnsDelegate** pVal);
+        [id(0x00000090), helpstring("method GetUnitString")]
+        HRESULT GetUnitString(
+                        [in] IDispatch* pVal, 
+                        [out, retval] BSTR* bsUnitString);
+        [id(0x00000091), propget, helpstring("method OnRequestACLERelease")]
+        HRESULT OnRequestACLERelease([out, retval] IAnsDelegate** pVal);
+        [id(0x00000092), helpstring("method RequestACLERelease")]
+        HRESULT RequestACLERelease();
+        [id(0x00000093), propget, helpstring("method OnACLECheckedOut")]
+        HRESULT OnACLECheckedOut([out, retval] IAnsDelegate** pVal);
+        [id(0x00000094), propget, helpstring("method OnACLECheckedIn")]
+        HRESULT OnACLECheckedIn([out, retval] IAnsDelegate** pVal);
+        [id(0x00000095), helpstring("method ACLECheckOut")]
+        HRESULT ACLECheckOut();
+        [id(0x00000096), helpstring("method ACLECheckIn")]
+        HRESULT ACLECheckIn();
+        [id(0x00000097), helpstring("method SetBrowseMode")]
+        HRESULT SetBrowseMode([in] VARIANT_BOOL vbBrowseMode);
+        [id(0x00000098), helpstring("method WorkbenchBackupFiles")]
+        HRESULT WorkbenchBackupFiles(
+                        [in] int ObjectID, 
+                        [in] IAnsBSTRColl* filesToMove, 
+                        [in] IAnsBSTRColl* filesToCopy);
+        [id(0x00000099), helpstring("method BeforeCleanContactTool")]
+        HRESULT BeforeCleanContactTool([in] BSTR ContactToolDirName);
+        [id(0x0000009a), propget, helpstring("property OnBeforeClean")]
+        HRESULT OnWorkbenchBackupFiles([out, retval] IAnsDelegate** ppVal);
+        [id(0x0000009b), propget, helpstring("property OnBeforeCleanContactTool")]
+        HRESULT OnBeforeCleanContactTool([out, retval] IAnsDelegate** ppVal);
+        [id(0x000000c9), helpstring("method ExtractEkmData")]
+        HRESULT ExtractEkmData(
+                        [in] int extractionType, 
+                        [in] BSTR outFilePath);
+        [id(0x000000ca), helpstring("method HaveAnyLicense")]
+        HRESULT HaveAnyLicense([out, retval] VARIANT_BOOL* pvbFlag);
+        [id(0x0000012d), helpstring("method ExportDatabaseWithGivenEnvironment")]
+        HRESULT ExportDatabaseWithGivenEnvironment(
+                        [in] BSTR bsFullPath, 
+                        [in] int envIdToKeep);
+        [id(0x0000012e), helpstring("method MarkCADParameterPublished")]
+        HRESULT MarkCADParameterPublished([in] IDispatch* pParamDisp);
+        [id(0x0000012f), helpstring("method MarkCADParameterRemoved")]
+        HRESULT MarkCADParameterRemoved([in] IDispatch* pParamDisp);
+        [id(0x00000130), helpstring("method IsCADParameterPublished")]
+        HRESULT IsCADParameterPublished(
+                        [in] IDispatch* pParamDisp, 
+                        [out, retval] VARIANT_BOOL* vbPublished);
+        [id(0x00000048), helpstring("method ProductDSorMeshMode")]
+        HRESULT getProductDSMeshMode([out, retval] unsigned int* uiProductMode);
+        [id(0x00000131), propget, helpstring("method OnAfterObjectDeleted")]
+        HRESULT OnAfterObjectDeleted([out, retval] IAnsDelegate** pVal);
+        [id(0x00000132), propget, helpstring("method OnShareLicenseUnAvailable")]
+        HRESULT OnShareLicenseUnAvailable([out, retval] IAnsDelegate** pVal);
+        [id(0x00000133), helpstring("method FireEventOnShareLicenseUnAvailable")]
+        HRESULT FireEventOnShareLicenseUnAvailable();
+        [id(0x00000134), helpstring("method CreateParameter")]
+        HRESULT CreateParameterEventArgs(
+                        [in] IDispatch* pParameterItf, 
+                        [out, retval] IDispatch** ppParamEventArgs);
+        [id(0x00000135), propget, helpstring("property OnDownloadResultsComplete")]
+        HRESULT OnDownloadResultsComplete([out, retval] IAnsDelegate** pVal);
+        [id(0x00000136), helpstring("method FireOnDownloadResultsComplete")]
+        HRESULT FireOnDownloadResultsComplete([in] IUnknown* pSender);
+        [id(0x0000009c), helpstring("method to read a lightweight stream containing the list of all objects by id, clsid and name")]
+        HRESULT ListObjectsInfoStream(
+                        [in] BSTR Filename, 
+                        [out] IAnsUINTColl** pObjects, 
+                        [out] IAnsUINTColl** pCLSIDs, 
+                        [out] IAnsBSTRColl** pNames);
+        [id(0x00000137), propget, helpstring("property AllObjectsLicensed")]
+        HRESULT AllObjectsLicensed([out, retval] VARIANT_BOOL* pUnLicensedObjectExists);
+        [id(0x00000138), helpstring("method SetBrowseModeForSharedModel")]
+        HRESULT SetBrowseModeForSharedModel([in] VARIANT_BOOL vbBrowseMode);
+        [id(0x00000139), helpstring("method getTimeToGrabLicense")]
+        HRESULT getTimeToGrabLicense([out, retval] double* Value);
+        [id(0x0000013a), helpstring("method UpdatePrototypeGroupOutputParameters")]
+        HRESULT UpdatePrototypeGroupOutputParameters();
+        [id(0x0000013b), propput, helpstring("property ShouldContinueDespiteRunningBackgroundJob")]
+        HRESULT ShouldContinueDespiteRunningBackgroundJob([in] VARIANT_BOOL vbValueChange);
+        [id(0x0000013b), propget, helpstring("property ShouldContinueDespiteRunningBackgroundJob")]
+        HRESULT ShouldContinueDespiteRunningBackgroundJob([out, retval] VARIANT_BOOL* vbValueChange);
+        [id(0x0000013c), propget, helpstring("ParameterSetHolder")]
+        HRESULT ParameterSetHolder([out, retval] IDispatch** ppParamSetItfHolder);
+        [id(0x0000013d), helpstring("method ACLERequestOpenDSDB")]
+        HRESULT ACLERequestOpenDSDB();
+        [id(0x0000013e), propget, helpstring("WorksheetWindowVisibility")]
+        HRESULT WorksheetWindowVisibility([out, retval] VARIANT_BOOL* pvbFlag);
+        [id(0x0000013e), propput, helpstring("WorksheetWindowVisibility")]
+        HRESULT WorksheetWindowVisibility([in] VARIANT_BOOL pvbFlag);
+        [id(0x00000049), helpstring("run cfx post")]
+        HRESULT RunCFXPost2(
+                        [in] BSTR bsInFile, 
+                        [in] BSTR bsOutFile, 
+                        [in] BSTR bsInsDir, 
+                        [in] BSTR bsRootDir);
+        [id(0x0000013f), propget, helpstring("method OnSolveHandlersChanged")]
+        HRESULT OnSolveHandlersChanged([out, retval] IAnsDelegate** pVal);
+        [id(0x00000140), propget, helpstring("method OnSelectiveGeometryUpdate")]
+        HRESULT OnSelectiveGeometryUpdate([out, retval] IAnsDelegate** pVal);
+        [id(0x00000141), helpstring("method ExecuteWorkbenchJournal")]
+        HRESULT ExecuteWorkbenchJournal([in] BSTR bsJournal);
+        [id(0x00000142), propget, helpstring("method OnWorkbenchJournalExecute")]
+        HRESULT OnWorkbenchJournalExecute([out, retval] IAnsDelegate** pVal);
+        [id(0x00000143), propget, helpstring("method OnDirty")]
+        HRESULT OnDirty([out, retval] IAnsDelegate** pVal);
+        [id(0x00000144), helpstring("method GrabDefaultLicense")]
+        HRESULT GrabDefaultLicense();
+        [id(0x00000145), helpstring("method ReleaseLicense")]
+        HRESULT ReleaseLicense();
+        [id(0x00000146), propget, helpstring("method OnMechanicalWantsToHide")]
+        HRESULT OnMechanicalWantsToHide([out, retval] IAnsDelegate** pVal);
+        [id(0x00000147), propget, helpstring("NinjaMechanicalIsHidden")]
+        HRESULT NinjaMechanicalIsHidden([out, retval] VARIANT_BOOL* pvbFlag);
+        [id(0x00000147), propput, helpstring("NinjaMechanicalIsHidden")]
+        HRESULT NinjaMechanicalIsHidden([in] VARIANT_BOOL pvbFlag);
+        [id(0x00000148), propget, helpstring("IsRegKeySet")]
+        HRESULT IsRegKeySet(
+                        [in] BSTR bsName, 
+                        [out, retval] VARIANT_BOOL* pvbFlag);
+        [id(0x00000149), propput, helpstring("ParameterVisibility")]
+        HRESULT ParameterVisibility([in] VARIANT_BOOL isVisible);
+        [id(0x00000149), propget, helpstring("ParameterVisibility")]
+        HRESULT ParameterVisibility([out, retval] long* isVisible);
+        [id(0x0000014a), propget, helpstring("OnUnitsChanged")]
+        HRESULT OnUnitsChanged([out, retval] IAnsDelegate** ppVal);
+        [id(0x0000014b), propget, helpstring("method OnMechanicalWantsToShow")]
+        HRESULT OnMechanicalWantsToShow([out, retval] IAnsDelegate** pVal);
+        [id(0x0000014c), propget, helpstring("NinjaMechanicalIsBatchMode")]
+        HRESULT NinjaMechanicalIsBatchMode([out, retval] VARIANT_BOOL* pbmFlag);
+        [id(0x0000014c), propput, helpstring("NinjaMechanicalIsBatchMode")]
+        HRESULT NinjaMechanicalIsBatchMode([in] VARIANT_BOOL pbmFlag);
+        [id(0x0000014d), helpstring("method Fire_OnExternalLayeredSectionModified")]
+        HRESULT Fire_OnExternalLayeredSectionTypeChanged();
+        [id(0x0000014e), propget, helpstring("method OnNinjaModeStateChanged")]
+        HRESULT OnNinjaModeStateChanged([out, retval] IAnsDelegate** pVal);
+        [id(0x0000014f), propget, helpstring("method OnLightGeometryRetrievalComplete")]
+        HRESULT OnLightGeometryRetrievalComplete([out, retval] IAnsDelegate** pVal);
+        [id(0x00000150), helpstring("method LightGeometryRetrievalComplete")]
+        HRESULT LightGeometryRetrievalComplete([in] int ModelID);
+        [id(0x00000151), helpstring("method FireOnSolveComplete")]
+        HRESULT FireOnSolveComplete([in] IUnknown* pSender);
+        [id(0x00000152), propget, helpstring("property OnSolveComplete")]
+        HRESULT OnSolveComplete([out, retval] IAnsDelegate** pVal);
+        [id(0x00000153), propget, helpstring("SolveInvokedFromAddin")]
+        HRESULT SolveInvokedFromAddin([out, retval] VARIANT_BOOL* pvbFlag);
+        [id(0x00000153), propput, helpstring("SolveInvokedFromAddin")]
+        HRESULT SolveInvokedFromAddin([in] VARIANT_BOOL pvbFlag);
+        [id(0x00000154), helpstring("method GenerateNewTransferId")]
+        HRESULT GenerateNewTransferId([out, retval] BSTR* transferId);
+        [id(0x00000155), helpstring("method FileAppend")]
+        HRESULT FileAppend(
+                        [in] IModelAssemblyFileOption* pFileOptionColl, 
+                        [in] IModelAssemblyOptions* pAssemblyOptions, 
+                        [in] IAnsProgress* piProgress);
+        [id(0x00000156), helpstring("method to read part manager from a mechanical database")]
+        HRESULT GetPartManagerFromFile(
+                        [in] BSTR bsDatabaseFile, 
+                        [out, retval] IUnknown** piPartMgrUnk);
+        [id(0x00000157), helpstring("method to read assembly mesh from a mechanical database")]
+        HRESULT GetAssemblyMeshFromFile(
+                        [in] BSTR bsDatabaseFile, 
+                        [out, retval] IUnknown** piAssemblyMeshUnk);
+        [id(0x600200b8)]
+        HRESULT IsScanResumeEnabled(
+                        [in] BSTR bsDatabaseFile, 
+                        [out, retval] VARIANT_BOOL* pvbEnabled);
+        [id(0x00000158), propget, helpstring("OnHandleCustomParameter")]
+        HRESULT OnHandleCustomParameter([out, retval] IAnsDelegate** ppVal);
+        [id(0x00000159), propget, helpstring("OnUseCustomParameterInput")]
+        HRESULT OnUseCustomParameterInput([out, retval] IAnsDelegate** ppVal);
+        [id(0x0000015a), helpstring("SetModelAssemblyRigidTransforms")]
+        HRESULT SetModelAssemblyRigidTransforms(
+                        [in] IAnsBSTRColl* piSources, 
+                        [in] IAnsIDispColl* piTranslations, 
+                        [in] IAnsIDispColl* piRotations, 
+                        [in] IAnsIntColl* piTransformOriginals, 
+                        [in] ModelAssemblyAlignmentAction alignmentAction);
+        [id(0x0000015b), propget, helpstring("OnSetModelAssemblyRigidTransforms")]
+        HRESULT OnSetModelAssemblyRigidTransforms([out, retval] IAnsDelegate** ppVal);
+        [id(0x0000015c), propget, helpstring("property OnJobAdded")]
+        HRESULT OnJobAdded([out, retval] IAnsDelegate** pVal);
+        [id(0x0000015d), helpstring("method FireOnJobAdded")]
+        HRESULT FireOnJobAdded(
+                        [in] int iDSId, 
+                        [in] BSTR bsSolveManager, 
+                        [in] BSTR bsJobId);
+        [id(0x0000015e), propget, helpstring("property OnJobRemoved")]
+        HRESULT OnJobRemoved([out, retval] IAnsDelegate** pVal);
+        [id(0x0000015f), helpstring("method FireOnJobRemoved")]
+        HRESULT FireOnJobRemoved(
+                        [in] int iDSId, 
+                        [in] BSTR bsSolveManager, 
+                        [in] BSTR bsJobId);
+        [id(0x00000160), helpstring("method CheckForPendingRSMJobsAndStopShutdown")]
+        HRESULT CheckForPendingRSMJobsAndStopShutdown([out, retval] VARIANT_BOOL* vbShouldStopShutdown);
+        [id(0x00000161), propget, helpstring("property OnClearGeneratedDataOnModel")]
+        HRESULT OnClearGeneratedDataOnModel([out, retval] IAnsDelegate** pVal);
+        [id(0x00000162), helpstring("method GetModelAssemblerIdMappingManager")]
+        HRESULT GetModelAssemblerIdMappingManager([out, retval] IUnknown** ppMgrUnk);
+        [id(0x00000163), propget, helpstring("method OnCondensedGeometryEmptyPath")]
+        HRESULT OnCondensedGeometryEmptyPath([out, retval] IAnsDelegate** pVal);
+        [id(0x00000164), helpstring("method FireCondensedGeometryEmptyPath")]
+        HRESULT FireCondensedGeometryEmptyPath([in] int iModelID);
+        [id(0x00000165), propget, helpstring("method OnMeshFileEmptyPath")]
+        HRESULT OnMeshFileEmptyPath([out, retval] IAnsDelegate** pVal);
+        [id(0x00000166), helpstring("method FireMeshFileEmptyPath")]
+        HRESULT FireMeshFileEmptyPath([in] int iModelID);
+        [id(0x00000167), helpstring("method Fire_OnExternalLoadGroupDelete")]
+        HRESULT Fire_OnExternalLoadGroupDelete(
+                        [in] unsigned int dsType, 
+                        [in] unsigned int dsId, 
+                        [in] VARIANT_BOOL vbOnAfterDelete);
+        [id(0x00000168), propget, helpstring("RSMInNewArchitectureMode")]
+        HRESULT RSMInNewArchitectureMode([out, retval] VARIANT_BOOL* pvbFlag);
+    };
+
+    [
+      odl,
+      uuid(0C4F278A-0EC0-4EE3-BC92-0B6BEDE4CD49),
+      helpstring("IAnsDelegate Interface"),
+      dual,
+      oleautomation
+    ]
+    interface IAnsDelegate : IDispatch {
+        [id(0x00000001), helpstring("method Fire")]
+        HRESULT Fire(
+                        IUnknown* pSender, 
+                        IUnknown* pArgs);
+        [id(0x00000002), helpstring("method Add")]
+        HRESULT Add(IAnsDelegate* pVal);
+        [id(0x00000003), helpstring("method Remove")]
+        HRESULT Remove(IAnsDelegate* pVal);
+        [id(0x00000004), helpstring("method Clear")]
+        HRESULT Clear();
+        [id(0x00000014), helpstring("method Init")]
+        HRESULT Init(
+                        IDispatch* pTarget, 
+                        BSTR bsMethodName);
+        [id(0x00000015), helpstring("method Init")]
+        HRESULT InitC(LONG_PTR fncPtr);
+        [id(0x00000016), helpstring("method Init")]
+        HRESULT InitCPP(LONG_PTR fncPtr);
+        [id(0x00000017), helpstring("method AddCOM")]
+        HRESULT AddCOM(
+                        IDispatch* pTarget, 
+                        BSTR bsMethodName);
+        [id(0x00000018), helpstring("method AddC")]
+        HRESULT AddC(LONG_PTR fncPtr);
+        [id(0x00000019), helpstring("method AddCPP")]
+        HRESULT AddCPP(LONG_PTR fncPtr);
+        [id(0x0000001a), helpstring("method RemoveCOM")]
+        HRESULT RemoveCOM(
+                        IDispatch* pTarget, 
+                        BSTR bsMethodName);
+        [id(0x0000001b), helpstring("method RemoveC")]
+        HRESULT RemoveC(LONG_PTR fncPtr);
+        [id(0x0000001c), helpstring("method RemoveCPP")]
+        HRESULT RemoveCPP(LONG_PTR fncPtr);
+    };
+
+    typedef [public    ,
+      custom(F914481D-9C62-4B43-9340-E9B2E6252E5F, 1)    
+]
+    int64 LONG_PTR;
+
+    [
+      odl,
+      uuid(F6E1D1AE-8788-4A94-A642-407A91E723DA),
+      helpstring("IAnsVARIANTColl Interface"),
+      dual,
+      nonextensible,
+      oleautomation
+    ]
+    interface IAnsVARIANTColl : IDispatch {
+        [id(0x00000001), propget, helpstring("property Count")]
+        HRESULT Count([out, retval] unsigned int* plCount);
+        [id(00000000), propget, helpstring("property Item")]
+        HRESULT Item(
+                        [in] unsigned int lNum, 
+                        [out, retval] VARIANT* pdVal);
+        [id(00000000), propput, helpstring("property Item")]
+        HRESULT Item(
+                        [in] unsigned int lNum, 
+                        [in] VARIANT pdVal);
+        [id(0xfffffffc), propget, helpstring("property NewEnum")]
+        HRESULT _NewEnum([out, retval] IUnknown** ppunkEnum);
+        [id(0x00000002), helpstring("method Add")]
+        HRESULT Add([in] VARIANT iNewVal);
+        [id(0x00000003), helpstring("method Remove")]
+        HRESULT RemoveAt(unsigned int index);
+        [id(0x00000004), helpstring("method Clear")]
+        HRESULT Clear();
+        [id(0x00000005), helpstring("method Modify")]
+        HRESULT Modify(
+                        [in] unsigned int index, 
+                        [in] VARIANT vntValue);
+        [id(0x00000006), helpstring("method Insert")]
+        HRESULT Insert(
+                        [in] unsigned int index, 
+                        [in] VARIANT vntValue);
+    };
+
+    [
+      odl,
+      uuid(17B6F2A0-A205-4306-B8F2-A62695D3F9E1),
+      helpstring("IAnsUINTColl Interface"),
+      dual,
+      nonextensible,
+      oleautomation
+    ]
+    interface IAnsUINTColl : IDispatch {
+        [id(0x00000001), propget, helpstring("property Count")]
+        HRESULT Count([out, retval] unsigned int* plCount);
+        [id(00000000), propget, helpstring("property Item")]
+        HRESULT Item(
+                        [in] unsigned int lNum, 
+                        [out, retval] unsigned int* pdVal);
+        [id(0xfffffffc), propget, helpstring("property NewEnum")]
+        HRESULT _NewEnum([out, retval] IUnknown** ppunkEnum);
+        [id(0x00000002), helpstring("method Add")]
+        HRESULT Add([in] unsigned int iNewVal);
+        [id(0x00000003), propget, helpstring("Returns index of first match from collection")]
+        HRESULT FindItem(
+                        [in] unsigned int bszItem, 
+                        [out, retval] unsigned int* pVal);
+        [id(0x00000004), helpstring("method Clear")]
+        HRESULT Clear();
+    };
+
+    [
+      odl,
+      uuid(CE4140D7-8A4D-4809-83DB-E8F79D2B84CF),
+      helpstring("IModelAssemblyFileOption Interface"),
+      nonextensible
+    ]
+    interface IModelAssemblyFileOption : IUnknown {
+        [propget, helpstring("property FilePath")]
+        HRESULT _stdcall FilePath([out, retval] BSTR* pbsFilePath);
+        [propget, helpstring("property Source")]
+        HRESULT _stdcall Source([out, retval] BSTR* pbsSystemId);
+        [propget, helpstring("property SourcePersistenceId")]
+        HRESULT _stdcall SourcePersistenceId([out, retval] BSTR* pbsPersistenceId);
+        [propget, helpstring("property NumberOfCopies")]
+        HRESULT _stdcall NumberOfCopies([out, retval] int* pNumCopies);
+        [propget, helpstring("property TransformOriginal")]
+        HRESULT _stdcall TransformOriginal([out, retval] VARIANT_BOOL* pvbValue);
+        [propget, helpstring("property UnitSystem")]
+        HRESULT _stdcall UnitSystem([out, retval] eUnitType* pUnitSystem);
+        [propget, helpstring("property SourceType")]
+        HRESULT _stdcall SourceType([out, retval] ModelAssemblyInputSourceType* pType);
+        [propget, helpstring("property LastAssemblyVersion")]
+        HRESULT _stdcall LastAssemblyVersion([out, retval] int* pVersion);
+        [propget, helpstring("property FileIdentifier")]
+        HRESULT _stdcall FileIdentifier([out, retval] BSTR* pbsFileIdentifier);
+        HRESULT _stdcall GetModelAssemblyIdMapping(
+                        [in] int copyIdx, 
+                        [out, retval] IModelAssemblyIdMapping** ppIModelAssemblyMapping);
+        HRESULT _stdcall GetTransform(
+                        [in] eUnitType UnitSystem, 
+                        [in] int copyIdx, 
+                        [out, retval] IAnsTransformColl** pTransformColl);
+        HRESULT _stdcall CleanModelAssemblyIdMappings();
+    };
+
+    typedef enum {
+        kUnitUnknown = 0xffffffff,
+        kUnitMKS = 0,
+        kUnitCGS = 1,
+        kUnitNMM = 2,
+        kUnitBFT = 3,
+        kUnitBIN = 4,
+        kUnitUKS = 9,
+        kUnitNKS = 10
+    } eUnitType;
+
+    typedef enum {
+        AcmoPmdbPair = 1,
+        MechDb = 2,
+        FromMechanical = 4
+    } ModelAssemblyInputSourceType;
+
+    [
+      odl,
+      uuid(E81C9943-377A-4F79-8642-1C0837C099F4),
+      helpstring("IModelAssemblyIdMapping Interface"),
+      nonextensible
+    ]
+    interface IModelAssemblyIdMapping : IDispatch {
+        HRESULT _stdcall GetNewPartId(
+                        [in] unsigned int iOldPartId, 
+                        [out, retval] unsigned int* piNewPartId);
+        HRESULT _stdcall GetNewReferenceId(
+                        [in] unsigned int iOldRefId, 
+                        [out, retval] unsigned int* piNewRefId);
+        HRESULT _stdcall GetNewNodeId(
+                        [in] unsigned int iOldNodeId, 
+                        [out, retval] unsigned int* piNewNodeId);
+        HRESULT _stdcall GetNewElementId(
+                        [in] unsigned int iOldElementId, 
+                        [out, retval] unsigned int* piNewElementId);
+        HRESULT _stdcall GetPartIdMapAsArray(
+                        [out] int* pNumIds, 
+                        [out] unsigned int** ppOldIds, 
+                        [out] unsigned int** ppNewIds);
+        HRESULT _stdcall GetRefIdMapAsArray(
+                        [out] int* pNumIds, 
+                        [out] unsigned int** ppOldIds, 
+                        [out] unsigned int** ppNewIds);
+        HRESULT _stdcall GetNodeIdMapAsArray(
+                        [out] int* pNumIds, 
+                        [out] int** ppOldIds, 
+                        [out] int** ppNewIds);
+        HRESULT _stdcall GetElementIdMapAsArray(
+                        [out] int* pNumIds, 
+                        [out] int** ppOldIds, 
+                        [out] int** ppNewIds);
+    };
+
+    [
+      odl,
+      uuid(D510A8FF-10B9-485C-AD03-8CCA74A617B5),
+      dual,
+      oleautomation
+    ]
+    interface IAnsTransformColl : IDispatch {
+        [id(0x00000001), propget, helpstring("property Count")]
+        HRESULT Count([out, retval] unsigned int* plCount);
+        [id(0x00000002), helpstring("method Add")]
+        HRESULT AddTransform(IAnsTransform* piReference);
+        [id(00000000), propget, helpstring("property Item")]
+        HRESULT Item(
+                        [in] unsigned int lNum, 
+                        [out, retval] IAnsTransform** ppiItem);
+        [id(0xfffffffc), propget, helpstring("property NewEnum")]
+        HRESULT _NewEnum([out, retval] IUnknown** ppunkEnum);
+        [id(0x0000000a), helpstring("method Clear")]
+        HRESULT Clear();
+        [id(0x00000007), helpstring("method Remove")]
+        HRESULT RemoveAt([in] unsigned int ulItemIdx);
+    };
+
+    [
+      odl,
+      uuid(D41DBAFC-C242-4BCF-8FB1-CBDE3A268597),
+      helpstring("IAnsTransform Interface"),
+      dual,
+      oleautomation
+    ]
+    interface IAnsTransform : IDispatch {
+        [id(0x00000001), propget, helpstring("property At")]
+        HRESULT At(
+                        [in] int row, 
+                        [in] int col, 
+                        [out, retval] double* pVal);
+        [id(0x00000001), propput, helpstring("property At")]
+        HRESULT At(
+                        [in] int row, 
+                        [in] int col, 
+                        [in] double pVal);
+        [id(0x00000002), propget, helpstring("property Doubles")]
+        HRESULT Doubles([out, retval] IAnsDoubleColl** ppiColl);
+        [id(0x00000003), helpstring("method transformXYZ")]
+        HRESULT TransformXYZ(
+                        [in] double dX, 
+                        [in] double dY, 
+                        [in] double dZ, 
+                        [in] VARIANT_BOOL bUseTranslation, 
+                        [out, retval] IAnsXYZ** ppiPoint);
+        [id(0x00000004), helpstring("method PreMultiply")]
+        HRESULT PreMultiply(
+                        [in] IAnsTransform* piOther, 
+                        [out, retval] IAnsTransform** piProduct);
+        [id(0x00000005), helpstring("method PostMultiply")]
+        HRESULT PostMultiply(
+                        [in] IAnsTransform* piOther, 
+                        [out, retval] IAnsTransform** piProduct);
+        [id(0x00000006), helpstring("method InitSimpleTransform")]
+        HRESULT InitSimpleTransform(
+                        [in] eAnsTransformType eType, 
+                        [in] eAnsCSysData eAxis, 
+                        [in] VARIANT vtVal);
+        [id(0x00000007), helpstring("method GetSimpleTransform")]
+        HRESULT GetSimpleTransform(
+                        [out] eAnsTransformType* eType, 
+                        [out] eAnsCSysData* eAxis, 
+                        [out] VARIANT* vtVal);
+        [id(0x00000008), helpstring("method GetSimpleTransform")]
+        HRESULT Clone([out, retval] IAnsTransform** pVal);
+    };
+
+    [
+      odl,
+      uuid(5EFA648B-7E3A-4DCD-988F-55A0011407A2),
+      helpstring("IAnsDoubleColl Interface"),
+      dual,
+      oleautomation
+    ]
+    interface IAnsDoubleColl : IDispatch {
+        [id(0x00000001), propget, helpstring("property Count")]
+        HRESULT Count([out, retval] unsigned int* plCount);
+        [id(00000000), propget, helpstring("property Item")]
+        HRESULT Item(
+                        [in] unsigned int lNum, 
+                        [out, retval] double* pdVal);
+        [id(0xfffffffc), propget, helpstring("property NewEnum")]
+        HRESULT _NewEnum([out, retval] IUnknown** ppunkEnum);
+        [id(0x00000002), helpstring("method Add")]
+        HRESULT Add([in] double dNewVal);
+        [id(0x00000003), helpstring("method Clear")]
+        HRESULT Clear();
+        [id(0x00000004), propget, helpstring("Returns index of first match from collection")]
+        HRESULT FindItem(
+                        [in] double bszItem, 
+                        [out, retval] unsigned int* pVal);
+    };
+
+    [
+      odl,
+      uuid(CE17F643-DD9B-4AA5-AC47-05CE65207907),
+      helpstring("IAnsXYZ Interface"),
+      dual,
+      oleautomation
+    ]
+    interface IAnsXYZ : IDispatch {
+        [id(0x00000001), propget]
+        HRESULT X([out, retval] double* pVal);
+        [id(0x00000001), propput]
+        HRESULT X([in] double pVal);
+        [id(0x00000002), propget]
+        HRESULT Y([out, retval] double* pVal);
+        [id(0x00000002), propput]
+        HRESULT Y([in] double pVal);
+        [id(0x00000003), propget]
+        HRESULT Z([out, retval] double* pVal);
+        [id(0x00000003), propput]
+        HRESULT Z([in] double pVal);
+        [id(0x00000004), helpstring("Gets x, y, z as array")]
+        HRESULT GetAsArray(double XYZ[3]);
+        [id(0x00000005), helpstring("Puts x, y, z as array")]
+        HRESULT PutAsArray(double XYZ[3]);
+    };
+
+    typedef enum {
+        kAnsTransformTypeCustom = 0,
+        kAnsTransformTypeOffset = 1,
+        kAnsTransformTypeRotation = 2,
+        kAnsTransformTypeFlip = 3
+    } eAnsTransformType;
+
+    typedef enum {
+        kAnsCSysOrigin = 0,
+        kAnsCSysXAxis = 1,
+        kAnsCSysYAxis = 2,
+        kAnsCSysZAxis = 3,
+        kAnsCSysNegXAxis = 4,
+        kAnsCSysNegYAxis = 5,
+        kAnsCSysNegZAxis = 6
+    } eAnsCSysData;
+
+    [
+      odl,
+      uuid(65894D03-8E60-4DC5-875E-069CAE774611),
+      helpstring("IModelAssemblyOptions Interface"),
+      nonextensible
+    ]
+    interface IModelAssemblyOptions : IDispatch {
+        [propget, helpstring("property UnitSystem")]
+        HRESULT _stdcall UnitSystem([out, retval] eUnitType* pUnitSystem);
+        [propget, helpstring("property GroupObjectsBySource")]
+        HRESULT _stdcall GroupObjectsBySource([out, retval] VARIANT_BOOL* pvbVal);
+        [propget, helpstring("property PreviewMode")]
+        HRESULT _stdcall PreviewMode([out, retval] VARIANT_BOOL* pvbVal);
+    };
+
+    [
+      odl,
+      uuid(3B4CD280-9048-4D95-A36B-227383FC86DE),
+      dual,
+      oleautomation
+    ]
+    interface IAnsProgress : IDispatch {
+        [id(0x00000032), helpstring("property SetProgress")]
+        HRESULT SetProgress(
+                        [in] unsigned int uiProgress, 
+                        BSTR uiMessage, 
+                        unsigned int uiSubProgress, 
+                        BSTR uiSubMessage);
+        [id(0x00000001), propget, helpstring("property Progress")]
+        HRESULT Progress([out, retval] unsigned int* pVal);
+        [id(0x00000002), propget, helpstring("property Message ")]
+        HRESULT Message([out, retval] BSTR* pVal);
+        [id(0x00000003), propget, helpstring("property SubProgress")]
+        HRESULT SubProgress([out, retval] unsigned int* pVal);
+        [id(0x00000004), propget, helpstring("property Message ")]
+        HRESULT SubMessage([out, retval] BSTR* pVal);
+        [id(0x00000014), helpstring("method Update")]
+        HRESULT Update();
+        [id(0x00000015), helpstring("method Stop")]
+        HRESULT Stop();
+        [id(0x0000001e), propget, helpstring("property OnProgress")]
+        HRESULT OnProgress([out, retval] IAnsDelegate** pVal);
+        [id(0x0000001f), propget, helpstring("property OnStop")]
+        HRESULT OnStop([out, retval] IAnsDelegate** pVal);
+        [id(0x00000020), propget, helpstring("property StopWaitHandle")]
+        HRESULT StopWaitHandle([out, retval] void** pVal);
+        [id(0x00000016), helpstring("method Interrupt")]
+        HRESULT Interrupt();
+        [id(0x00000021), propget, helpstring("property OnInterrupt")]
+        HRESULT OnInterrupt([out, retval] IAnsDelegate** pVal);
+        [id(0x00000022), propget, helpstring("property ProgressHandle")]
+        HRESULT ProgressHandle([out, retval] void** pVal);
+        [id(0x00000023)]
+        HRESULT ClearReferences();
+        [id(0x00000024)]
+        HRESULT AddReference(
+                        [in] unsigned int partId, 
+                        [in] unsigned int topoId);
+        [id(0x00000025)]
+        HRESULT GetNumReferences([out, retval] unsigned int* numReferences);
+        [id(0x00000026)]
+        HRESULT GetReferencePart(
+                        [in] int index, 
+                        [out, retval] unsigned int* part);
+        [id(0x00000027)]
+        HRESULT GetReferenceTopo(
+                        [in] int index, 
+                        [out, retval] unsigned int* topo);
+        [id(0x00000028), propget]
+        HRESULT Status([out, retval] BSTR* Status);
+        [id(0x00000028), propput]
+        HRESULT Status([in] BSTR Status);
+    };
+
+    [
+      odl,
+      uuid(A567F734-24AA-4AFD-A262-3E2338B0420D),
+      helpstring("IAnsIDispColl Interface"),
+      dual,
+      nonextensible,
+      oleautomation
+    ]
+    interface IAnsIDispColl : IDispatch {
+        [id(0x00000001), propget, helpstring("property Count")]
+        HRESULT Count([out, retval] unsigned int* plCount);
+        [id(00000000), propget, helpstring("property Item")]
+        HRESULT Item(
+                        [in] unsigned int lNum, 
+                        [out, retval] IDispatch** pdVal);
+        [id(0xfffffffc), propget, helpstring("property NewEnum")]
+        HRESULT _NewEnum([out, retval] IUnknown** ppunkEnum);
+        [id(0x00000002), helpstring("method Add")]
+        HRESULT Add([in] IDispatch* dNewVal);
+        [id(0x00000003), helpstring("method Clear")]
+        HRESULT Clear();
+    };
+
+    [
+      odl,
+      uuid(943FFA74-F8CF-4BE0-80F8-AE5FFB385E53),
+      helpstring("IAnsIntColl Interface"),
+      dual,
+      nonextensible,
+      oleautomation
+    ]
+    interface IAnsIntColl : IDispatch {
+        [id(0x00000001), propget, helpstring("property Count")]
+        HRESULT Count([out, retval] unsigned int* plCount);
+        [id(00000000), propget, helpstring("property Item")]
+        HRESULT Item(
+                        [in] unsigned int lNum, 
+                        [out, retval] int* pdVal);
+        [id(0xfffffffc), propget, helpstring("property NewEnum")]
+        HRESULT _NewEnum([out, retval] IUnknown** ppunkEnum);
+        [id(0x00000002), helpstring("method Add")]
+        HRESULT Add([in] int iNewVal);
+        [id(0x00000003), propget, helpstring("Returns index of first match from collection")]
+        HRESULT FindItem(
+                        [in] int bszItem, 
+                        [out, retval] unsigned int* pVal);
+        [id(0x00000004), helpstring("method Clear")]
+        HRESULT Clear();
+    };
+
+    typedef enum {
+        SetRigidTransforms = 1,
+        SetRigidTransformsAndPreview = 2,
+        SetRigidTransformsAndRefresh = 3
+    } ModelAssemblyAlignmentAction;
+
+    [
+      odl,
+      uuid(EF958465-94E3-4CAB-8676-A78F1E1C1E74),
+      helpstring("IDSSimulationAddinCaller Interface"),
+      dual,
+      oleautomation
+    ]
+    interface IDSAlbionSimAddinCaller : IDispatch {
+        [id(0x00000001), propget, helpstring("property OnActivateParametersSummaryView")]
+        HRESULT OnActivateParametersSummaryView([out, retval] IAnsDelegate** ppIAnsDelegate);
+        [id(0x00000002), propget, helpstring("property OnActivateEDAWorkspace")]
+        HRESULT OnActivateEDAWorkspace([out, retval] IAnsDelegate** ppIAnsDelegate);
+        [id(0x00000003), propget, helpstring("property OnCaptionChanged")]
+        HRESULT OnCaptionChanged([out, retval] IAnsDelegate** ppIAnsDelegate);
+        [id(0x00000004), propget, helpstring("property OnEnvironmentDuplicated")]
+        HRESULT OnEnvironmentDuplicated([out, retval] IAnsDelegate** ppIAnsDelegate);
+        [id(0x00000005), propget, helpstring("property OnFileSaveProject")]
+        HRESULT OnFileSaveProject([out, retval] IAnsDelegate** ppIAnsDelegate);
+        [id(0x00000006), propget, helpstring("property OnExternalLoadGroupDeleted")]
+        HRESULT OnExternalLoadGroupDeleted([out, retval] IAnsDelegate** ppIAnsDelegate);
+        [id(0x00000007), propget, helpstring("property OnSolve")]
+        HRESULT OnSolve([out, retval] IAnsDelegate** ppIAnsDelegate);
+        [id(0x00000008), propget, helpstring("property OnUpdateMeshCell")]
+        HRESULT OnUpdateMeshCell([out, retval] IAnsDelegate** ppIAnsDelegate);
+    };
+
+    [
+      odl,
+      uuid(FE9D0C38-71D4-4367-94CA-EF5FB5202A88),
+      helpstring("IDSUserSettinge Interface"),
+      dual,
+      oleautomation
+    ]
+    interface IDSUserSettings : IDispatch {
+        [id(0x00000001), helpstring("method AddSessionVariable")]
+        HRESULT AddSessionVariable(
+                        [in] BSTR Key, 
+                        [in] BSTR Value);
+        [id(0x00000002), helpstring("method AddSessionVariable")]
+        HRESULT DeleteSessionVariable([in] BSTR Key);
+        [id(0x00000003), helpstring("method GetSessionVariableKey")]
+        HRESULT GetSessionVariableKey(
+                        [in] int index, 
+                        [out, retval] BSTR* Key);
+        [id(0x00000004), helpstring("method GetSessionVariableValue")]
+        HRESULT GetSessionVariableValue(
+                        [in] int index, 
+                        [out, retval] BSTR* Value);
+        [id(0x00000005), helpstring("method GetSessionVariableType")]
+        HRESULT GetSessionVariableType(
+                        [in] int index, 
+                        [out, retval] int* readtype);
+    };
+
+    [
+      odl,
+      uuid(07DD7380-2F33-4C8B-A18C-497AE7A8D472),
+      helpstring("IAnsAttributeEventArgs Interface"),
+      dual,
+      oleautomation
+    ]
+    interface IAnsAttributeEventArgs : IDispatch {
+        [id(0x00000001), propget, helpstring("property Name")]
+        HRESULT Name([out, retval] BSTR* pVal);
+        [id(0x00000001), propput, helpstring("property Name")]
+        HRESULT Name([in] BSTR pVal);
+        [id(0x00000002), propget, helpstring("property ParamId")]
+        HRESULT ParamId([out, retval] BSTR* pVal);
+        [id(0x00000002), propput, helpstring("property ParamId")]
+        HRESULT ParamId([in] BSTR pVal);
+        [id(0x00000003), propget, helpstring("property Value")]
+        HRESULT Value([out, retval] VARIANT* pVal);
+        [id(0x00000003), propput, helpstring("property Value")]
+        HRESULT Value([in] VARIANT pVal);
+    };
+
+    [
+      odl,
+      uuid(6C78B083-925B-400A-9433-5B91FB52DB10),
+      helpstring("IDSAllowBusyAPICallEventArgs Interface"),
+      dual,
+      oleautomation
+    ]
+    interface IDSAllowBusyAPICallEventArgs : IDispatch {
+        [id(0x00000001), propget, helpstring("property AllowBusyAPICall")]
+        HRESULT AllowBusyAPICall([out, retval] VARIANT_BOOL* pVal);
+        [id(0x00000001), propput, helpstring("property AllowBusyAPICall")]
+        HRESULT AllowBusyAPICall([in] VARIANT_BOOL pVal);
+    };
+
+    [
+      odl,
+      uuid(266F2A01-14DE-4558-9877-C880B6461E33),
+      helpstring("IAnsCreateParameterEventArgs Interface"),
+      dual,
+      oleautomation
+    ]
+    interface IAnsCreateParameterEventArgs : IDispatch {
+        [id(0x00000001), propget, helpstring("property Name")]
+        HRESULT Name([out, retval] BSTR* pVal);
+        [id(0x00000001), propput, helpstring("property Name")]
+        HRESULT Name([in] BSTR pVal);
+        [id(0x00000002), propget, helpstring("property ParamId")]
+        HRESULT ParamId([out, retval] BSTR* pVal);
+        [id(0x00000002), propput, helpstring("property ParamId")]
+        HRESULT ParamId([in] BSTR pVal);
+        [id(0x00000003), propget, helpstring("property FolderDSId")]
+        HRESULT FolderDSId([out, retval] int* pVal);
+        [id(0x00000003), propput, helpstring("property FolderDSId")]
+        HRESULT FolderDSId([in] int pVal);
+        [id(0x00000004), propget, helpstring("property Access")]
+        HRESULT Access([out, retval] int* pVal);
+        [id(0x00000004), propput, helpstring("property Access")]
+        HRESULT Access([in] int pVal);
+        [id(0x00000005), propget, helpstring("property Type")]
+        HRESULT Type([out, retval] int* pVal);
+        [id(0x00000005), propput, helpstring("property Type")]
+        HRESULT Type([in] int pVal);
+        [id(0x00000006), propget, helpstring("property Value")]
+        HRESULT Value([out, retval] VARIANT* pVal);
+        [id(0x00000006), propput, helpstring("property Value")]
+        HRESULT Value([in] VARIANT pVal);
+        [id(0x00000007), propget, helpstring("property UnitString")]
+        HRESULT UnitString([out, retval] BSTR* pVal);
+        [id(0x00000007), propput, helpstring("property UnitString")]
+        HRESULT UnitString([in] BSTR pVal);
+        [id(0x00000008), propget, helpstring("property QuantityName")]
+        HRESULT QuantityName([out, retval] BSTR* pVal);
+        [id(0x00000008), propput, helpstring("property QuantityName")]
+        HRESULT QuantityName([in] BSTR pVal);
+        [id(0x00000009), propget, helpstring("property Expression")]
+        HRESULT Expression([out, retval] BSTR* pVal);
+        [id(0x00000009), propput, helpstring("property Expression")]
+        HRESULT Expression([in] BSTR pVal);
+        [id(0x0000000a), propget, helpstring("property ExpressionID")]
+        HRESULT ExpressionID([out, retval] BSTR* pVal);
+        [id(0x0000000a), propput, helpstring("property ExpressionID")]
+        HRESULT ExpressionID([in] BSTR pVal);
+        [id(0x0000000b), propget, helpstring("property UnitSystemName")]
+        HRESULT UnitSystemName([out, retval] BSTR* pVal);
+        [id(0x0000000b), propput, helpstring("property UnitSystemName")]
+        HRESULT UnitSystemName([in] BSTR pVal);
+    };
+
+    [
+      odl,
+      uuid(A4352950-AF69-4162-A205-FF55F1ACD90F),
+      helpstring("IAnsCreateCustomParameterEventArgs Interface"),
+      dual,
+      oleautomation
+    ]
+    interface IAnsCreateCustomParameterEventArgs : IDispatch {
+        [id(0x00000001), propget, helpstring("property Name")]
+        HRESULT Name([out, retval] BSTR* pVal);
+        [id(0x00000001), propput, helpstring("property Name")]
+        HRESULT Name([in] BSTR pVal);
+        [id(0x00000002), propget, helpstring("property ParamId")]
+        HRESULT ParamId([out, retval] BSTR* pVal);
+        [id(0x00000002), propput, helpstring("property ParamId")]
+        HRESULT ParamId([in] BSTR pVal);
+        [id(0x00000003), propget, helpstring("property FolderDSId")]
+        HRESULT FolderDSId([out, retval] int* pVal);
+        [id(0x00000003), propput, helpstring("property FolderDSId")]
+        HRESULT FolderDSId([in] int pVal);
+        [id(0x00000004), propget, helpstring("property Access")]
+        HRESULT Access([out, retval] int* pVal);
+        [id(0x00000004), propput, helpstring("property Access")]
+        HRESULT Access([in] int pVal);
+        [id(0x00000005), propget, helpstring("property Type")]
+        HRESULT Type([out, retval] int* pVal);
+        [id(0x00000005), propput, helpstring("property Type")]
+        HRESULT Type([in] int pVal);
+        [id(0x00000006), propget, helpstring("property Value")]
+        HRESULT Value([out, retval] VARIANT* pVal);
+        [id(0x00000006), propput, helpstring("property Value")]
+        HRESULT Value([in] VARIANT pVal);
+        [id(0x00000007), propget, helpstring("property UnitString")]
+        HRESULT UnitString([out, retval] BSTR* pVal);
+        [id(0x00000007), propput, helpstring("property UnitString")]
+        HRESULT UnitString([in] BSTR pVal);
+        [id(0x00000008), propget, helpstring("property QuantityName")]
+        HRESULT QuantityName([out, retval] BSTR* pVal);
+        [id(0x00000008), propput, helpstring("property QuantityName")]
+        HRESULT QuantityName([in] BSTR pVal);
+        [id(0x00000009), propget, helpstring("property Expression")]
+        HRESULT Expression([out, retval] BSTR* pVal);
+        [id(0x00000009), propput, helpstring("property Expression")]
+        HRESULT Expression([in] BSTR pVal);
+        [id(0x0000000a), propget, helpstring("property ExpressionID")]
+        HRESULT ExpressionID([out, retval] BSTR* pVal);
+        [id(0x0000000a), propput, helpstring("property ExpressionID")]
+        HRESULT ExpressionID([in] BSTR pVal);
+        [id(0x0000000b), propget, helpstring("property UnitSystemName")]
+        HRESULT UnitSystemName([out, retval] BSTR* pVal);
+        [id(0x0000000b), propput, helpstring("property UnitSystemName")]
+        HRESULT UnitSystemName([in] BSTR pVal);
+        [id(0x0000000c), propget, helpstring("property Handled")]
+        HRESULT Handled([out, retval] VARIANT_BOOL* pVal);
+        [id(0x0000000c), propput, helpstring("property Handled")]
+        HRESULT Handled([in] VARIANT_BOOL pVal);
+    };
+
+    [
+      odl,
+      uuid(7874D775-2643-44E2-BAB6-27A2FF1818CF),
+      helpstring("IAnsCreateUseCustomParameterInputEventArgs Interface"),
+      dual,
+      oleautomation
+    ]
+    interface IAnsCreateUseCustomParameterInputEventArgs : IDispatch {
+        [id(0x00000001), propget, helpstring("property ParamObj")]
+        HRESULT ParamObj([out, retval] IDispatch** pVal);
+        [id(0x00000001), propput, helpstring("property ParamObj")]
+        HRESULT ParamObj([in] IDispatch* pVal);
+    };
+
+    [
+      odl,
+      uuid(B2380B3A-B4B5-46FB-84A1-4894D949DEE5),
+      helpstring("IDSRemoteJobInformationEventArgs Interface"),
+      dual,
+      oleautomation
+    ]
+    interface IDSRemoteJobInformationEventArgs : IDispatch {
+        [id(0x00000001), propget, helpstring("property JobId")]
+        HRESULT JobId([out, retval] BSTR* pVal);
+        [id(0x00000002), propget, helpstring("property DSId")]
+        HRESULT dsId([out, retval] int* pVal);
+        [id(0x00000003), propget, helpstring("property SolveManager")]
+        HRESULT SolveManager([out, retval] BSTR* pVal);
+    };
+
+    [
+      odl,
+      uuid(F388A964-A646-4B8B-A570-654263B56216),
+      helpstring("IDSModelAssemblyUpdateRigidTransformsEventArgs Interface"),
+      dual,
+      oleautomation
+    ]
+    interface IDSModelAssemblyUpdateRigidTransformsEventArgs : IDispatch {
+        [id(0x00000001), propget, helpstring("Sources")]
+        HRESULT Sources([out, retval] IAnsBSTRColl** ppiSources);
+        [id(0x00000002), helpstring("Initialize")]
+        HRESULT Initialize([in] ModelAssemblyAlignmentAction alignmentAction);
+        [id(0x00000003), helpstring("AddTransform")]
+        HRESULT AddTransform(
+                        [in] BSTR bsSource, 
+                        [in] IAnsDoubleColl* piTranslation, 
+                        [in] IAnsDoubleColl* piRotation, 
+                        [in] VARIANT_BOOL vbTransformOriginal);
+        [id(0x00000004), helpstring("GetTransform")]
+        HRESULT GetTransform(
+                        [in] BSTR bsSource, 
+                        [out] IAnsDoubleColl** ppiTranslation, 
+                        [out] IAnsDoubleColl** piRotation, 
+                        [out] VARIANT_BOOL* pvbTransformOriginal);
+        [id(0x00000005), propget, helpstring("AlignmentAction")]
+        HRESULT alignmentAction([out] ModelAssemblyAlignmentAction* pAction);
+    };
+
+    [
+      uuid(43B4848E-2E47-4586-ACEE-1F2A7F934CD2),
+      helpstring("DSAppService Class")
+    ]
+    coclass DSAppService {
+        [default] interface IWBApplet;
+        interface IWBApplet2;
+        interface ISimulationFilterConsumer;
+        interface IWBACLEProvider;
+    };
+
+    [
+      odl,
+      uuid(E3380BDC-887E-4337-BA02-83B9F62EB0DD),
+      helpstring("IWBApplet Interface"),
+      dual,
+      oleautomation
+    ]
+    interface IWBApplet : IDispatch {
+        [id(0x00000001), helpstring("method OnInitialize")]
+        HRESULT OnInitialize(
+                        [in] IDispatch* pWB, 
+                        [in] BSTR bsRegPath, 
+                        [in] BSTR bsLoadFile, 
+                        [in] long bHideUI, 
+                        [in] IWBAppletFrame* pFrame);
+        [id(0x00000002), helpstring("method OnTerminate")]
+        HRESULT OnTerminate();
+        [id(0x00000003), helpstring("method OnActivate")]
+        HRESULT OnActivate();
+        [id(0x00000004), helpstring("method OnDeactivate")]
+        HRESULT OnDeactivate();
+        [id(0x00000005), propget, helpstring("property App")]
+        HRESULT App([out, retval] IDispatch** pVal);
+        [id(0x00000006), helpstring("method CanTerminate")]
+        HRESULT CanTerminate([in, out] VARIANT_BOOL* bCanShutdown);
+    };
+
+    [
+      odl,
+      uuid(42126CC0-357C-4AB4-B47C-16EBA1409528),
+      helpstring("IWBAppletFrame Interface"),
+      dual,
+      oleautomation
+    ]
+    interface IWBAppletFrame : IDispatch {
+        [id(0x00000001), propget, helpstring("property Panes")]
+        HRESULT Panes([out, retval] IWBAppletFramePanes** pPanesCollection);
+        [id(0x00000002), propget, helpstring("property UIHost")]
+        HRESULT UIHost([out, retval] IDispatch** pVal);
+        [id(0x00000002), propput, helpstring("property UIHost")]
+        HRESULT UIHost([in] IDispatch* pVal);
+        [id(0x00000003), propget, helpstring("property hWnd")]
+        HRESULT hWnd([out, retval] uint64* pVal);
+        [id(0x00000004), helpstring("method CreateControl")]
+        HRESULT CreateControl(
+                        [in] int paneId, 
+                        [in] BSTR controlStr, 
+                        [in] int wStyle, 
+                        [in] int wStyleEx, 
+                        [in] IDispatch* pUIHandler);
+        [id(0x00000005), propget, helpstring("property ControlUnknown")]
+        HRESULT ControlUnknown(
+                        [in] int paneIndex, 
+                        [out, retval] IUnknown** ppControl);
+        [id(0x00000006), propget, helpstring("property ControlDispatch")]
+        HRESULT ControlDispatch(
+                        [in] int paneIndex, 
+                        [out, retval] IDispatch** ppControlDisp);
+        [id(0x00000007), propget, helpstring("property Pane")]
+        HRESULT Pane([out, retval] IDispatch** pVal);
+        [id(0x00000008), helpstring("splits pFrameDisp and returns the new frame, pNewSplitPane (splitType 0=horizontal, 1=vertical), (percentSplit, 50=split down the middle, 25=split at 1/4, etc.)")]
+        HRESULT Split(
+                        IDispatch* pFrameDisp, 
+                        int splitType, 
+                        [in] int percentSplit, 
+                        [in] VARIANT_BOOL upperTabs, 
+                        [in] VARIANT_BOOL bFloating, 
+                        [out, retval] IDispatch** pNewSplitPane);
+        [id(0x00000009), helpstring("Removes the pane")]
+        HRESULT Remove(IDispatch* pFrameDisp);
+        [id(0x0000000a), helpstring("Hides/Shows the pane")]
+        HRESULT Show(
+                        IDispatch* pFrameDisp, 
+                        int hideShow);
+        [id(0x0000000b), helpstring("Set the min size of the frame")]
+        HRESULT SetMinSize(
+                        [in] int width, 
+                        [in] int height);
+        [id(0x0000000c), helpstring("Update saved window positions (after all splitting has occured!)")]
+        HRESULT InitWindowPosFromRegistry();
+        [id(0x0000000d), helpstring("Restore the original window layout")]
+        HRESULT RestoreOriginalWindowPos();
+        [id(0x0000000e), helpstring("Save a layout to be restored when RestoreOriginalWindowPos is called (only needs called when InitWindowPosFromRegistry is not used")]
+        HRESULT SaveLayoutInMemory();
+        [id(0x0000000f), propget, helpstring("Get the min width of the frame")]
+        HRESULT minWidth([out, retval] int* pVal);
+        [id(0x00000010), propget, helpstring("Get the min height of the frame")]
+        HRESULT minHeight([out, retval] int* pVal);
+        [id(0x00000011)]
+        HRESULT CreatePane(
+                        [in] int position, 
+                        [in] double widthRel, 
+                        [in] double heightRel, 
+                        [in] VARIANT_BOOL bFloat, 
+                        [in] IDispatch* pPaneNeighbor, 
+                        [out, retval] IDispatch** pNewSplitPane);
+    };
+
+    [
+      odl,
+      uuid(65152A42-960E-465B-88B3-AE7BB24D61D1),
+      helpstring("IWBAppletFramePanes Interface"),
+      dual,
+      oleautomation
+    ]
+    interface IWBAppletFramePanes : IDispatch {
+        [id(0x00000001), propget]
+        HRESULT Count([out, retval] int* pnCount);
+        [id(00000000), helpstring("method Item")]
+        HRESULT Item(
+                        [in] VARIANT i_vntIndex, 
+                        [out, retval] IWBAppletFramePane** ppPane);
+        [id(0xfffffffc), propget]
+        HRESULT _NewEnum([out, retval] IUnknown** ppEnum);
+    };
+
+    [
+      odl,
+      uuid(054CF2A6-143F-4526-9DAA-AEBDCCA06B18),
+      helpstring("IWBAppletFramePane Interface"),
+      dual,
+      oleautomation
+    ]
+    interface IWBAppletFramePane : IDispatch {
+        [id(0x00000001), helpstring("Loads a control called controlStr and returns it")]
+        HRESULT LoadControl(
+                        [in] BSTR controlStr, 
+                        [in] IDispatch* pIBrowserUIHandler, 
+                        [out, retval] IDispatch** pIControl);
+        [id(0x00000002), propget, helpstring("Gets the ID of the window")]
+        HRESULT ID([out, retval] int* windowID);
+        [id(0x00000003), propput, helpstring("Puts the pane name")]
+        HRESULT PaneName([in] BSTR pbstrPaneName);
+        [id(0x00000003), propget, helpstring("Puts the pane name")]
+        HRESULT PaneName([out, retval] BSTR* pbstrPaneName);
+        [id(0x00000006), propget, helpstring("property CaptionVisible")]
+        HRESULT CaptionVisible([out, retval] VARIANT_BOOL* pVal);
+        [id(0x00000006), propput, helpstring("property CaptionVisible")]
+        HRESULT CaptionVisible([in] VARIANT_BOOL pVal);
+        [id(0x00000007), propget, helpstring("property CloseButtonVisible")]
+        HRESULT CloseButtonVisible([out, retval] VARIANT_BOOL* pVal);
+        [id(0x00000007), propput, helpstring("property CloseButtonVisible")]
+        HRESULT CloseButtonVisible([in] VARIANT_BOOL pVal);
+        [id(0x00000008), propget, helpstring("property Visible")]
+        HRESULT Visible([out, retval] VARIANT_BOOL* pVal);
+        [id(0x00000008), propput, helpstring("property Visible")]
+        HRESULT Visible([in] VARIANT_BOOL pVal);
+        [id(0x00000009), helpstring("method SetMinSize")]
+        HRESULT SetMinSize(
+                        [in] int minWidth, 
+                        [in] int minHeight);
+        [id(0x0000000a), helpstring("method CreateTabCtrl")]
+        HRESULT CreateTabCtrl();
+        [id(0x0000000b), propget, helpstring("property TabCtrl")]
+        HRESULT TabCtrl([out, retval] IDispatch** ppIDisp);
+        [id(0x0000000c), propget, helpstring("property ControlUnknown")]
+        HRESULT ControlUnknown([out, retval] IUnknown** ppControlUnk);
+        [id(0x0000000d), propput, helpstring("property Transient")]
+        HRESULT Transient([in] VARIANT_BOOL bTrans);
+        [id(0x0000000d), propget, helpstring("property Transient")]
+        HRESULT Transient([out, retval] VARIANT_BOOL* bTrans);
+        [id(0x0000000e), propget, helpstring("property CommandContainer")]
+        HRESULT CommandContainer([out, retval] IDispatch** ppCmdCont);
+        [id(0x0000000f), propput, helpstring("property CommandContainerVisible")]
+        HRESULT CommandContainerVisible([in] VARIANT_BOOL pVal);
+        [id(0x0000000f), propget, helpstring("property CommandContainerVisible")]
+        HRESULT CommandContainerVisible([out, retval] VARIANT_BOOL* pVal);
+        [id(0x00000010), propget, helpstring("property Hidden")]
+        HRESULT Hidden([out, retval] VARIANT_BOOL* pVal);
+        [id(0x00000011), helpstring("method Select")]
+        HRESULT Select();
+        [id(0x00000012), propget, helpstring("property VisibilityMode")]
+        HRESULT VisibilityMode([out, retval] PaneVisibilityMode* mode);
+        [id(0x00000012), propput, helpstring("property VisibilityMode")]
+        HRESULT VisibilityMode([in] PaneVisibilityMode mode);
+        [id(0x00000018), propget]
+        HRESULT OnResize([out, retval] IAnsDelegate** ppDelegate);
+    };
+
+    typedef enum {
+        PVM_AlwaysHidden = 0,
+        PVM_AlwaysVisible = 1,
+        PVM_ProgramControlled = 2
+    } PaneVisibilityMode;
+
+    [
+      odl,
+      uuid(ACAF7F1F-B170-49EA-ABCA-89C54F390F53),
+      helpstring("IWBApplet2 Interface"),
+      dual,
+      oleautomation
+    ]
+    interface IWBApplet2 : IWBApplet {
+        [id(0x00000007), propget, helpstring("property WBProjectSystemInterop")]
+        HRESULT WBProjectSystemInterop([out, retval] IWBProjectSystemInterop** pWBPSI);
+        [id(0x00000008), propget, helpstring("property AppletRegistrationId")]
+        HRESULT AppletRegistrationId([out, retval] BSTR* pbsAppId);
+        [id(0x00000009), helpstring("method OnPreInitialize")]
+        HRESULT OnPreInitialize(
+                        [in] IDispatch* pWB, 
+                        [in] BSTR bsRegPath);
+    };
+
+    [
+      odl,
+      uuid(8C976BCD-CD08-4EB1-8FDB-95427C0D5619),
+      helpstring("IWBProjectSystemInterop Interface"),
+      dual,
+      oleautomation
+    ]
+    interface IWBProjectSystemInterop : IDispatch {
+        [id(0x00000001), helpstring("method OnInitializeStartPage")]
+        HRESULT OnInitializeStartPage([in] IDispatch* pPSHookDisp);
+        [id(0x00000002), helpstring("method IsDirty")]
+        HRESULT IsDirty(
+                        [in] IDispatch* pIWBProjectItem, 
+                        [out, retval] VARIANT_BOOL* pbYesNo);
+        [id(0x00000003), helpstring("method OnSave")]
+        HRESULT OnSave(
+                        [in] IDispatch* pIWBProjectItem, 
+                        VARIANT_BOOL bSaveCopy);
+        [id(0x00000004), helpstring("method itemDoubleClicked")]
+        HRESULT itemDoubleClicked(IDispatch* pIWBProjectItem);
+        [id(0x00000005), helpstring("method OnTaskCallback")]
+        HRESULT OnTaskCallback([in] unsigned int ulCallbackId);
+        [id(0x00000006), helpstring("method OnTaskVisibilityCallback")]
+        HRESULT OnTaskVisibilityCallback(
+                        [in] unsigned int ulCallbackId, 
+                        [out, retval] VARIANT_BOOL* pbDisplay);
+        [id(0x00000007), helpstring("method OnRecentFileClicked")]
+        HRESULT OnRecentFileClicked([in] BSTR bsFilePath);
+        [id(0x00000008), helpstring("method CleanUpApplet")]
+        HRESULT CleanUp();
+        [id(0x00000009), propget, helpstring("property ActiveFile")]
+        HRESULT ActiveFile([out, retval] IDispatch** ppFileListDisp);
+    };
+
+    [
+      odl,
+      uuid(FF06BD98-A290-4011-82BF-3A0E12FBB713),
+      helpstring("ISimulationFilterConsumer Interface"),
+      oleautomation
+    ]
+    interface ISimulationFilterConsumer : IUnknown {
+        [helpstring("method ApplySimulationFilterCollection.  Used to override the current ISimulationFilterCollection")]
+        HRESULT _stdcall ApplySimulationFilterCollection([in] IDispatch* ppDisp);
+    };
+
+    [
+      odl,
+      uuid(B7C091F1-E46E-4B44-9899-006ABBAB2717),
+      helpstring("IWBACLEProvider Interface")
+    ]
+    interface IWBACLEProvider : IUnknown {
+        [helpstring("method ACLERequest")]
+        HRESULT _stdcall ACLERequest();
+        [helpstring("method doInterfaceExists")]
+        HRESULT _stdcall doInterfaceExists();
+        [helpstring("method Fire_ReadModeLicenseTimeOut")]
+        HRESULT _stdcall Fire_ReadModeLicenseTimeOut();
+    };
+
+    [
+      uuid(A93D7F6E-139F-4041-90E2-730342A5A962),
+      helpstring("DSUserSettings Class")
+    ]
+    coclass DSUserSettings {
+        [default] interface IDSUserSettings;
+    };
+
+    [
+      uuid(2617798C-F08A-4AB4-98CE-E7429FEADB4D),
+      helpstring("DSAppObject Class"),
+      noncreatable
+    ]
+    coclass DSAppObject {
+        [default] interface IDSAppObject;
+    };
+
+    [
+      uuid(E0B6554C-F2E0-4143-AF1A-5ADAE28596E5),
+      helpstring("DSAlbionSimAddinCaller Class"),
+      noncreatable
+    ]
+    coclass DSAlbionSimAddinCaller {
+        [default] interface IDSAlbionSimAddinCaller;
+    };
+
+    [
+      uuid(852E083D-5F18-4714-846A-B34978115A0C),
+      helpstring("DSCaptionChangedEventArgs Class")
+    ]
+    coclass DSCaptionChangedEventArgs {
+        [default] interface IDSCaptionChangedEventArgs;
+    };
+
+    [
+      uuid(9199BEA8-076C-42AE-BBE0-C6CD1AA208E8),
+      helpstring("DSAddCADMaterialsEventArgs Class")
+    ]
+    coclass DSAddCADMaterialsEventArgs {
+        [default] interface IDSAddCADMaterialsEventArgs;
+    };
+
+    [
+      uuid(3427EC24-2998-410C-BE39-2CBE37001C18),
+      helpstring("DSEnvironmentDuplicatedEventArgs Class")
+    ]
+    coclass DSEnvironmentDuplicatedEventArgs {
+        [default] interface IDSEnvironmentDuplicatedEventArgs;
+    };
+
+    [
+      uuid(1C407E81-2DB6-48B6-A5A0-C1C11407913E),
+      helpstring("DSExternalLoadGroupDeletedEventArgs Class")
+    ]
+    coclass DSExternalLoadGroupDeletedEventArgs {
+        [default] interface IDSExternalLoadGroupDeletedEventArgs;
+    };
+
+    [
+      uuid(50BB0869-BAB8-4DFE-A097-7815C6D47598),
+      helpstring("AnsBeforeActionEventArgs Class")
+    ]
+    coclass AnsBeforeActionEventArgs {
+        [default] interface IAnsBeforeActionEventArgs;
+    };
+
+    [
+      uuid(2AD14F68-D7E8-4FAD-BA42-2744B5461E3B),
+      helpstring("AnsEDOperationEventArgs Class")
+    ]
+    coclass AnsEDOperationEventArgs {
+        [default] interface IAnsEDOperationEventArgs;
+    };
+
+    [
+      uuid(276FEF69-5AC7-4B23-8870-AC0695ACC213),
+      helpstring("AnsCreateParameterEventArgs Class")
+    ]
+    coclass AnsCreateParameterEventArgs {
+        [default] interface IAnsCreateParameterEventArgs;
+    };
+
+    [
+      uuid(9C0EE759-E326-4A21-833E-49BF430A0B61),
+      helpstring("AnsCreateCustomParameterEventArgs Class")
+    ]
+    coclass AnsCreateCustomParameterEventArgs {
+        [default] interface IAnsCreateCustomParameterEventArgs;
+    };
+
+    [
+      uuid(E4234A24-8151-4696-ADB3-197AB858C342),
+      helpstring("AnsCreateUseCustomParameterInputEventArgs Class")
+    ]
+    coclass AnsCreateUseCustomParameterInputEventArgs {
+        [default] interface IAnsCreateUseCustomParameterInputEventArgs;
+    };
+
+    [
+      uuid(89710BB1-03DA-485C-AA45-5BB2DCCA4AC3),
+      helpstring("AnsAttributeEventArgs Class")
+    ]
+    coclass AnsAttributeEventArgs {
+        [default] interface IAnsAttributeEventArgs;
+    };
+
+    [
+      uuid(DE359F26-BCD6-4E70-9800-D135163EF9BE),
+      helpstring("DSAllowBusyAPICallEventArgs Class")
+    ]
+    coclass DSAllowBusyAPICallEventArgs {
+        [default] interface IDSAllowBusyAPICallEventArgs;
+    };
+
+    [
+      uuid(A2C968D2-7E69-48F7-A3E4-76B15C2B3CDA),
+      helpstring("RefreshEventArgs Class")
+    ]
+    coclass RefreshEventArgs {
+        [default] interface IRefreshEventArgs;
+    };
+
+    [
+      uuid(7120BDCD-E1B5-4C5B-A8A5-1FD5943250A7),
+      helpstring("DSLightweightRetrievalCompleteEventArgs Class")
+    ]
+    coclass DSLightweightRetrievalCompleteEventArgs {
+        [default] interface IDSLightweightRetrievalCompleteEventArgs;
+    };
+
+    [
+      uuid(62A01784-08F3-4180-9CC7-F6BE8276F946),
+      helpstring("CDSModelAssemblyUpdateRigidTransformsEventArgs Class")
+    ]
+    coclass DSModelAssemblyUpdateRigidTransformsEventArgs {
+        [default] interface IDSModelAssemblyUpdateRigidTransformsEventArgs;
+    };
+
+    [
+      uuid(4C973CA6-B034-4E02-A85D-2B476678D1B0),
+      helpstring("CDSRemoteJobInformationEventArgs Class")
+    ]
+    coclass DSRemoteJobInformationEventArgs {
+        [default] interface IDSRemoteJobInformationEventArgs;
+    };
+};

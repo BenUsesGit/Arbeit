@@ -1,0 +1,28 @@
+
+class PythonTest(object):
+
+	def f(self):
+		return 'hello world!'
+
+#===================================================================================================
+# Main
+#===================================================================================================
+system1 = GetSystem(Name="SYS")
+#mech1 = GetDataContainer(Name="Mechanical")
+#modelComponent1 = system1.GetComponent(Name="Model")
+#modelComponent1.Refresh()
+model1 = system1.GetContainer(ComponentName="Model") 
+setup = system1.GetContainer(ComponentName="Setup")
+
+#t = PythonTest()
+#DSscriptCommand = t.f()
+
+#DSscript = open("D:\Skripte\VBA\AnsysControl\JScriptTest.js", "r")
+#DSscriptCommand = DSscript.read()
+#DSscript.close()
+
+#model1.SendCommand(Command = DSscriptCommand)
+#model1.SendCommand(Command="WBScript.Out(\"My Text\",true);" )
+
+setup.SendCommand(Command="WB.AppletList.Applet(\"DSApplet\").App.Script.doToolsRunMacro(\"D:\Programme\Ansys\ANSYS Inc\v172\aisol\DesignSpace\DSPages\macros\saveAfterEachSolve.js\")")
+#setup.SendCommand(Command="WBScript.Out(\"Hallo Welt\", true);")

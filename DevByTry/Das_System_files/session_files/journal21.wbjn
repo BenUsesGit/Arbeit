@@ -1,0 +1,4 @@
+﻿# encoding: utf-8
+# Release 17.2
+SetScriptVersion(Version="17.2.225")
+RunScript(FilePath="D:/Skripte/VBA/Splines/Test/Java.py")

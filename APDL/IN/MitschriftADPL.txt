@@ -1,0 +1,25 @@
+/NOPR   ! Suppress printing of UNDO process 
+/PMACRO ! Echo following commands to log    
+FINISH  ! Make sure we are at BEGIN level   
+/CLEAR,NOSTART  ! Clear model since no SAVE found   
+! WE SUGGEST YOU REMOVE THIS LINE AND THE FOLLOWING STARTUP LINES   
+/input,menust,tmp,''
+/GRA,POWER  
+/GST,ON 
+/PLO,INFO,3 
+/GRO,CURL,ON
+/CPLANE,1   
+/REPLOT,RESIZE  
+WPSTYLE,,,,,,,,0
+/AUX15  
+!*  
+IOPTN,IGES,SMOOTH   
+IOPTN,MERGE,YES 
+IOPTN,SOLID,YES 
+IOPTN,SMALL,NO  
+IOPTN,GTOLER, DEFA  
+IGESIN,'RechteckTest','igs','Desktop\'  
+VPLOT   
+!*  
+)/GOP    ! Resume printing after UNDO process   
+)! We suggest a save at this point  

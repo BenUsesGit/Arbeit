@@ -1,0 +1,11 @@
+# encoding: utf-8
+# Release 17.2	
+
+Open(ProgLoc + "\DevByTry\Das_System.wbpj")
+sysgrp=GetAllSystems()
+sys=sysgrp[0]
+
+modelComponent1 = sys.GetComponent(Name="Model")
+modelComponent1.Refresh()
+model1 = sys.GetContainer(ComponentName="Model")
+model1.Edit(Interactive=True)

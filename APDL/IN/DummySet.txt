@@ -1,0 +1,12 @@
+/GO 
+!*  
+!*  
+!*  
+ET,2,SOLID186   
+!*  
+cmsel,s,T_fest  
+d,all,all   
+nsel,all
+cmsel,s,t_kraft 
+f,all,fy,-20000 
+nsel,all

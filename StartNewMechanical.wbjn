@@ -1,0 +1,17 @@
+﻿# encoding: utf-8
+# Release 17.2
+SetScriptVersion(Version="17.2.225")
+template1 = GetTemplate(TemplateName="Static Structural", Solver="ANSYS")
+mechSys = template1.CreateSystem()
+
+# allocate Geometry and get properties
+
+geom = mechSys.GetContainer("Geometry")
+gProp = geom.GetGeometryProperties()
+
+# import named Selections set True and define
+
+gProp.GeometryImportNamedSelections = True
+gProp.GeometryImportNamedSelectionsFilter = "T"
+
+

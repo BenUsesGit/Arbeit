@@ -1,0 +1,14 @@
+/COM,ANSYS RELEASE Release 17.2      BUILD 17.2      UP20160718       17:36:22
+/COM,ANSYS RELEASE Release 17.2      BUILD 17.2      UP20160718       17:36:49
+
+ *** WARNING ***                         CP =       2.109   TIME= 17:37:21
+ AHOW is not a recognized PREP7 command, abbreviation, or macro.         
+  This command will be ignored.                                          
+
+ *** WARNING ***                         CP =       2.172   TIME= 17:37:24
+ SHOW is not a recognized PREP7 command, abbreviation, or macro.         
+  This command will be ignored.                                          
+
+ *** ERROR ***                           CP =       2.766   TIME= 17:41:34
+ Element type 1 cannot be deleted while elements of this type exist.     
+ The ETDELE command is ignored.                                          

@@ -1,0 +1,6 @@
+﻿# encoding: utf-8
+# Release 17.2
+SetScriptVersion(Version="17.2.225")
+geometry1 = sys.GetContainer(ComponentName="Geometry")
+geometry1.SetFile(CADLoc + "RechteckTest.ipt")
+geometry1.UpdateCAD()

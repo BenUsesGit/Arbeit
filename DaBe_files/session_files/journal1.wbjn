@@ -1,0 +1,172 @@
+﻿# encoding: utf-8
+# Release 17.2
+SetScriptVersion(Version="17.2.225")
+template1 = GetTemplate(
+    TemplateName="Static Structural",
+    Solver="ANSYS")
+system1 = template1.CreateSystem()
+template2 = GetTemplate(TemplateName="Mechanical APDL")
+modelComponent1 = system1.GetComponent(Name="Model")
+componentTemplate1 = GetComponentTemplate(Name="ANSYSSetupCellTemplate")
+system2 = template2.CreateSystem(
+    DataTransferFrom=[Set(FromComponent=modelComponent1, TransferName=None, ToComponentTemplate=componentTemplate1)],
+    Position="Right",
+    RelativeTo=system1)
+system2.DisplayText = "Mechanical APDL"
+system2.Delete()
+system1.Delete()
+template3 = GetTemplate(TemplateName="Geometry")
+system3 = template3.CreateSystem()
+geometry1 = system3.GetContainer(ComponentName="Geometry")
+geometry1.SetFile(
+    FilePath="C:/Users/szalkiewicz/Desktop/RechteckTest.ipt",
+    PlugInName="Inventor[9112]")
+geometryComponent1 = system3.GetComponent(Name="Geometry")
+system4 = template2.CreateSystem(
+    DataTransferFrom=[Set(FromComponent=geometryComponent1, TransferName=None, ToComponentTemplate=componentTemplate1)],
+    Position="Right",
+    RelativeTo=system3)
+system4.DisplayText = "Mechanical APDL"
+setupComponent1 = system4.GetComponent(Name="Setup")
+setupComponent1.Refresh()
+geometryComponent1.DeleteTransfer(TargetComponent=setupComponent1)
+template4 = GetTemplate(TemplateName="External Model")
+system5 = template4.CreateSystem(
+    Position="Left",
+    RelativeTo=system4)
+system5.Move(
+    Position="Below",
+    RelativeTo=system3)
+system5.Move(
+    Position="Right",
+    RelativeTo=system3)
+system5.Delete()
+template5 = GetTemplate(TemplateName="Mechanical Model")
+system6 = template5.CreateSystem(
+    ComponentsToShare=[geometryComponent1],
+    Position="Below",
+    RelativeTo=system4)
+geometryComponent1.TransferData(TargetComponent=setupComponent1)
+setupComponent1.Refresh()
+geometryComponent1.DeleteTransfer(TargetComponent=setupComponent1)
+system4.Move(
+    Position="Right",
+    RelativeTo=system6)
+template6 = GetTemplate(TemplateName="Mesh")
+geometryComponent2 = system6.GetComponent(Name="Geometry")
+system7 = template6.CreateSystem(
+    ComponentsToShare=[geometryComponent2],
+    Position="Below",
+    RelativeTo=system4)
+system4.Move(
+    Position="Right",
+    RelativeTo=system7)
+meshComponent1 = system7.GetComponent(Name="Mesh")
+meshComponent1.TransferData(TargetComponent=setupComponent1)
+setupComponent1.Refresh()
+setup1 = system4.GetContainer(ComponentName="Setup")
+setup1.Edit(
+    Interactive=True,
+    LoadInputFiles=True)
+setup1.Exit()
+system4.Delete()
+system7.Delete()
+system6.Delete()
+system3.Delete()
+system8 = template3.CreateSystem()
+geometry2 = system8.GetContainer(ComponentName="Geometry")
+geometry2.SetFile(
+    FilePath="C:/Users/szalkiewicz/Desktop/RechteckTest.ipt",
+    PlugInName="Inventor[9112]")
+geometryComponent3 = system8.GetComponent(Name="Geometry")
+system9 = template6.CreateSystem(
+    ComponentsToShare=[geometryComponent3],
+    Position="Right",
+    RelativeTo=system8)
+meshComponent2 = system9.GetComponent(Name="Mesh")
+system10 = template2.CreateSystem(
+    DataTransferFrom=[Set(FromComponent=meshComponent2, TransferName=None, ToComponentTemplate=componentTemplate1)],
+    Position="Right",
+    RelativeTo=system9)
+system10.DisplayText = "Mechanical APDL"
+setupComponent2 = system10.GetComponent(Name="Setup")
+setupComponent2.Refresh()
+setup2 = system10.GetContainer(ComponentName="Setup")
+setup2.Edit(
+    Interactive=True,
+    LoadInputFiles=True)
+system11 = template1.CreateSystem()
+modelComponent2 = system11.GetComponent(Name="Model")
+system12 = template2.CreateSystem(
+    DataTransferFrom=[Set(FromComponent=modelComponent2, TransferName=None, ToComponentTemplate=componentTemplate1)],
+    Position="Right",
+    RelativeTo=system11)
+system12.DisplayText = "Mechanical APDL"
+system11.Delete()
+system12.Delete()
+system10.Delete()
+setup2.Exit()
+system10.Delete()
+system9.Delete()
+system8.Delete()
+system13 = template1.CreateSystem()
+geometry3 = system13.GetContainer(ComponentName="Geometry")
+geometry3.SetFile(
+    FilePath="C:/Users/szalkiewicz/Desktop/RechteckTest.ipt",
+    PlugInName="Inventor[9112]")
+modelComponent3 = system13.GetComponent(Name="Model")
+system14 = template2.CreateSystem(
+    DataTransferFrom=[Set(FromComponent=modelComponent3, TransferName=None, ToComponentTemplate=componentTemplate1)],
+    Position="Right",
+    RelativeTo=system13)
+system14.DisplayText = "Mechanical APDL"
+setupComponent3 = system14.GetComponent(Name="Setup")
+setupComponent3.Refresh()
+setup3 = system14.GetContainer(ComponentName="Setup")
+setup3.Edit(
+    Interactive=True,
+    LoadInputFiles=True)
+setup3.Exit()
+setupComponent4 = system13.GetComponent(Name="Setup")
+setupComponent4.TransferData(TargetComponent=setupComponent3)
+geometryProperties1 = geometry3.GetGeometryProperties()
+geometryProperties1.GeometryImportParametersFilter = "ANS;DS;T"
+geometryProperties1.GeometryImportParametersFilter = "ANS;DS;T_"
+setupComponent3.Refresh()
+setup3.Edit(
+    Interactive=True,
+    LoadInputFiles=True)
+modelComponent3.Refresh()
+modelComponent3.Refresh()
+setup3.Exit()
+system14.Delete()
+system13.Delete()
+system15 = template3.CreateSystem()
+geometry4 = system15.GetContainer(ComponentName="Geometry")
+geometry4.SetFile(
+    FilePath="C:/Users/szalkiewicz/Desktop/RechteckTest.ipt",
+    PlugInName="Inventor[9112]")
+geometryComponent4 = system15.GetComponent(Name="Geometry")
+system16 = template5.CreateSystem(
+    ComponentsToShare=[geometryComponent4],
+    Position="Right",
+    RelativeTo=system15)
+modelComponent4 = system16.GetComponent(Name="Model")
+modelComponent4.Update(AllDependencies=True)
+system17 = template2.CreateSystem(
+    DataTransferFrom=[Set(FromComponent=modelComponent4, TransferName=None, ToComponentTemplate=componentTemplate1)],
+    Position="Right",
+    RelativeTo=system16)
+system17.DisplayText = "Mechanical APDL"
+setupComponent5 = system17.GetComponent(Name="Setup")
+setupComponent5.Update(AllDependencies=True)
+setupComponent5.Refresh()
+setup4 = system17.GetContainer(ComponentName="Setup")
+setup4.Edit(
+    Interactive=True,
+    LoadInputFiles=True)
+model1 = system16.GetContainer(ComponentName="Model")
+model1.Edit()
+model1.Exit()
+setup4.Exit()
+Save(Overwrite=True)

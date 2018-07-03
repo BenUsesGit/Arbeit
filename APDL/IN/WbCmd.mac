@@ -1,0 +1,8 @@
+/prep7
+cmsel,s,T_Fest
+d,all,all
+nsel,all
+
+cmsel,s,T_Kraft
+f,all,FY,-20000
+nsel,all

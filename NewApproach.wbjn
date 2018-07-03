@@ -1,0 +1,61 @@
+# encoding: utf-8
+
+Reset()
+# this is to log errors in external file
+import clr
+clr.AddReference("System.Windows.Forms")
+import System.Windows.Forms as WinForms
+logPath="log_file.log"
+logFile = open(logPath,
+  "w")
+
+errNum = 0
+
+try:
+    # in case we need Static Structural further 
+  template1 = GetTemplate(TemplateName="Static Structural", Solver="ANSYS")
+
+    
+  # open geometry
+  geometry1 = system2.GetContainer(ComponentName="Geometry")
+  geometry1.Edit()
+  geometry1.SendCommand( Command = """
+  
+    myParams       = new Object();
+    myParams.fName = "some_data_file_if_needed_in_script.txt";
+  
+    var scriptPath="geom_script.js";
+    runIt(scriptPath);
+  
+  # need this to run JScript inside DM properly
+    function runIt(path)
+    { ag.m.BeginUserScript();
+      try{ ag.runningScriptPath = path;
+         ag.wb.ScriptEngine.AddNamedItem ("ag", ag);
+         ag.wb.ScriptEngine.AddNamedItem ("myParams", myParams);
+       ag.wb.ScriptEngine.RunScript(path);
+      }
+      catch(e){ag.m.DisplayMessage("Error in JScript-> " +path,2);}
+      ag.m.EndUserScript();
+    }
+  
+  """)
+  geometry1.Update()
+  
+except Exception, err:
+  logFile.write("Error:\n%s\n\n" % err)
+  errNum=errNum+1
+  
+# save project if needed
+Save( FilePath="project_file.wbpj",
+  Overwrite=True)
+
+# log all the WB messages
+for msg in GetMessages():
+  msgString =msg.MessageType + ":\n" + msg.Summary + "\n\n" 
+  logFile.write(msgString)
+
+logFile.close()
+
+if errNum > 0:
+ WinForms.MessageBox.Show("some text about log-file created:\n%s" % logPath, "Error caption")
